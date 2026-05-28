@@ -46,10 +46,6 @@ These minimums are declared in three places — keep them in sync if you change 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — package dependency graph, public API per package, load-bearing patterns, decision log. Read this before touching engine code.
 - **Package layout** — eight packages in strict dependency order: `file-format → calendar → scheduler → simulation → engine-worker / cli → app ← importers`. Core engines (`file-format`, `calendar`, `scheduler`, `simulation`) are pure and framework-free; only `app` imports React.
 
-## Deployment
-
-The hosted instance at `app.caladia.ai` is built and served by Cloudflare Pages. Runtime settings (compatibility date, serve directory) live in [`wrangler.toml`](wrangler.toml) at the repo root. Build settings (build command, output directory, production branch) live in the Cloudflare dashboard under Settings → Builds & deployments — Pages doesn't support a `[build]` section in `wrangler.toml`. The canonical values are documented in the `wrangler.toml` header comment. Cloudflare auto-builds on every push to `main`; preview builds fire on every branch.
-
 ## PR conventions
 
 - One coherent change per PR. Big features land as a sequence of small PRs, not one giant one.
