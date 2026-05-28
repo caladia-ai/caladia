@@ -1,0 +1,282 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Simple Sequential Workflow",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-owner",
+      "name": "Project Owner",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 100
+    },
+    {
+      "id": "r-reviewer",
+      "name": "Reviewer",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 100
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "plan",
+      "nodeType": "activity",
+      "name": "Plan work",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-owner",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "main",
+      "nodeType": "activity",
+      "name": "Main work",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 380,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-owner",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 5
+      }
+    },
+    {
+      "id": "polish",
+      "nodeType": "activity",
+      "name": "Polish & cleanup",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-owner",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "nodeType": "decision",
+      "name": "Review",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 740,
+        "y": 170
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-reviewer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 1,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "wrap",
+      "nodeType": "activity",
+      "name": "Wrap up",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 920,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-owner",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Done",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "plan",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "plan",
+      "to": "main",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "main",
+      "to": "polish",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "polish",
+      "to": "review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "review",
+      "to": "wrap",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "wrap",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

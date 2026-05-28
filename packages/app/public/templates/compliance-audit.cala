@@ -1,0 +1,505 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Compliance Audit",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-auditor",
+      "name": "Auditor",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 175
+    },
+    {
+      "id": "r-compliance",
+      "name": "Compliance Manager",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 200
+    },
+    {
+      "id": "r-it",
+      "name": "IT / Control Owner",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 130
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Audit kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "plan",
+      "nodeType": "activity",
+      "name": "Audit planning",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-auditor",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-compliance",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 8
+      }
+    },
+    {
+      "id": "controls",
+      "nodeType": "activity",
+      "name": "Controls testing",
+      "duration": {
+        "value": 10,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 400,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-auditor",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 7,
+        "mode": 10,
+        "max": 18
+      }
+    },
+    {
+      "id": "docs",
+      "nodeType": "activity",
+      "name": "Document review",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 400,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-auditor",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 10
+      }
+    },
+    {
+      "id": "interviews",
+      "nodeType": "activity",
+      "name": "Stakeholder interviews",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 400,
+        "y": 420
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-compliance",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "consolidate",
+      "nodeType": "activity",
+      "name": "Consolidate findings",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 620,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-auditor",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-compliance",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ]
+    },
+    {
+      "id": "findings-gate",
+      "nodeType": "decision",
+      "name": "Findings significance",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 800,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-compliance",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.3,
+      "failureDelay": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "remediate",
+      "nodeType": "activity",
+      "name": "Remediate findings",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-it",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 12
+      }
+    },
+    {
+      "id": "retest",
+      "nodeType": "activity",
+      "name": "Re-test controls",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1160,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-auditor",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 6
+      }
+    },
+    {
+      "id": "report",
+      "nodeType": "activity",
+      "name": "Final audit report",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1340,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-auditor",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-compliance",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Sign-off",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1520,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "plan",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "plan",
+      "to": "controls",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "plan",
+      "to": "docs",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "plan",
+      "to": "interviews",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "controls",
+      "to": "consolidate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "docs",
+      "to": "consolidate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "interviews",
+      "to": "consolidate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "consolidate",
+      "to": "findings-gate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "findings-gate",
+      "to": "remediate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "remediate",
+      "to": "retest",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "retest",
+      "to": "report",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e12",
+      "from": "report",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [
+    {
+      "id": "loop-remediation",
+      "bodyNodeIds": [
+        "remediate",
+        "retest"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 4
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 1,
+        "mode": 2,
+        "max": 3
+      }
+    }
+  ],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

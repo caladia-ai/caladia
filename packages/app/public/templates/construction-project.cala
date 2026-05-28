@@ -1,0 +1,1049 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Office Build-Out",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "budget": 250000,
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h (US holidays)",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "US_FEDERAL",
+      "holidayPresetVersion": "2024.1",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-foreman",
+      "name": "Site Foreman",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 95
+    },
+    {
+      "id": "r-crew",
+      "name": "General Labour Crew",
+      "capacity": 7,
+      "calendarId": "cal-default",
+      "costRate": 65
+    },
+    {
+      "id": "r-crane",
+      "name": "Crane (rented)",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 200,
+      "costPerUse": 1500
+    },
+    {
+      "id": "r-electrician",
+      "name": "Electrician",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 110
+    },
+    {
+      "id": "r-plumber",
+      "name": "Plumber",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 105
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "site-prep",
+      "nodeType": "activity",
+      "name": "Site preparation",
+      "description": "Clear and grade the site, set up site fencing, lay out the building footprint. Foreman directs the crew through layout and grade verification before any digging begins.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-foreman",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 25
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 75
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 5
+      },
+      "fixedCost": {
+        "value": 4500
+      }
+    },
+    {
+      "id": "permits",
+      "nodeType": "decision",
+      "name": "Permit inspection",
+      "description": "Building department inspection of layout, grading, and erosion control before excavation. Foreman walks the inspector through; passing unlocks the foundation work.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 380,
+        "y": 220
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-foreman",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.75,
+      "failureDelay": {
+        "value": 5,
+        "unit": "days"
+      },
+      "fixedCost": {
+        "value": 3000
+      }
+    },
+    {
+      "id": "sub-foundation",
+      "nodeType": "subsystem",
+      "name": "Foundation",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 250
+      },
+      "color": "#92400e",
+      "group": "Structure",
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "fnd-excavate",
+      "nodeType": "activity",
+      "name": "Excavate",
+      "description": "Excavate the footings and slab area. Crane handles spoils removal and oversized lifts; crew handles shoring, layout verification, and finer measurements as the dig progresses.",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 3,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-crane",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 40
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 1.5,
+        "mode": 2,
+        "max": 4
+      }
+    },
+    {
+      "id": "fnd-pour",
+      "nodeType": "activity",
+      "name": "Pour concrete",
+      "description": "Pour the slab and footings. In-slab plumbing and electrical conduit are set just before the pour by the plumber and electrician; crew handles forms, rebar, and finishing; foreman directs sequence.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 280,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-foreman",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 15
+        },
+        {
+          "resourceId": "r-plumber",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 15
+        },
+        {
+          "resourceId": "r-electrician",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 10
+        }
+      ],
+      "fixedCost": {
+        "value": 8500
+      }
+    },
+    {
+      "id": "fnd-cure",
+      "nodeType": "activity",
+      "name": "Cure (wait)",
+      "description": "Concrete cure time before framing can start. No active labour — the site sits for four days while the slab reaches usable strength.",
+      "duration": {
+        "value": 4,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 460,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-framing",
+      "nodeType": "subsystem",
+      "name": "Framing",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 740,
+        "y": 250
+      },
+      "color": "#1e40af",
+      "group": "Structure",
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "frm-walls",
+      "nodeType": "activity",
+      "name": "Erect walls",
+      "description": "Frame exterior and interior walls. Crane handles wall-panel lifts and bracing; crew does cutting, layout, and fastening.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 4,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        },
+        {
+          "resourceId": "r-crane",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 30
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 2.5,
+        "mode": 3,
+        "max": 5
+      },
+      "fixedCost": {
+        "value": 12000
+      }
+    },
+    {
+      "id": "frm-roof",
+      "nodeType": "activity",
+      "name": "Install roof",
+      "description": "Set roof trusses and sheathing. Crane lifts truss bundles into place; crew sets, braces, and sheathes.",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 280,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 3,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        },
+        {
+          "resourceId": "r-crane",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 30
+        }
+      ],
+      "fixedCost": {
+        "value": 9500
+      }
+    },
+    {
+      "id": "sub-mep",
+      "nodeType": "subsystem",
+      "name": "MEP",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 920,
+        "y": 250
+      },
+      "color": "#15803d",
+      "group": "Services",
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "mep-rough",
+      "nodeType": "activity",
+      "name": "Rough-in electrical",
+      "description": "Pull cable through walls, set boxes, install the panel. Electrician works in parallel with the plumber's rough-in to compress the critical path.",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-electrician",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "fixedCost": {
+        "value": 4200
+      }
+    },
+    {
+      "id": "mep-plumb",
+      "nodeType": "activity",
+      "name": "Rough-in plumbing",
+      "description": "Run supply and drain lines through walls and ceilings; set fixture rough connections. Plumber works in parallel with electrical rough-in.",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 280,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-plumber",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "fixedCost": {
+        "value": 5000
+      }
+    },
+    {
+      "id": "mep-inspect",
+      "nodeType": "activity",
+      "name": "MEP inspection",
+      "description": "Building department inspection of electrical and plumbing rough-in before drywall closes the walls. Foreman walks the inspector through.",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 460,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-foreman",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "sub-finish",
+      "nodeType": "subsystem",
+      "name": "Finishing",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1100,
+        "y": 250
+      },
+      "color": "#a16207",
+      "group": "Finishes",
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "fin-drywall",
+      "nodeType": "activity",
+      "name": "Drywall and paint",
+      "description": "Hang drywall, tape, mud, sand, prime, paint. Crew handles end-to-end; the sequence has built-in cure-time breaks between coats.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 3,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2.5,
+        "mode": 3,
+        "max": 5
+      },
+      "fixedCost": {
+        "value": 6800
+      }
+    },
+    {
+      "id": "fin-floor",
+      "nodeType": "activity",
+      "name": "Flooring and trim",
+      "description": "Install flooring and trim. Electrician and plumber do trim-out at the same time — outlets, lighting, fixtures, faucets. Crew handles flooring, trim carpentry, and final paint touch-ups.",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 280,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-electrician",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        },
+        {
+          "resourceId": "r-plumber",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        }
+      ],
+      "fixedCost": {
+        "value": 5400
+      }
+    },
+    {
+      "id": "final-inspect",
+      "nodeType": "decision",
+      "name": "Final inspection",
+      "description": "Final building department walkthrough — life-safety, code compliance, certificate of occupancy. Foreman walks the inspector through; passing closes the project.",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1280,
+        "y": 220
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-foreman",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 1,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Handover",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1460,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "85354af9-6475-46f9-91c5-d1945445a0af",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "35ce6bf1-3287-4e15-a954-1d523800c140",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 680,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "19c3acc0-baca-4b54-8087-ef3d19333668",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "550d2508-42ad-4a4a-9e72-2be41768a19f",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 500,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "5f84de63-58ac-4510-818e-9065d6bf779e",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "d843ee94-edad-4b9b-abff-d809db26d33a",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 680,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "1ec41d3f-416c-4c50-841e-fc1584d2f6c3",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "96303f5d-5405-4d70-9a62-b4ed51770107",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 500,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "site-prep",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "site-prep",
+      "to": "permits",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "permits",
+      "to": "sub-foundation",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "fnd-excavate",
+      "to": "fnd-pour",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "fnd-pour",
+      "to": "fnd-cure",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "sub-foundation",
+      "to": "sub-framing",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "frm-walls",
+      "to": "frm-roof",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "sub-framing",
+      "to": "sub-mep",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "mep-rough",
+      "to": "mep-plumb",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "mep-plumb",
+      "to": "mep-inspect",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "sub-mep",
+      "to": "sub-finish",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e12",
+      "from": "fin-drywall",
+      "to": "fin-floor",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e13",
+      "from": "sub-finish",
+      "to": "final-inspect",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e14",
+      "from": "final-inspect",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "feafe302-36fc-425d-ae25-d9370be94f22",
+      "from": "85354af9-6475-46f9-91c5-d1945445a0af",
+      "to": "fnd-excavate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9d53721-9926-4193-8f2e-9f490fdfe14d",
+      "from": "fnd-cure",
+      "to": "35ce6bf1-3287-4e15-a954-1d523800c140",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "d8872920-58bc-4b72-9644-d89ecb6b025c",
+      "from": "19c3acc0-baca-4b54-8087-ef3d19333668",
+      "to": "frm-walls",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "4bd1be51-a35d-46c0-bb52-96711bc8caed",
+      "from": "frm-roof",
+      "to": "550d2508-42ad-4a4a-9e72-2be41768a19f",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "1b9c7abe-c24a-4116-8926-d82be9ebf32b",
+      "from": "5f84de63-58ac-4510-818e-9065d6bf779e",
+      "to": "mep-rough",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "50a41fbb-b08f-457c-8593-489a6faa3880",
+      "from": "mep-inspect",
+      "to": "d843ee94-edad-4b9b-abff-d809db26d33a",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "46084020-72da-49b5-a086-31cc649aa6ce",
+      "from": "1ec41d3f-416c-4c50-841e-fc1584d2f6c3",
+      "to": "fin-drywall",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "603ecadb-472e-4ba3-a5e5-b9ce5cbd9ec8",
+      "from": "fin-floor",
+      "to": "96303f5d-5405-4d70-9a62-b4ed51770107",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [],
+  "subsystems": [
+    {
+      "id": "ss-foundation",
+      "containerNodeId": "sub-foundation",
+      "bodyNodeIds": [
+        "85354af9-6475-46f9-91c5-d1945445a0af",
+        "fnd-excavate",
+        "fnd-pour",
+        "fnd-cure",
+        "35ce6bf1-3287-4e15-a954-1d523800c140"
+      ],
+      "entryNodeId": "85354af9-6475-46f9-91c5-d1945445a0af",
+      "exitNodeId": "35ce6bf1-3287-4e15-a954-1d523800c140",
+      "group": "Structure"
+    },
+    {
+      "id": "ss-framing",
+      "containerNodeId": "sub-framing",
+      "bodyNodeIds": [
+        "19c3acc0-baca-4b54-8087-ef3d19333668",
+        "frm-walls",
+        "frm-roof",
+        "550d2508-42ad-4a4a-9e72-2be41768a19f"
+      ],
+      "entryNodeId": "19c3acc0-baca-4b54-8087-ef3d19333668",
+      "exitNodeId": "550d2508-42ad-4a4a-9e72-2be41768a19f",
+      "group": "Structure"
+    },
+    {
+      "id": "ss-mep",
+      "containerNodeId": "sub-mep",
+      "bodyNodeIds": [
+        "5f84de63-58ac-4510-818e-9065d6bf779e",
+        "mep-rough",
+        "mep-plumb",
+        "mep-inspect",
+        "d843ee94-edad-4b9b-abff-d809db26d33a"
+      ],
+      "entryNodeId": "5f84de63-58ac-4510-818e-9065d6bf779e",
+      "exitNodeId": "d843ee94-edad-4b9b-abff-d809db26d33a",
+      "group": "Services"
+    },
+    {
+      "id": "ss-finish",
+      "containerNodeId": "sub-finish",
+      "bodyNodeIds": [
+        "1ec41d3f-416c-4c50-841e-fc1584d2f6c3",
+        "fin-drywall",
+        "fin-floor",
+        "96303f5d-5405-4d70-9a62-b4ed51770107"
+      ],
+      "entryNodeId": "1ec41d3f-416c-4c50-841e-fc1584d2f6c3",
+      "exitNodeId": "96303f5d-5405-4d70-9a62-b4ed51770107",
+      "group": "Finishes"
+    }
+  ],
+  "scenarios": [],
+  "comments": []
+}

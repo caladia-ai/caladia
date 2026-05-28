@@ -1,0 +1,4284 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Oncology Drug Development",
+    "startDate": "2026-01-05",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "weeks",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "budget": 500000000,
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Biotech Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "US_FEDERAL",
+      "holidayPresetVersion": "2024.1",
+      "exceptions": []
+    },
+    {
+      "id": "cal-mfg",
+      "name": "Manufacturing extended shift (Mon–Sat 14h)",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hoursPerDay": 14,
+      "daysPerWeek": 6,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-discovery",
+      "name": "Discovery Scientist",
+      "capacity": 4,
+      "calendarId": "cal-default",
+      "costRate": 180
+    },
+    {
+      "id": "r-cmc",
+      "name": "CMC / Manufacturing Lead",
+      "capacity": 3,
+      "calendarId": "cal-mfg",
+      "costRate": 250
+    },
+    {
+      "id": "r-regulatory",
+      "name": "Regulatory Affairs Lead",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 300
+    },
+    {
+      "id": "r-cmo",
+      "name": "Chief Medical Officer",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 500
+    },
+    {
+      "id": "r-clinops",
+      "name": "Sr Clinical Operations",
+      "capacity": 5,
+      "calendarId": "cal-default",
+      "costRate": 220
+    },
+    {
+      "id": "r-biostat",
+      "name": "Senior Biostatistician",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 260
+    },
+    {
+      "id": "r-datamgmt",
+      "name": "Data Management",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 150
+    },
+    {
+      "id": "r-medwriting",
+      "name": "Medical Writing",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 180
+    },
+    {
+      "id": "r-commercial",
+      "name": "Commercial Lead",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 280
+    },
+    {
+      "id": "r-pv",
+      "name": "Pharmacovigilance Lead",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 200
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Program kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 50,
+        "y": 300
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": [],
+      "anchorDate": "2026-01-05"
+    },
+    {
+      "id": "sub-preclin",
+      "nodeType": "subsystem",
+      "name": "Pre-clinical discovery",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 272,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-preind",
+      "nodeType": "subsystem",
+      "name": "Pre-IND prep",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 552,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-phase1",
+      "nodeType": "subsystem",
+      "name": "Phase I (Safety)",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 832,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-phase2",
+      "nodeType": "subsystem",
+      "name": "Phase II (Efficacy)",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1112,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-phase3",
+      "nodeType": "subsystem",
+      "name": "Phase III (Pivotal)",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1392,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-nda",
+      "nodeType": "subsystem",
+      "name": "NDA submission + FDA review",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1672,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-launch",
+      "nodeType": "subsystem",
+      "name": "Launch prep",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1952,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-phase4",
+      "nodeType": "subsystem",
+      "name": "Phase IV / post-approval",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2232,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Program complete",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2512,
+        "y": 300
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "pc-target",
+      "nodeType": "activity",
+      "name": "Target identification",
+      "description": "Identify and validate the molecular target for the oncology indication.",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 150
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-discovery",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "pc-lead-opt",
+      "nodeType": "activity",
+      "name": "Lead optimization",
+      "description": "Iterate on candidate molecules to improve potency, selectivity, and ADME profile.",
+      "duration": {
+        "value": 48,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 150
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-discovery",
+          "count": 4,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 40,
+        "mode": 48,
+        "max": 78
+      }
+    },
+    {
+      "id": "pc-tox",
+      "nodeType": "activity",
+      "name": "IND-enabling toxicology",
+      "description": "GLP toxicology studies in two species per ICH M3(R2).",
+      "duration": {
+        "value": 36,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 564,
+        "y": 80
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-discovery",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 32,
+        "mode": 36,
+        "max": 52
+      }
+    },
+    {
+      "id": "pc-cmc",
+      "nodeType": "activity",
+      "name": "CMC initial scale-up",
+      "description": "Process development and Phase I drug substance / drug product manufacturing under 24/7 plant calendar.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 564,
+        "y": 200
+      },
+      "calendarId": "cal-mfg",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmc",
+          "count": 2,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "pc-pharm",
+      "nodeType": "activity",
+      "name": "Pharmacology profile",
+      "description": "PK / PD in animal models, safety pharmacology.",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 564,
+        "y": 320
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-discovery",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "pc-discovery-go",
+      "nodeType": "decision",
+      "name": "Discovery go/no-go",
+      "description": "Cross-functional review of candidate viability. A no-go sends the program back to lead optimization for a new candidate.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 809,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-discovery",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ],
+      "passProbability": 0.7,
+      "failureDelay": {
+        "value": 48,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "pc-reg-strategy",
+      "nodeType": "activity",
+      "name": "Regulatory strategy",
+      "description": "Define the regulatory pathway: standard vs accelerated, Breakthrough/Fast Track eligibility, ex-US strategy.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1053,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "pc-ind-draft",
+      "nodeType": "activity",
+      "name": "IND module draft",
+      "description": "Author the eCTD modules that go into the IND submission.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1053,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-medwriting",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "pc-exit",
+      "nodeType": "activity",
+      "name": "Pre-clinical complete",
+      "description": "Gather all pre-clinical deliverables for the Pre-IND package.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1273,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "preind-briefing",
+      "nodeType": "activity",
+      "name": "Pre-IND briefing document",
+      "description": "Author the briefing document for the FDA Pre-IND meeting — proposed Phase I design, CMC, tox summary.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "preind-meeting",
+      "nodeType": "activity",
+      "name": "FDA Pre-IND meeting",
+      "description": "Type B meeting with FDA — alignment on Phase I design, safety endpoints, CMC expectations.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "preind-incorporate",
+      "nodeType": "activity",
+      "name": "Incorporate FDA feedback",
+      "description": "Update protocol and IND modules to reflect Pre-IND meeting outcomes.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "preind-final-cmc",
+      "nodeType": "activity",
+      "name": "Finalize CMC for IND",
+      "description": "Lock the CMC section for filing — release testing, stability data through filing window.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 280
+      },
+      "calendarId": "cal-mfg",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmc",
+          "count": 1,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "preind-submit",
+      "nodeType": "activity",
+      "name": "Submit IND",
+      "description": "Electronic submission via FDA Gateway. Includes filing fee.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 50000
+      }
+    },
+    {
+      "id": "preind-30day",
+      "nodeType": "activity",
+      "name": "FDA 30-day review clock",
+      "description": "Statutory 30-calendar-day review window after IND receipt.",
+      "duration": {
+        "value": 30,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": "cal-mfg",
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "preind-clearance",
+      "nodeType": "decision",
+      "name": "IND clearance",
+      "description": "Right to Proceed (default) or Clinical Hold. A Hold tacks 60+ days while we respond to FDA questions.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.92,
+      "failureDelay": {
+        "value": 60,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "p1-protocol",
+      "nodeType": "activity",
+      "name": "Phase I protocol design",
+      "description": "First-in-human, 3+3 dose escalation, oncology-specific endpoints (RP2D, DLT, MTD).",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-clinops",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "p1-irb",
+      "nodeType": "activity",
+      "name": "IRB / ethics approval",
+      "description": "Central IRB review for the lead site.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p1-siv-prep",
+      "nodeType": "activity",
+      "name": "Site initiation preparation",
+      "description": "Site qualification, contracts, regulatory package, drug supply shipment.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p1-siv",
+      "nodeType": "activity",
+      "name": "Site initiation visit",
+      "description": "Formal SIV at the lead site; site is now activated for enrolment.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p1-first-pt",
+      "nodeType": "activity",
+      "name": "First patient enrolled",
+      "description": "Screening and consent for the first dose-escalation cohort.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 4,
+        "max": 12
+      }
+    },
+    {
+      "id": "p1-cohort-treat",
+      "nodeType": "activity",
+      "name": "Treat dose cohort",
+      "description": "3+3 design: dose 3 patients, observe for DLT during cycle 1. (Loop body.)",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 4,
+        "mode": 6,
+        "max": 10
+      }
+    },
+    {
+      "id": "p1-cohort-eval",
+      "nodeType": "activity",
+      "name": "DLT evaluation window",
+      "description": "Safety committee reviews cohort data and decides escalate / expand / de-escalate. (Loop body.)",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "p1-mtd-decision",
+      "nodeType": "decision",
+      "name": "MTD reached / RP2D selected",
+      "description": "Safety committee declares MTD or RP2D. A no-go sends program back to formulation / dose strategy review.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 24,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "p1-expansion",
+      "nodeType": "activity",
+      "name": "Expansion cohort at RP2D",
+      "description": "Treat a larger cohort at RP2D to characterise safety and signal of activity.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1860,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 18,
+        "mode": 24,
+        "max": 36
+      }
+    },
+    {
+      "id": "p1-pk",
+      "nodeType": "activity",
+      "name": "PK / PD analysis",
+      "description": "Pharmacokinetic and pharmacodynamic readout for Phase II dose selection.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2080,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p1-lock",
+      "nodeType": "activity",
+      "name": "Phase I database lock",
+      "description": "All Phase I data cleaned and locked for the CSR.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2080,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-datamgmt",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p1-csr",
+      "nodeType": "activity",
+      "name": "Phase I CSR",
+      "description": "Author the Clinical Study Report for the Phase I trial.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "p2-protocol",
+      "nodeType": "activity",
+      "name": "Phase II protocol design",
+      "description": "Single-arm or randomised Phase II with futility interim. Endpoint usually ORR or PFS.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "p2-fda-typec",
+      "nodeType": "activity",
+      "name": "FDA Type C meeting",
+      "description": "Optional Type C meeting to align on Phase II endpoints and dose. Common in oncology before pivotal commitments.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p2-irb",
+      "nodeType": "activity",
+      "name": "Multi-site IRB approval",
+      "description": "Central IRB plus local IRB review for participating sites.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p2-siv",
+      "nodeType": "activity",
+      "name": "Multi-site activation",
+      "description": "Activate 8–15 oncology sites. Includes contracts, drug shipment, EDC setup.",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 3,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p2-enrollment",
+      "nodeType": "activity",
+      "name": "Phase II enrolment",
+      "description": "Patient enrolment is the single largest schedule risk in oncology trials.",
+      "duration": {
+        "value": 72,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 3,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 52,
+        "mode": 72,
+        "max": 130
+      }
+    },
+    {
+      "id": "p2-amend-draft",
+      "nodeType": "activity",
+      "name": "Protocol amendment draft",
+      "description": "Mid-study amendment: usually inclusion/exclusion tightening or dose schedule tweak. (Loop body.)",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "p2-amend-irb",
+      "nodeType": "activity",
+      "name": "Amendment IRB approval",
+      "description": "Re-submission of amended protocol to IRB at each site. (Loop body.)",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p2-interim",
+      "nodeType": "decision",
+      "name": "Interim futility analysis",
+      "description": "Pre-specified Bayesian futility check at ~50% enrolment. A futile result stops the trial.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ],
+      "passProbability": 0.7,
+      "failureDelay": {
+        "value": 72,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "p2-completion",
+      "nodeType": "activity",
+      "name": "Trial completion + follow-up",
+      "description": "Treat remaining cohort and observe through endpoint maturity.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 18,
+        "mode": 24,
+        "max": 40
+      }
+    },
+    {
+      "id": "p2-lock",
+      "nodeType": "activity",
+      "name": "Phase II database lock",
+      "description": "Clean and lock Phase II data for CSR.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1860,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-datamgmt",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p2-csr",
+      "nodeType": "activity",
+      "name": "Phase II CSR + EOP2 package",
+      "description": "Phase II CSR plus End-of-Phase-II briefing package for the FDA.",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2080,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "p2-go-nogo",
+      "nodeType": "decision",
+      "name": "Phase II → III go/no-go",
+      "description": "Internal portfolio decision. The single riskiest gate in oncology — Phase II→III transition fails ~50% of the time. A no-go usually triggers a 24-month re-strategy.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        },
+        {
+          "resourceId": "r-commercial",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        }
+      ],
+      "passProbability": 0.5,
+      "failureDelay": {
+        "value": 96,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "p3-eop2",
+      "nodeType": "activity",
+      "name": "End-of-Phase-II meeting",
+      "description": "Type B meeting with FDA to align on pivotal Phase III design.",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "p3-protocol",
+      "nodeType": "activity",
+      "name": "Pivotal protocol design",
+      "description": "Randomised, controlled, adequately powered for the primary endpoint (usually OS or PFS).",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "p3-cro",
+      "nodeType": "activity",
+      "name": "CRO selection + contract",
+      "description": "Select and contract a global CRO for the pivotal trial. The single largest line item in the program.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-commercial",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "fixedCost": {
+        "value": 50000000,
+        "distribution": {
+          "type": "triangular",
+          "min": 40000000,
+          "mode": 50000000,
+          "max": 85000000
+        }
+      }
+    },
+    {
+      "id": "p3-startup",
+      "nodeType": "activity",
+      "name": "Multi-site startup (global)",
+      "description": "Activate 80–150 sites across US, EU, APAC. Includes regulatory, ethics, contracts.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 4,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 18,
+        "mode": 24,
+        "max": 40
+      }
+    },
+    {
+      "id": "p3-enrollment",
+      "nodeType": "activity",
+      "name": "Pivotal enrolment",
+      "description": "Pivotal trial enrolment runs alongside the DSMB loop. The widest variance in the program.",
+      "duration": {
+        "value": 104,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 4,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 78,
+        "mode": 104,
+        "max": 156
+      }
+    },
+    {
+      "id": "p3-dsmb",
+      "nodeType": "activity",
+      "name": "DSMB safety review",
+      "description": "Independent Data Safety Monitoring Board safety review. (Loop body.)",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-pv",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "p3-treat",
+      "nodeType": "activity",
+      "name": "Treatment + follow-up window",
+      "description": "Treatment cycles between DSMB reviews. (Loop body.)",
+      "duration": {
+        "value": 13,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p3-interim",
+      "nodeType": "decision",
+      "name": "Interim efficacy analysis",
+      "description": "Pre-specified interim. A futile result stops the trial; an overwhelming positive could prompt early stopping for efficacy.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.8,
+      "failureDelay": {
+        "value": 72,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "p3-followup",
+      "nodeType": "activity",
+      "name": "Final follow-up for endpoint maturity",
+      "description": "Continue follow-up until the primary endpoint matures (event-driven for OS / PFS).",
+      "duration": {
+        "value": 52,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-clinops",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 40,
+        "mode": 52,
+        "max": 80
+      }
+    },
+    {
+      "id": "p3-lock",
+      "nodeType": "activity",
+      "name": "Pivotal database lock",
+      "description": "Multi-week clean-and-lock for the pivotal trial database.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1860,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-datamgmt",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p3-analysis",
+      "nodeType": "activity",
+      "name": "Primary + secondary analyses",
+      "description": "Statistical analysis of the primary and key secondary endpoints.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2080,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-biostat",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p3-primary-decision",
+      "nodeType": "decision",
+      "name": "Primary endpoint hit?",
+      "description": "Reading the unblinded pivotal data. A miss usually ends the program — historic oncology Phase III success rate is around 55%.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-commercial",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ],
+      "passProbability": 0.55,
+      "failureDelay": {
+        "value": 144,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "p3-csr",
+      "nodeType": "activity",
+      "name": "Phase III CSR",
+      "description": "Pivotal CSR — the centrepiece document of the NDA.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "nda-mod1",
+      "nodeType": "activity",
+      "name": "Module 1: Administrative",
+      "description": "US-specific administrative information for the eCTD submission.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 60
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "nda-mod2",
+      "nodeType": "activity",
+      "name": "Module 2: Summaries",
+      "description": "Quality, nonclinical, and clinical overviews — the FDA reviewer's first stop.",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 160
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "nda-mod3",
+      "nodeType": "activity",
+      "name": "Module 3: CMC",
+      "description": "Quality / manufacturing module. Includes commercial-scale process validation runs.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 260
+      },
+      "calendarId": "cal-mfg",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmc",
+          "count": 2,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "nda-mod4",
+      "nodeType": "activity",
+      "name": "Module 4: Nonclinical",
+      "description": "Toxicology, pharmacology, and ADME study reports.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 360
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "nda-mod5",
+      "nodeType": "activity",
+      "name": "Module 5: Clinical",
+      "description": "Phase I / II / III CSRs and integrated summaries (ISS, ISE).",
+      "duration": {
+        "value": 20,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 460
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "nda-qc",
+      "nodeType": "activity",
+      "name": "NDA quality review + publishing",
+      "description": "Cross-module QC, hyperlinking, eCTD publishing, dry-run.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 369,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "nda-submission",
+      "nodeType": "activity",
+      "name": "NDA submission",
+      "description": "Submit via FDA ESG. PDUFA filing fee is a hard cost.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 589,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 4000000
+      }
+    },
+    {
+      "id": "nda-acceptance",
+      "nodeType": "decision",
+      "name": "Filing acceptance (Refusal to File risk)",
+      "description": "FDA 60-day filing review. Refusal to File adds ~6 months while we address deficiencies.",
+      "duration": {
+        "value": 60,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 809,
+        "y": 260
+      },
+      "calendarId": "cal-mfg",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.95,
+      "failureDelay": {
+        "value": 26,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "fda-review",
+      "nodeType": "activity",
+      "name": "FDA review",
+      "description": "Standard 10-month review per PDUFA goal date. The Priority Review crash option compresses to 6 months with $5M expedited-prep premium.",
+      "duration": {
+        "value": 40,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1053,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "crashOptions": [
+        {
+          "duration": {
+            "value": 24,
+            "unit": "weeks"
+          },
+          "additionalCost": 5000000
+        }
+      ]
+    },
+    {
+      "id": "adcom-prep-mock",
+      "nodeType": "activity",
+      "name": "Mock advisory committee prep",
+      "description": "Cross-functional mock AdCom with external KOL panel. (Loop body.)",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1298,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-medwriting",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "adcom-prep-rev",
+      "nodeType": "activity",
+      "name": "Incorporate mock feedback",
+      "description": "Update slides, briefing book, and KOL panel based on the mock outcomes. (Loop body.)",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1298,
+        "y": 320
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "adcom-meeting",
+      "nodeType": "activity",
+      "name": "FDA Advisory Committee meeting",
+      "description": "Public advisory committee meeting; vote is non-binding but historically predictive.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1542,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ],
+      "fixedCost": {
+        "value": 2000000
+      }
+    },
+    {
+      "id": "adcom-vote",
+      "nodeType": "decision",
+      "name": "Positive AdCom recommendation",
+      "description": "A negative AdCom doesn't always tank approval but adds 6+ months of FDA dialogue.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1762,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.75,
+      "failureDelay": {
+        "value": 26,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "fda-action",
+      "nodeType": "decision",
+      "name": "FDA action letter",
+      "description": "Approval, Complete Response Letter (CRL), or AdHold. CRL adds ~18 months for the response cycle.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1982,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.78,
+      "failureDelay": {
+        "value": 78,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "lp-commercial-strategy",
+      "nodeType": "activity",
+      "name": "Commercial strategy",
+      "description": "Pricing, market access, payer strategy, launch sequencing.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-commercial",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "lp-mfg-scaleup",
+      "nodeType": "activity",
+      "name": "Commercial manufacturing scale-up",
+      "description": "Scale to commercial-scale process; PPQ runs; inventory build for launch.",
+      "duration": {
+        "value": 52,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": "cal-mfg",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmc",
+          "count": 3,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 40,
+        "mode": 52,
+        "max": 78
+      }
+    },
+    {
+      "id": "lp-label",
+      "nodeType": "activity",
+      "name": "Label negotiation with FDA",
+      "description": "Iterate the proposed label with FDA medical officers. Often the last 3-month sprint before approval.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "lp-pricing",
+      "nodeType": "activity",
+      "name": "Pricing + access prep",
+      "description": "Health economics dossier, payer-by-payer access strategy, GTN modelling.",
+      "duration": {
+        "value": 36,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-commercial",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "lp-readiness",
+      "nodeType": "decision",
+      "name": "Launch readiness review",
+      "description": "Cross-functional go/no-go before commercial launch.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-commercial",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.9,
+      "failureDelay": {
+        "value": 12,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "lp-sales-train",
+      "nodeType": "activity",
+      "name": "Sales force training",
+      "description": "Train the field force on the new product, indications, and competitive landscape.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-commercial",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "lp-launch",
+      "nodeType": "activity",
+      "name": "Commercial launch",
+      "description": "First commercial shipment; KOL launch events; field force in market.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-commercial",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 15000000
+      }
+    },
+    {
+      "id": "p4-pmc-protocol",
+      "nodeType": "activity",
+      "name": "Post-marketing commitment protocol",
+      "description": "Design the FDA-required post-marketing study (often a confirmatory trial for accelerated approval).",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "p4-rwe",
+      "nodeType": "activity",
+      "name": "Real-world evidence study",
+      "description": "Long-running RWE study to support label expansions and payer negotiations.",
+      "duration": {
+        "value": 156,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-datamgmt",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 130,
+        "mode": 156,
+        "max": 210
+      }
+    },
+    {
+      "id": "p4-psur",
+      "nodeType": "activity",
+      "name": "PSUR / periodic safety update",
+      "description": "Periodic safety update reports to FDA, EMA, and PMDA.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-pv",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p4-pmc-completion",
+      "nodeType": "activity",
+      "name": "PMC trial completion + report",
+      "description": "Complete the post-marketing commitment trial and submit results.",
+      "duration": {
+        "value": 24,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-medwriting",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "p4-label-expansion",
+      "nodeType": "decision",
+      "name": "Label expansion supplemental",
+      "description": "Decide whether to pursue a label expansion based on RWE / PMC data.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-cmo",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ],
+      "passProbability": 0.7,
+      "failureDelay": {
+        "value": 26,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "p4-final",
+      "nodeType": "activity",
+      "name": "Program steady state",
+      "description": "Hand-off from program team to lifecycle management.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "0013c29b-a043-408a-af55-1828de648987",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 150
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "3a293cbc-ff82-4ca2-b906-1644c101c03f",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1493,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "1c5ad237-6c02-4203-9801-526a0846cabb",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "62821d9a-6276-4967-ab48-86a3d518ffe9",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "17514364-e5ba-49bd-be1f-71956593da31",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "a4730cc2-2391-4789-b5b2-ea2f7fea99a1",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "d16bf6fb-83cd-4641-b94a-5e60bb160d01",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "8e0d6499-c8ac-4ab3-88a9-23dfe47271db",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "6bfc8df1-6d90-4726-9066-770bb68e5fe3",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "f00fb4ed-fcfc-4745-8db0-149c08e3c4d0",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2740,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "525d595b-3fb6-4f2c-828d-1ae18fcbcf5f",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 60
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "29f56b49-15ea-43c9-a793-1b861aa5ee6a",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2202,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "f2bd3bff-cf47-4ee6-b550-58a8955dc3c8",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "23ab8c0b-d750-4bbd-bba8-c2362d761093",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "12071f5c-7979-4db3-95d4-1a5e73598973",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "23b2b37f-bb48-491d-acfd-ceaf8823603a",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-start-preclin",
+      "from": "start",
+      "to": "sub-preclin",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preclin-preind",
+      "from": "sub-preclin",
+      "to": "sub-preind",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-phase1",
+      "from": "sub-preind",
+      "to": "sub-phase1",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-phase1-phase2",
+      "from": "sub-phase1",
+      "to": "sub-phase2",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-phase2-phase3",
+      "from": "sub-phase2",
+      "to": "sub-phase3",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-phase3-nda",
+      "from": "sub-phase3",
+      "to": "sub-nda",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-launch",
+      "from": "sub-nda",
+      "to": "sub-launch",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-launch-phase4",
+      "from": "sub-launch",
+      "to": "sub-phase4",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-phase4-end",
+      "from": "sub-phase4",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-target-leadopt",
+      "from": "pc-target",
+      "to": "pc-lead-opt",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-leadopt-tox",
+      "from": "pc-lead-opt",
+      "to": "pc-tox",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-leadopt-cmc",
+      "from": "pc-lead-opt",
+      "to": "pc-cmc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-leadopt-pharm",
+      "from": "pc-lead-opt",
+      "to": "pc-pharm",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-tox-go",
+      "from": "pc-tox",
+      "to": "pc-discovery-go",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-cmc-go",
+      "from": "pc-cmc",
+      "to": "pc-discovery-go",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-pharm-go",
+      "from": "pc-pharm",
+      "to": "pc-discovery-go",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-go-reg",
+      "from": "pc-discovery-go",
+      "to": "pc-reg-strategy",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-go-inddraft",
+      "from": "pc-discovery-go",
+      "to": "pc-ind-draft",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-reg-exit",
+      "from": "pc-reg-strategy",
+      "to": "pc-exit",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pc-inddraft-exit",
+      "from": "pc-ind-draft",
+      "to": "pc-exit",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-briefing-meeting",
+      "from": "preind-briefing",
+      "to": "preind-meeting",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-meeting-incorp",
+      "from": "preind-meeting",
+      "to": "preind-incorporate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-meeting-cmc",
+      "from": "preind-meeting",
+      "to": "preind-final-cmc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-incorp-submit",
+      "from": "preind-incorporate",
+      "to": "preind-submit",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-cmc-submit",
+      "from": "preind-final-cmc",
+      "to": "preind-submit",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-submit-30day",
+      "from": "preind-submit",
+      "to": "preind-30day",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preind-30day-clearance",
+      "from": "preind-30day",
+      "to": "preind-clearance",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-protocol-irb",
+      "from": "p1-protocol",
+      "to": "p1-irb",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-irb-siv-prep",
+      "from": "p1-irb",
+      "to": "p1-siv-prep",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-siv-prep-siv",
+      "from": "p1-siv-prep",
+      "to": "p1-siv",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-siv-first",
+      "from": "p1-siv",
+      "to": "p1-first-pt",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-first-cohort",
+      "from": "p1-first-pt",
+      "to": "p1-cohort-treat",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-cohort-eval",
+      "from": "p1-cohort-treat",
+      "to": "p1-cohort-eval",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-eval-mtd",
+      "from": "p1-cohort-eval",
+      "to": "p1-mtd-decision",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-mtd-expansion",
+      "from": "p1-mtd-decision",
+      "to": "p1-expansion",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-exp-pk",
+      "from": "p1-expansion",
+      "to": "p1-pk",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-exp-lock",
+      "from": "p1-expansion",
+      "to": "p1-lock",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-pk-csr",
+      "from": "p1-pk",
+      "to": "p1-csr",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p1-lock-csr",
+      "from": "p1-lock",
+      "to": "p1-csr",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-protocol-fda",
+      "from": "p2-protocol",
+      "to": "p2-fda-typec",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-fda-irb",
+      "from": "p2-fda-typec",
+      "to": "p2-irb",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-irb-siv",
+      "from": "p2-irb",
+      "to": "p2-siv",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-siv-enroll",
+      "from": "p2-siv",
+      "to": "p2-enrollment",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-enroll-amend",
+      "from": "p2-enrollment",
+      "to": "p2-amend-draft",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-amend-irb",
+      "from": "p2-amend-draft",
+      "to": "p2-amend-irb",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-amendirb-interim",
+      "from": "p2-amend-irb",
+      "to": "p2-interim",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-interim-completion",
+      "from": "p2-interim",
+      "to": "p2-completion",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-completion-lock",
+      "from": "p2-completion",
+      "to": "p2-lock",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-lock-csr",
+      "from": "p2-lock",
+      "to": "p2-csr",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p2-csr-gonogo",
+      "from": "p2-csr",
+      "to": "p2-go-nogo",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-eop2-protocol",
+      "from": "p3-eop2",
+      "to": "p3-protocol",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-protocol-cro",
+      "from": "p3-protocol",
+      "to": "p3-cro",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-cro-startup",
+      "from": "p3-cro",
+      "to": "p3-startup",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-startup-enroll",
+      "from": "p3-startup",
+      "to": "p3-enrollment",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-enroll-dsmb",
+      "from": "p3-enrollment",
+      "to": "p3-dsmb",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-dsmb-treat",
+      "from": "p3-dsmb",
+      "to": "p3-treat",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-treat-interim",
+      "from": "p3-treat",
+      "to": "p3-interim",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-interim-followup",
+      "from": "p3-interim",
+      "to": "p3-followup",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-followup-lock",
+      "from": "p3-followup",
+      "to": "p3-lock",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-lock-analysis",
+      "from": "p3-lock",
+      "to": "p3-analysis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-analysis-primary",
+      "from": "p3-analysis",
+      "to": "p3-primary-decision",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p3-primary-csr",
+      "from": "p3-primary-decision",
+      "to": "p3-csr",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-mod1-qc",
+      "from": "nda-mod1",
+      "to": "nda-qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-mod2-qc",
+      "from": "nda-mod2",
+      "to": "nda-qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-mod3-qc",
+      "from": "nda-mod3",
+      "to": "nda-qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-mod4-qc",
+      "from": "nda-mod4",
+      "to": "nda-qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-mod5-qc",
+      "from": "nda-mod5",
+      "to": "nda-qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-qc-submit",
+      "from": "nda-qc",
+      "to": "nda-submission",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-submit-accept",
+      "from": "nda-submission",
+      "to": "nda-acceptance",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-nda-accept-review",
+      "from": "nda-acceptance",
+      "to": "fda-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-fda-review-adcom-prep",
+      "from": "fda-review",
+      "to": "adcom-prep-mock",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-adcom-prep-rev",
+      "from": "adcom-prep-mock",
+      "to": "adcom-prep-rev",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-adcom-rev-meeting",
+      "from": "adcom-prep-rev",
+      "to": "adcom-meeting",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-adcom-meeting-vote",
+      "from": "adcom-meeting",
+      "to": "adcom-vote",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-adcom-vote-action",
+      "from": "adcom-vote",
+      "to": "fda-action",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-lp-strategy-mfg",
+      "from": "lp-commercial-strategy",
+      "to": "lp-mfg-scaleup",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-lp-strategy-pricing",
+      "from": "lp-commercial-strategy",
+      "to": "lp-pricing",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-lp-mfg-label",
+      "from": "lp-mfg-scaleup",
+      "to": "lp-label",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-lp-label-readiness",
+      "from": "lp-label",
+      "to": "lp-readiness",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-lp-pricing-readiness",
+      "from": "lp-pricing",
+      "to": "lp-readiness",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-lp-readiness-train",
+      "from": "lp-readiness",
+      "to": "lp-sales-train",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-lp-train-launch",
+      "from": "lp-sales-train",
+      "to": "lp-launch",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p4-protocol-rwe",
+      "from": "p4-pmc-protocol",
+      "to": "p4-rwe",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p4-protocol-psur",
+      "from": "p4-pmc-protocol",
+      "to": "p4-psur",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p4-rwe-completion",
+      "from": "p4-rwe",
+      "to": "p4-pmc-completion",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p4-psur-completion",
+      "from": "p4-psur",
+      "to": "p4-pmc-completion",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p4-completion-label",
+      "from": "p4-pmc-completion",
+      "to": "p4-label-expansion",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-p4-label-final",
+      "from": "p4-label-expansion",
+      "to": "p4-final",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "264f196e-b691-41a6-b4f1-a9ce286d586f",
+      "from": "0013c29b-a043-408a-af55-1828de648987",
+      "to": "pc-target",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "4c69a885-a8f2-4073-9545-55ff9b9c78ef",
+      "from": "pc-exit",
+      "to": "3a293cbc-ff82-4ca2-b906-1644c101c03f",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "8dd3bdef-9505-49ef-a135-36962c89f830",
+      "from": "1c5ad237-6c02-4203-9801-526a0846cabb",
+      "to": "preind-briefing",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "81e0b607-b38d-456a-8499-c97bf33666f6",
+      "from": "preind-clearance",
+      "to": "62821d9a-6276-4967-ab48-86a3d518ffe9",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "bdf17176-554e-45de-b105-651042e640b1",
+      "from": "17514364-e5ba-49bd-be1f-71956593da31",
+      "to": "p1-protocol",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "3b576fab-1d77-4559-a972-a99070f5fbf0",
+      "from": "p1-csr",
+      "to": "a4730cc2-2391-4789-b5b2-ea2f7fea99a1",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "c001e633-c24f-4586-86b3-29ad5769a029",
+      "from": "d16bf6fb-83cd-4641-b94a-5e60bb160d01",
+      "to": "p2-protocol",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "c3bc5512-8739-4323-82f4-fad4d1fdaadc",
+      "from": "p2-go-nogo",
+      "to": "8e0d6499-c8ac-4ab3-88a9-23dfe47271db",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "a7174959-c32d-4d54-b739-ff52e463a66c",
+      "from": "6bfc8df1-6d90-4726-9066-770bb68e5fe3",
+      "to": "p3-eop2",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "b0c5ceaa-ad4a-4225-9f08-c67fa3fae783",
+      "from": "p3-csr",
+      "to": "f00fb4ed-fcfc-4745-8db0-149c08e3c4d0",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "d8542174-4b4b-44a7-88f9-7168fdfa842a",
+      "from": "525d595b-3fb6-4f2c-828d-1ae18fcbcf5f",
+      "to": "nda-mod1",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "2e19c27e-d345-41bd-8364-26cca8391fb5",
+      "from": "fda-action",
+      "to": "29f56b49-15ea-43c9-a793-1b861aa5ee6a",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "1f00d3d4-1a55-49be-b4fe-a1aca7bee105",
+      "from": "f2bd3bff-cf47-4ee6-b550-58a8955dc3c8",
+      "to": "lp-commercial-strategy",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "d330c32a-6869-4bd2-9da1-8c775e2d3284",
+      "from": "lp-launch",
+      "to": "23ab8c0b-d750-4bbd-bba8-c2362d761093",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "5851d897-25e6-400d-a0c7-e1fe04e319fe",
+      "from": "12071f5c-7979-4db3-95d4-1a5e73598973",
+      "to": "p4-pmc-protocol",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "caa4e389-8652-47ee-a3c2-7cfc98e20d63",
+      "from": "p4-final",
+      "to": "23b2b37f-bb48-491d-acfd-ceaf8823603a",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [
+    {
+      "id": "loop-p1-dose-escalation",
+      "bodyNodeIds": [
+        "p1-cohort-treat",
+        "p1-cohort-eval"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 10
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 4,
+        "mode": 6,
+        "max": 8
+      },
+      "group": "Dose escalation",
+      "description": "3+3 dose escalation — typically 4–8 cohorts before MTD is reached."
+    },
+    {
+      "id": "loop-p2-amendments",
+      "bodyNodeIds": [
+        "p2-amend-draft",
+        "p2-amend-irb"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 4
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 1,
+        "mode": 2,
+        "max": 3
+      },
+      "group": "Protocol amendments",
+      "description": "Mid-study protocol amendments — usually 1–3 over the course of enrolment."
+    },
+    {
+      "id": "loop-p3-dsmb",
+      "bodyNodeIds": [
+        "p3-dsmb",
+        "p3-treat"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 16
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 6,
+        "mode": 10,
+        "max": 14
+      },
+      "group": "DSMB review cycle",
+      "description": "Quarterly Data Safety Monitoring Board reviews running alongside the pivotal treatment phase."
+    },
+    {
+      "id": "loop-adcom-prep",
+      "bodyNodeIds": [
+        "adcom-prep-mock",
+        "adcom-prep-rev"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 5
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 4
+      },
+      "group": "Advisory committee prep",
+      "description": "Mock advisory committees with external KOL panels — usually 2–4 rounds before the real meeting."
+    }
+  ],
+  "subsystems": [
+    {
+      "id": "ss-preclin",
+      "containerNodeId": "sub-preclin",
+      "bodyNodeIds": [
+        "0013c29b-a043-408a-af55-1828de648987",
+        "pc-target",
+        "pc-lead-opt",
+        "pc-tox",
+        "pc-cmc",
+        "pc-pharm",
+        "pc-discovery-go",
+        "pc-reg-strategy",
+        "pc-ind-draft",
+        "pc-exit",
+        "3a293cbc-ff82-4ca2-b906-1644c101c03f"
+      ],
+      "entryNodeId": "0013c29b-a043-408a-af55-1828de648987",
+      "exitNodeId": "3a293cbc-ff82-4ca2-b906-1644c101c03f",
+      "group": "Development phases"
+    },
+    {
+      "id": "ss-preind",
+      "containerNodeId": "sub-preind",
+      "bodyNodeIds": [
+        "1c5ad237-6c02-4203-9801-526a0846cabb",
+        "preind-briefing",
+        "preind-meeting",
+        "preind-incorporate",
+        "preind-final-cmc",
+        "preind-submit",
+        "preind-30day",
+        "preind-clearance",
+        "62821d9a-6276-4967-ab48-86a3d518ffe9"
+      ],
+      "entryNodeId": "1c5ad237-6c02-4203-9801-526a0846cabb",
+      "exitNodeId": "62821d9a-6276-4967-ab48-86a3d518ffe9",
+      "group": "Development phases"
+    },
+    {
+      "id": "ss-phase1",
+      "containerNodeId": "sub-phase1",
+      "bodyNodeIds": [
+        "17514364-e5ba-49bd-be1f-71956593da31",
+        "p1-protocol",
+        "p1-irb",
+        "p1-siv-prep",
+        "p1-siv",
+        "p1-first-pt",
+        "p1-cohort-treat",
+        "p1-cohort-eval",
+        "p1-mtd-decision",
+        "p1-expansion",
+        "p1-pk",
+        "p1-lock",
+        "p1-csr",
+        "a4730cc2-2391-4789-b5b2-ea2f7fea99a1"
+      ],
+      "entryNodeId": "17514364-e5ba-49bd-be1f-71956593da31",
+      "exitNodeId": "a4730cc2-2391-4789-b5b2-ea2f7fea99a1",
+      "group": "Development phases"
+    },
+    {
+      "id": "ss-phase2",
+      "containerNodeId": "sub-phase2",
+      "bodyNodeIds": [
+        "d16bf6fb-83cd-4641-b94a-5e60bb160d01",
+        "p2-protocol",
+        "p2-fda-typec",
+        "p2-irb",
+        "p2-siv",
+        "p2-enrollment",
+        "p2-amend-draft",
+        "p2-amend-irb",
+        "p2-interim",
+        "p2-completion",
+        "p2-lock",
+        "p2-csr",
+        "p2-go-nogo",
+        "8e0d6499-c8ac-4ab3-88a9-23dfe47271db"
+      ],
+      "entryNodeId": "d16bf6fb-83cd-4641-b94a-5e60bb160d01",
+      "exitNodeId": "8e0d6499-c8ac-4ab3-88a9-23dfe47271db",
+      "group": "Development phases"
+    },
+    {
+      "id": "ss-phase3",
+      "containerNodeId": "sub-phase3",
+      "bodyNodeIds": [
+        "6bfc8df1-6d90-4726-9066-770bb68e5fe3",
+        "p3-eop2",
+        "p3-protocol",
+        "p3-cro",
+        "p3-startup",
+        "p3-enrollment",
+        "p3-dsmb",
+        "p3-treat",
+        "p3-interim",
+        "p3-followup",
+        "p3-lock",
+        "p3-analysis",
+        "p3-primary-decision",
+        "p3-csr",
+        "f00fb4ed-fcfc-4745-8db0-149c08e3c4d0"
+      ],
+      "entryNodeId": "6bfc8df1-6d90-4726-9066-770bb68e5fe3",
+      "exitNodeId": "f00fb4ed-fcfc-4745-8db0-149c08e3c4d0",
+      "group": "Development phases"
+    },
+    {
+      "id": "ss-nda",
+      "containerNodeId": "sub-nda",
+      "bodyNodeIds": [
+        "525d595b-3fb6-4f2c-828d-1ae18fcbcf5f",
+        "nda-mod1",
+        "nda-mod2",
+        "nda-mod3",
+        "nda-mod4",
+        "nda-mod5",
+        "nda-qc",
+        "nda-submission",
+        "nda-acceptance",
+        "fda-review",
+        "adcom-prep-mock",
+        "adcom-prep-rev",
+        "adcom-meeting",
+        "adcom-vote",
+        "fda-action",
+        "29f56b49-15ea-43c9-a793-1b861aa5ee6a"
+      ],
+      "entryNodeId": "525d595b-3fb6-4f2c-828d-1ae18fcbcf5f",
+      "exitNodeId": "29f56b49-15ea-43c9-a793-1b861aa5ee6a",
+      "group": "Development phases"
+    },
+    {
+      "id": "ss-launch",
+      "containerNodeId": "sub-launch",
+      "bodyNodeIds": [
+        "f2bd3bff-cf47-4ee6-b550-58a8955dc3c8",
+        "lp-commercial-strategy",
+        "lp-mfg-scaleup",
+        "lp-label",
+        "lp-pricing",
+        "lp-readiness",
+        "lp-sales-train",
+        "lp-launch",
+        "23ab8c0b-d750-4bbd-bba8-c2362d761093"
+      ],
+      "entryNodeId": "f2bd3bff-cf47-4ee6-b550-58a8955dc3c8",
+      "exitNodeId": "23ab8c0b-d750-4bbd-bba8-c2362d761093",
+      "group": "Development phases"
+    },
+    {
+      "id": "ss-phase4",
+      "containerNodeId": "sub-phase4",
+      "bodyNodeIds": [
+        "12071f5c-7979-4db3-95d4-1a5e73598973",
+        "p4-pmc-protocol",
+        "p4-rwe",
+        "p4-psur",
+        "p4-pmc-completion",
+        "p4-label-expansion",
+        "p4-final",
+        "23b2b37f-bb48-491d-acfd-ceaf8823603a"
+      ],
+      "entryNodeId": "12071f5c-7979-4db3-95d4-1a5e73598973",
+      "exitNodeId": "23b2b37f-bb48-491d-acfd-ceaf8823603a",
+      "group": "Development phases"
+    }
+  ],
+  "scenarios": [],
+  "comments": []
+}

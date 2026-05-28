@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import '@xyflow/react/dist/style.css';
+
+/* Phase 49 Slice 3 — Caveat (variable, woff2). Self-hosted, matches the
+   caladia-webpage design tokens. Used for free-floating canvas comments
+   so they read as handwritten user annotations rather than diagram
+   content. */
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/caveat.woff2') format('woff2-variations');
+}
+
+/* Class-based dark mode: add the `dark` class to <html> to activate. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tell the browser to render native form controls (number-input spinners,
+   date pickers, scrollbars, focus rings) with dark-theme defaults when
+   the `dark` class is active. Without this, <input type="number"> spinner
+   arrows render in light grey-on-white and disappear against the dark
+   surface. The `color-scheme` property is the standardized way to do this;
+   it costs nothing in light mode (default) and fixes spinner visibility,
+   the date-picker chrome, and native scrollbars in one shot. */
+html.dark {
+  color-scheme: dark;
+}
+
+/* ── Canvas interaction overrides ─────────────────────────────────────────── */
+
+/* Nodes are selectable/draggable — use the standard arrow cursor, not grab. */
+.react-flow__node,
+.react-flow__node:hover {
+  cursor: default !important;
+}
+
+/* Default mode: arrow cursor on the blank canvas pane. */
+.rf-select-mode .react-flow__pane {
+  cursor: default !important;
+}
+
+/* Actively panning via middle mouse (pointer captured): grabbing cursor. */
+.rf-panning .react-flow__pane,
+.rf-panning .react-flow__node,
+.rf-panning .react-flow__node:hover {
+  cursor: grabbing !important;
+}
+
+/* ── Connection handles — larger hit area ─────────────────────────────────── */
+/* Default React Flow handles are 8×8px. At 14×14px they're easier to grab
+   when starting a connection without looking cluttered. */
+.react-flow__handle {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+}
+
+/* ── Always-visible scrollbar (Phase 47 Slice 2) ───────────────────────────── */
+/* macOS / Safari uses overlay scrollbars by default — they auto-hide when
+   idle even with `overflow: scroll`, because the OS-level "Show scroll bars"
+   preference defaults to "When scrolling" or "Automatically". Setting
+   `-webkit-appearance: none` on `::-webkit-scrollbar` opts OUT of the
+   overlay/auto-hide variant and forces the classic always-visible scrollbar
+   in WebKit. A visible track colour reinforces the affordance even when no
+   thumb is needed (e.g. at zoom = 1 with content that fits).
+   Firefox uses the standard `scrollbar-width` / `scrollbar-color` properties
+   below; both engines stay in sync. */
+.cala-scroll-x {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.5) rgba(15, 23, 42, 0.06); /* slate-500 @ 50% on slate-900 @ 6% */
+}
+.cala-scroll-x::-webkit-scrollbar {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+}
+.cala-scroll-x::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.06); /* slate-900 @ 6% — visible track */
+  border-radius: 5px;
+}
+.cala-scroll-x::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.55); /* slate-500 @ 55% */
+  border-radius: 5px;
+  min-width: 32px;
+}
+.cala-scroll-x::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 116, 139, 0.85);
+}
+html.dark .cala-scroll-x {
+  scrollbar-color: rgba(148, 163, 184, 0.45) rgba(255, 255, 255, 0.06);
+}
+html.dark .cala-scroll-x::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+}
+html.dark .cala-scroll-x::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.45);
+}
+html.dark .cala-scroll-x::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.75);
+}

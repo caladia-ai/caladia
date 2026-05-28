@@ -1,0 +1,3461 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Tentpole Feature Film",
+    "startDate": "2026-01-05",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "weeks",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "budget": 200000000,
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Studio Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "US_FEDERAL",
+      "holidayPresetVersion": "2024.1",
+      "exceptions": []
+    },
+    {
+      "id": "cal-set",
+      "name": "Production set Mon–Sat 12h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hoursPerDay": 12,
+      "daysPerWeek": 6,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "",
+      "exceptions": []
+    },
+    {
+      "id": "cal-director",
+      "name": "Director 7-day 12h",
+      "workingDays": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hoursPerDay": 12,
+      "daysPerWeek": 7,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-exec",
+      "name": "Studio Executive",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 400
+    },
+    {
+      "id": "r-director",
+      "name": "Director",
+      "capacity": 1,
+      "calendarId": "cal-director",
+      "costRate": 2500
+    },
+    {
+      "id": "r-producer",
+      "name": "Producer / EP",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 350
+    },
+    {
+      "id": "r-writer",
+      "name": "Screenwriter",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 250
+    },
+    {
+      "id": "r-leadtalent",
+      "name": "Lead Talent (A-list)",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 8000
+    },
+    {
+      "id": "r-supporting",
+      "name": "Supporting Cast + Day Players",
+      "capacity": 30,
+      "calendarId": "cal-set",
+      "costRate": 300
+    },
+    {
+      "id": "r-crew",
+      "name": "Production Crew (dept heads, camera, grip, electric, art, sound)",
+      "capacity": 80,
+      "calendarId": "cal-set",
+      "costRate": 200
+    },
+    {
+      "id": "r-vfx",
+      "name": "VFX Team (across vendors)",
+      "capacity": 50,
+      "calendarId": "cal-default",
+      "costRate": 150
+    },
+    {
+      "id": "r-postprod",
+      "name": "Post-production (editorial, sound, music, finishing)",
+      "capacity": 15,
+      "calendarId": "cal-default",
+      "costRate": 180
+    },
+    {
+      "id": "r-marketing",
+      "name": "Marketing / PR (studio + agency)",
+      "capacity": 12,
+      "calendarId": "cal-default",
+      "costRate": 220
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Project kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 50,
+        "y": 300
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": [],
+      "anchorDate": "2026-01-05"
+    },
+    {
+      "id": "sub-dev",
+      "nodeType": "subsystem",
+      "name": "Development",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 280,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-preprod",
+      "nodeType": "subsystem",
+      "name": "Pre-production",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-shoot",
+      "nodeType": "subsystem",
+      "name": "Principal photography",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 840,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-post",
+      "nodeType": "subsystem",
+      "name": "Post-production",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1120,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-mktg",
+      "nodeType": "subsystem",
+      "name": "Marketing prep",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1400,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-release",
+      "nodeType": "subsystem",
+      "name": "Theatrical release",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1680,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-awards",
+      "nodeType": "subsystem",
+      "name": "Awards / long-tail",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1960,
+        "y": 300
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Library steady state",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2240,
+        "y": 300
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "dev-concept",
+      "nodeType": "activity",
+      "name": "Concept / pitch document",
+      "description": "Producer + studio shape the high-level concept and pitch deck.",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-exec",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "dev-script-first",
+      "nodeType": "activity",
+      "name": "First-draft script",
+      "description": "Hired screenwriter produces the first complete draft.",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-writer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 12,
+        "mode": 16,
+        "max": 28
+      }
+    },
+    {
+      "id": "dev-revision-pass",
+      "nodeType": "activity",
+      "name": "Script revision pass",
+      "description": "Notes from producer / studio / director land; writer revises. (Loop body.)",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-writer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 4,
+        "mode": 6,
+        "max": 12
+      }
+    },
+    {
+      "id": "dev-notes-review",
+      "nodeType": "activity",
+      "name": "Notes + table read",
+      "description": "Producer / director / studio review draft; deliver consolidated notes. (Loop body.)",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-exec",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "dev-greenlight",
+      "nodeType": "decision",
+      "name": "Studio greenlight",
+      "description": "The single biggest gate in feature production. A no-go usually kills the project; the failure delay models a from-scratch dev restart with a new package.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-exec",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "passProbability": 0.5,
+      "failureDelay": {
+        "value": 52,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "dev-director-attach",
+      "nodeType": "decision",
+      "name": "Director attachment",
+      "description": "Director signs; locks tone and shooting style. A pass-on tacks a multi-month re-search to the package.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.8,
+      "failureDelay": {
+        "value": 12,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "dev-lead-attach",
+      "nodeType": "decision",
+      "name": "Lead talent attachment",
+      "description": "A-list talent signs (fee, availability, approvals). The largest single line item and a frequent project-killer when fall-through occurs.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-exec",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "passProbability": 0.7,
+      "failureDelay": {
+        "value": 16,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "dev-finance-package",
+      "nodeType": "activity",
+      "name": "Finance + insurance package",
+      "description": "Complete the financing package; secure completion bond; lock budget contingency.",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 2000000
+      }
+    },
+    {
+      "id": "dev-budget-approval",
+      "nodeType": "decision",
+      "name": "Final budget approval",
+      "description": "Studio greenlight contingent on the locked budget. Studio notes on cost may trigger scope cuts (e.g. dropping a sequence).",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-exec",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 8,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "pp-casting-supporting",
+      "nodeType": "activity",
+      "name": "Supporting cast + casting",
+      "description": "Casting director auditions and locks supporting roles.",
+      "duration": {
+        "value": 10,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 8,
+        "mode": 10,
+        "max": 18
+      }
+    },
+    {
+      "id": "pp-locations",
+      "nodeType": "activity",
+      "name": "Location scout + lock",
+      "description": "Scout, negotiate, and permit principal shooting locations.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 6,
+        "mode": 8,
+        "max": 14
+      },
+      "fixedCost": {
+        "value": 4000000,
+        "distribution": {
+          "type": "triangular",
+          "min": 3000000,
+          "mode": 4000000,
+          "max": 8000000
+        }
+      }
+    },
+    {
+      "id": "pp-crew-hiring",
+      "nodeType": "activity",
+      "name": "Hire department heads + crew",
+      "description": "DP, production designer, costume designer, key crew. Cascades into department teams.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "pp-design",
+      "nodeType": "activity",
+      "name": "Production design + storyboards",
+      "description": "Production designer + concept art + storyboards. Director-led.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 12,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "pp-previs",
+      "nodeType": "activity",
+      "name": "Pre-visualization (key VFX sequences)",
+      "description": "VFX-heavy sequences pre-vis'd so the on-set shoot has clear coverage targets.",
+      "duration": {
+        "value": 10,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-vfx",
+          "count": 8,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "pp-set-build",
+      "nodeType": "activity",
+      "name": "Set construction",
+      "description": "Build practical sets + dress locations. Construction crews work intense shifts on the set calendar. Rush-construction crash option compresses to 10 weeks with weekend overtime + extra labour at 1.2× rate.",
+      "duration": {
+        "value": 14,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 140
+      },
+      "calendarId": "cal-set",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-crew",
+          "count": 50,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 8000000
+      },
+      "crashOptions": [
+        {
+          "duration": {
+            "value": 10,
+            "unit": "weeks"
+          },
+          "additionalCost": 5000000,
+          "resourceCostMultiplier": 1.2
+        }
+      ]
+    },
+    {
+      "id": "pp-rehearsal",
+      "nodeType": "activity",
+      "name": "Cast rehearsal + table reads",
+      "description": "Lead and supporting cast rehearse with director; final script polishes.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-leadtalent",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "pp-leadtalent-fee",
+      "nodeType": "activity",
+      "name": "Lead talent contract + retainer",
+      "description": "Pay-or-play deal locked. The fee is the largest single line item in the budget and varies wildly with talent leverage.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 25000000,
+        "distribution": {
+          "type": "triangular",
+          "min": 15000000,
+          "mode": 25000000,
+          "max": 50000000
+        }
+      }
+    },
+    {
+      "id": "pp-insurance",
+      "nodeType": "decision",
+      "name": "Insurance / completion bond",
+      "description": "Bond company underwrites the production schedule. A no-go forces script / schedule changes to reduce risk.",
+      "duration": {
+        "value": 3,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.95,
+      "failureDelay": {
+        "value": 4,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "pp-final-prep",
+      "nodeType": "activity",
+      "name": "Final shoot prep + tech rehearsal",
+      "description": "Camera tests, lens tests, dolly choreography, makeup tests. Last 2 weeks before principal photography.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": "cal-set",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 30,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "shoot-block1",
+      "nodeType": "activity",
+      "name": "Shoot Block 1 (interior / studio)",
+      "description": "Soundstage interiors — controllable schedule, no weather risk.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": "cal-set",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-leadtalent",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-supporting",
+          "count": 20,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 60,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 20
+        }
+      ]
+    },
+    {
+      "id": "shoot-block2",
+      "nodeType": "activity",
+      "name": "Shoot Block 2 (location / exteriors)",
+      "description": "On-location exteriors. The widest schedule variance — weather, permits, crowd control.",
+      "duration": {
+        "value": 10,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": "cal-set",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-leadtalent",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-supporting",
+          "count": 20,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 60,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 20
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 8,
+        "mode": 10,
+        "max": 22
+      }
+    },
+    {
+      "id": "shoot-block3",
+      "nodeType": "activity",
+      "name": "Shoot Block 3 (action / stunts)",
+      "description": "Action sequences and stunt work. Tightly storyboarded, often pre-vis'd.",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": "cal-set",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 25
+        },
+        {
+          "resourceId": "r-leadtalent",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 25
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 60,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "shoot-wrap",
+      "nodeType": "activity",
+      "name": "Shoot wrap + dailies handoff",
+      "description": "Strike sets; hand dailies + scripts to editorial. End of principal photography.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": "cal-set",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 30,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "shoot-reshoot-need",
+      "nodeType": "activity",
+      "name": "Reshoot need assessment",
+      "description": "Editorial flags coverage gaps; producer + director decide on pickup days. (Loop body.)",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "shoot-pickup",
+      "nodeType": "activity",
+      "name": "Pickup / reshoot days",
+      "description": "Additional photography to fill gaps and replace bad takes. (Loop body.)",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": "cal-set",
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 25
+        },
+        {
+          "resourceId": "r-leadtalent",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 25
+        },
+        {
+          "resourceId": "r-crew",
+          "count": 40,
+          "calendarPolicy": "resourceWins",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "shoot-complete",
+      "nodeType": "activity",
+      "name": "Photography complete",
+      "description": "All footage in the can; editorial owns the schedule from here.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "post-assembly",
+      "nodeType": "activity",
+      "name": "Editor's assembly cut",
+      "description": "Editor cuts a first assembly from raw dailies — usually long and rough.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-postprod",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 6,
+        "mode": 8,
+        "max": 14
+      }
+    },
+    {
+      "id": "post-directors-cut",
+      "nodeType": "activity",
+      "name": "Director's cut",
+      "description": "Director refines assembly into the director's cut.",
+      "duration": {
+        "value": 10,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-postprod",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 8,
+        "mode": 10,
+        "max": 18
+      }
+    },
+    {
+      "id": "post-vfx-bid",
+      "nodeType": "activity",
+      "name": "VFX vendor bid + spot list",
+      "description": "Lock VFX shot list; award vendor bids.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 80
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-vfx",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "post-vfx-rev-shot",
+      "nodeType": "activity",
+      "name": "VFX shot delivery",
+      "description": "Vendor delivers a batch of shots; director / producer review. (Loop body.)",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 80
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-vfx",
+          "count": 30,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "post-vfx-rev-notes",
+      "nodeType": "activity",
+      "name": "VFX notes + revision pass",
+      "description": "Director's notes + revision request to vendor. (Loop body.)",
+      "duration": {
+        "value": 3,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 80
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-vfx",
+          "count": 15,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        }
+      ]
+    },
+    {
+      "id": "post-vfx-budget",
+      "nodeType": "activity",
+      "name": "VFX budget commitment",
+      "description": "VFX is consistently the highest-variance cost line on tentpole films.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 80
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": [],
+      "fixedCost": {
+        "value": 60000000,
+        "distribution": {
+          "type": "triangular",
+          "min": 45000000,
+          "mode": 60000000,
+          "max": 95000000
+        }
+      }
+    },
+    {
+      "id": "post-color",
+      "nodeType": "activity",
+      "name": "Color grading + DI",
+      "description": "Digital intermediate. Colorist + director establish the film's final look.",
+      "duration": {
+        "value": 5,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-postprod",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "post-sound",
+      "nodeType": "activity",
+      "name": "Sound design + mix + ADR",
+      "description": "Sound editorial, design, dialogue replacement (ADR), and final mix.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 320
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-postprod",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "post-music",
+      "nodeType": "activity",
+      "name": "Score recording",
+      "description": "Composer scores the picture; orchestra session for principal cues.",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-postprod",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 3000000
+      }
+    },
+    {
+      "id": "post-test-screen",
+      "nodeType": "activity",
+      "name": "Test screening",
+      "description": "Audience test screening; cards collected and analyzed.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-postprod",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "post-test-decision",
+      "nodeType": "decision",
+      "name": "Test screening pass",
+      "description": "A bad result triggers additional reshoots + recutting, pushing release.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-exec",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ],
+      "passProbability": 0.75,
+      "failureDelay": {
+        "value": 12,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "post-final-cut",
+      "nodeType": "decision",
+      "name": "Final cut approval",
+      "description": "Studio signs off on the final cut. Notes can mean another round of editorial.",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1860,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-exec",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.9,
+      "failureDelay": {
+        "value": 4,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "post-mpaa",
+      "nodeType": "decision",
+      "name": "MPAA rating",
+      "description": "Target PG-13. A surprise R rating triggers a recut for the desired rating.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2080,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-producer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.9,
+      "failureDelay": {
+        "value": 6,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "post-delivery",
+      "nodeType": "activity",
+      "name": "Delivery + DCP master",
+      "description": "Final masters delivered to studio: theatrical DCP, broadcast, home video, censorship cuts.",
+      "duration": {
+        "value": 3,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-postprod",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "mktg-strategy",
+      "nodeType": "activity",
+      "name": "Marketing strategy",
+      "description": "Studio marketing devises positioning, audience targets, sequencing.",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "mktg-strategy-approval",
+      "nodeType": "decision",
+      "name": "Marketing strategy approval",
+      "description": "Studio sign-off on the marketing plan.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-exec",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.9,
+      "failureDelay": {
+        "value": 2,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "mktg-trailer-cut",
+      "nodeType": "activity",
+      "name": "Trailer cut",
+      "description": "Marketing creative cuts trailer / teaser variants. (Loop body.)",
+      "duration": {
+        "value": 3,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "mktg-trailer-rev",
+      "nodeType": "activity",
+      "name": "Trailer review + revisions",
+      "description": "Director / studio review trailer cuts; round of revisions. (Loop body.)",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-director",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "mktg-poster",
+      "nodeType": "activity",
+      "name": "Poster + key art",
+      "description": "Key art passes. Parallel to trailer work.",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "mktg-press-junket",
+      "nodeType": "activity",
+      "name": "Press junket + EPK",
+      "description": "Cast / director press tour + electronic press kit assembly.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-leadtalent",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "mktg-paid-buy",
+      "nodeType": "activity",
+      "name": "Paid media buy + P&A spend",
+      "description": "Studio's promotion + advertising spend. The other tentpole-budget heavyweight after talent / VFX.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 40000000,
+        "distribution": {
+          "type": "triangular",
+          "min": 30000000,
+          "mode": 40000000,
+          "max": 65000000
+        }
+      }
+    },
+    {
+      "id": "mktg-premiere-prep",
+      "nodeType": "activity",
+      "name": "World premiere prep",
+      "description": "Red carpet, talent travel, press junkets, premiere event logistics.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 3000000
+      }
+    },
+    {
+      "id": "rel-date-lock",
+      "nodeType": "decision",
+      "name": "Release date lock",
+      "description": "Studio confirms release window. Competition or marketing readiness can force a slide.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-exec",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "passProbability": 0.95,
+      "failureDelay": {
+        "value": 8,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "rel-premiere",
+      "nodeType": "activity",
+      "name": "World premiere",
+      "description": "Premiere screening event. Marketing peak.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-leadtalent",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        }
+      ]
+    },
+    {
+      "id": "rel-opening",
+      "nodeType": "activity",
+      "name": "Opening weekend",
+      "description": "Wide theatrical release. Box-office tracking starts; reviews land.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "rel-theatrical-run",
+      "nodeType": "activity",
+      "name": "Theatrical run",
+      "description": "Wide run; expansion / contraction depending on holds.",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 6,
+        "mode": 12,
+        "max": 22
+      }
+    },
+    {
+      "id": "rel-international",
+      "nodeType": "activity",
+      "name": "International rollout",
+      "description": "Staggered international releases across major territories.",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "rel-home-window",
+      "nodeType": "activity",
+      "name": "PVOD / home window",
+      "description": "Premium VOD then transactional home video. Modern theatrical-to-home is 45–90 days.",
+      "duration": {
+        "value": 10,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "aw-festival-strategy",
+      "nodeType": "activity",
+      "name": "Festival / awards strategy",
+      "description": "If the film tracks for awards, plan the campaign — Telluride, Toronto, Cannes, etc.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "aw-campaign",
+      "nodeType": "activity",
+      "name": "Awards campaign + FYC",
+      "description": "For-Your-Consideration campaign — guild screenings, talent events, ad spend.",
+      "duration": {
+        "value": 20,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 320,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ],
+      "fixedCost": {
+        "value": 5000000
+      }
+    },
+    {
+      "id": "aw-nominations",
+      "nodeType": "activity",
+      "name": "Nominations announced",
+      "description": "Guild nominations + Academy nominations. Influences ongoing campaign spend.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 540,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "aw-ceremonies",
+      "nodeType": "activity",
+      "name": "Award ceremonies",
+      "description": "Guilds + Academy Awards. Wins drive a post-ceremony box-office and streaming bump.",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "aw-svod",
+      "nodeType": "activity",
+      "name": "SVOD / streaming window",
+      "description": "Subscription streaming window opens. Long-tail library asset for years.",
+      "duration": {
+        "value": 26,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 980,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 100
+        }
+      ]
+    },
+    {
+      "id": "aw-library",
+      "nodeType": "activity",
+      "name": "Library steady state",
+      "description": "Film enters the studio's evergreen library — re-licensed across streamers, broadcast, sequels.",
+      "duration": {
+        "value": 1,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "c6c59b8f-30d3-4ed5-9c32-46d4221e6ff3",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "beb0747d-4b89-42ba-b4bd-cbf3f70a0a0e",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1860,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "999123b2-a06c-4d8b-bc44-604443c78eaa",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "2e143194-4ac8-47fc-a728-e40922e8b8d6",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "aeafbdf4-ca92-4c40-9d08-611dbecba854",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "3072833e-93df-4005-b19b-7f3748cd2aa2",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "5ff80c83-5b1e-4935-83e7-a41318b1f583",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "6fd2777e-9377-4c69-be03-1d9e55d1366d",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "df208c70-844e-4c88-94bb-38d465233367",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "f295c0f9-66c6-4b09-b9ce-d02d8b748a82",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1640,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "b362510b-86d9-48d8-847e-2ce9b3332220",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "08fd1750-054c-410f-8c93-bd369f947691",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "550433b5-8b52-422b-abfa-f7af2ae33079",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -4,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "6896e87e-6bd3-473f-9ae2-73f96e5e4b74",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-start-dev",
+      "from": "start",
+      "to": "sub-dev",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-preprod",
+      "from": "sub-dev",
+      "to": "sub-preprod",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-preprod-shoot",
+      "from": "sub-preprod",
+      "to": "sub-shoot",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-shoot-post",
+      "from": "sub-shoot",
+      "to": "sub-post",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-mktg",
+      "from": "sub-post",
+      "to": "sub-mktg",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-release",
+      "from": "sub-mktg",
+      "to": "sub-release",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-release-awards",
+      "from": "sub-release",
+      "to": "sub-awards",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-awards-end",
+      "from": "sub-awards",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-concept-script",
+      "from": "dev-concept",
+      "to": "dev-script-first",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-script-revpass",
+      "from": "dev-script-first",
+      "to": "dev-revision-pass",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-revpass-notes",
+      "from": "dev-revision-pass",
+      "to": "dev-notes-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-notes-greenlight",
+      "from": "dev-notes-review",
+      "to": "dev-greenlight",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-greenlight-director",
+      "from": "dev-greenlight",
+      "to": "dev-director-attach",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-greenlight-lead",
+      "from": "dev-greenlight",
+      "to": "dev-lead-attach",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-director-finance",
+      "from": "dev-director-attach",
+      "to": "dev-finance-package",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-lead-finance",
+      "from": "dev-lead-attach",
+      "to": "dev-finance-package",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-dev-finance-budget",
+      "from": "dev-finance-package",
+      "to": "dev-budget-approval",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-casting-crew",
+      "from": "pp-casting-supporting",
+      "to": "pp-crew-hiring",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-locations-crew",
+      "from": "pp-locations",
+      "to": "pp-crew-hiring",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-crew-design",
+      "from": "pp-crew-hiring",
+      "to": "pp-design",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-crew-previs",
+      "from": "pp-crew-hiring",
+      "to": "pp-previs",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-design-setbuild",
+      "from": "pp-design",
+      "to": "pp-set-build",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-previs-rehearsal",
+      "from": "pp-previs",
+      "to": "pp-rehearsal",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-setbuild-leadfee",
+      "from": "pp-set-build",
+      "to": "pp-leadtalent-fee",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-rehearsal-ins",
+      "from": "pp-rehearsal",
+      "to": "pp-insurance",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-leadfee-final",
+      "from": "pp-leadtalent-fee",
+      "to": "pp-final-prep",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-pp-ins-final",
+      "from": "pp-insurance",
+      "to": "pp-final-prep",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-shoot-b1-b2",
+      "from": "shoot-block1",
+      "to": "shoot-block2",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-shoot-b2-b3",
+      "from": "shoot-block2",
+      "to": "shoot-block3",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-shoot-b3-wrap",
+      "from": "shoot-block3",
+      "to": "shoot-wrap",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-shoot-wrap-reshoot",
+      "from": "shoot-wrap",
+      "to": "shoot-reshoot-need",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-shoot-reshoot-pickup",
+      "from": "shoot-reshoot-need",
+      "to": "shoot-pickup",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-shoot-pickup-complete",
+      "from": "shoot-pickup",
+      "to": "shoot-complete",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-assembly-dc",
+      "from": "post-assembly",
+      "to": "post-directors-cut",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-dc-vfxbid",
+      "from": "post-directors-cut",
+      "to": "post-vfx-bid",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-dc-color",
+      "from": "post-directors-cut",
+      "to": "post-color",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-dc-sound",
+      "from": "post-directors-cut",
+      "to": "post-sound",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-vfxbid-shot",
+      "from": "post-vfx-bid",
+      "to": "post-vfx-rev-shot",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-vfx-shot-notes",
+      "from": "post-vfx-rev-shot",
+      "to": "post-vfx-rev-notes",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-vfx-notes-budget",
+      "from": "post-vfx-rev-notes",
+      "to": "post-vfx-budget",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-color-music",
+      "from": "post-color",
+      "to": "post-music",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-sound-music",
+      "from": "post-sound",
+      "to": "post-music",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-vfxbudget-test",
+      "from": "post-vfx-budget",
+      "to": "post-test-screen",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-music-test",
+      "from": "post-music",
+      "to": "post-test-screen",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-test-decision",
+      "from": "post-test-screen",
+      "to": "post-test-decision",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-decision-final",
+      "from": "post-test-decision",
+      "to": "post-final-cut",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-final-mpaa",
+      "from": "post-final-cut",
+      "to": "post-mpaa",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-post-mpaa-delivery",
+      "from": "post-mpaa",
+      "to": "post-delivery",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-strategy-approval",
+      "from": "mktg-strategy",
+      "to": "mktg-strategy-approval",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-approval-trailer",
+      "from": "mktg-strategy-approval",
+      "to": "mktg-trailer-cut",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-approval-poster",
+      "from": "mktg-strategy-approval",
+      "to": "mktg-poster",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-trailer-rev",
+      "from": "mktg-trailer-cut",
+      "to": "mktg-trailer-rev",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-rev-press",
+      "from": "mktg-trailer-rev",
+      "to": "mktg-press-junket",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-poster-paid",
+      "from": "mktg-poster",
+      "to": "mktg-paid-buy",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-press-paid",
+      "from": "mktg-press-junket",
+      "to": "mktg-paid-buy",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-mktg-paid-premiere",
+      "from": "mktg-paid-buy",
+      "to": "mktg-premiere-prep",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-rel-lock-premiere",
+      "from": "rel-date-lock",
+      "to": "rel-premiere",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-rel-premiere-opening",
+      "from": "rel-premiere",
+      "to": "rel-opening",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-rel-opening-run",
+      "from": "rel-opening",
+      "to": "rel-theatrical-run",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-rel-run-intl",
+      "from": "rel-theatrical-run",
+      "to": "rel-international",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-rel-intl-home",
+      "from": "rel-international",
+      "to": "rel-home-window",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-aw-strategy-campaign",
+      "from": "aw-festival-strategy",
+      "to": "aw-campaign",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-aw-campaign-nom",
+      "from": "aw-campaign",
+      "to": "aw-nominations",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-aw-nom-ceremonies",
+      "from": "aw-nominations",
+      "to": "aw-ceremonies",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-aw-ceremonies-svod",
+      "from": "aw-ceremonies",
+      "to": "aw-svod",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e-aw-svod-library",
+      "from": "aw-svod",
+      "to": "aw-library",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "5d87eee8-7863-43f4-a8a4-0abad20f32ec",
+      "from": "c6c59b8f-30d3-4ed5-9c32-46d4221e6ff3",
+      "to": "dev-concept",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "c4d59c96-ae70-4bf7-92c1-689f15b9e70c",
+      "from": "dev-budget-approval",
+      "to": "beb0747d-4b89-42ba-b4bd-cbf3f70a0a0e",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "d0a0a128-24c7-4c36-851d-ae5e00b6dd72",
+      "from": "999123b2-a06c-4d8b-bc44-604443c78eaa",
+      "to": "pp-casting-supporting",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "5ca1be4a-82d6-4f38-9639-a3ad3d30a838",
+      "from": "pp-final-prep",
+      "to": "2e143194-4ac8-47fc-a728-e40922e8b8d6",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "646be5df-5555-41a2-8be8-dd945fc02bec",
+      "from": "aeafbdf4-ca92-4c40-9d08-611dbecba854",
+      "to": "shoot-block1",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "3979b2cc-dadf-4b5c-92b1-7d2bb6b01fd5",
+      "from": "shoot-complete",
+      "to": "3072833e-93df-4005-b19b-7f3748cd2aa2",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "2ea258c2-f7cd-4bf5-a7b7-5e07fa0b0fa7",
+      "from": "5ff80c83-5b1e-4935-83e7-a41318b1f583",
+      "to": "post-assembly",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "0af07142-3460-4371-b829-dcd7e0eb35af",
+      "from": "post-delivery",
+      "to": "6fd2777e-9377-4c69-be03-1d9e55d1366d",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "9fd102e7-3ebc-44f0-bb2b-b42f32864cb5",
+      "from": "df208c70-844e-4c88-94bb-38d465233367",
+      "to": "mktg-strategy",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "1c95165e-44aa-4fa0-9b53-88f3e1f2c0a6",
+      "from": "mktg-premiere-prep",
+      "to": "f295c0f9-66c6-4b09-b9ce-d02d8b748a82",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "dea0a488-ec4f-4fd5-8da5-ce12586d06f2",
+      "from": "b362510b-86d9-48d8-847e-2ce9b3332220",
+      "to": "rel-date-lock",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "885c176f-bfdb-4903-bedd-e5447e32f789",
+      "from": "rel-home-window",
+      "to": "08fd1750-054c-410f-8c93-bd369f947691",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "33e82345-0294-41fe-a96f-842769519af5",
+      "from": "550433b5-8b52-422b-abfa-f7af2ae33079",
+      "to": "aw-festival-strategy",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "c09453bc-9a4a-4623-b310-e9ed537cab33",
+      "from": "aw-library",
+      "to": "6896e87e-6bd3-473f-9ae2-73f96e5e4b74",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [
+    {
+      "id": "loop-script-revisions",
+      "bodyNodeIds": [
+        "dev-revision-pass",
+        "dev-notes-review"
+      ],
+      "kickout": {
+        "type": "externalTrigger",
+        "description": "Producer + director approve the locked shooting draft."
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 8
+      },
+      "group": "Script revisions",
+      "description": "Tentpole script typically goes through 5 revision rounds between first draft and shooting draft; 3–8 is the realistic range."
+    },
+    {
+      "id": "loop-reshoots",
+      "bodyNodeIds": [
+        "shoot-reshoot-need",
+        "shoot-pickup"
+      ],
+      "kickout": {
+        "type": "externalTrigger",
+        "description": "Editorial confirms no further pickups needed."
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 1,
+        "mode": 2,
+        "max": 4
+      },
+      "group": "Reshoots",
+      "description": "1–4 pickup days are normal on a tentpole production. Heavy reshoots (4+) usually signal a recut-pass-test-screening loop kicking in."
+    },
+    {
+      "id": "loop-vfx-rounds",
+      "bodyNodeIds": [
+        "post-vfx-rev-shot",
+        "post-vfx-rev-notes"
+      ],
+      "kickout": {
+        "type": "externalTrigger",
+        "description": "Director signs off on final shots."
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 4,
+        "mode": 6,
+        "max": 12
+      },
+      "group": "VFX revision rounds",
+      "description": "Hero shots commonly go through 8–12 review rounds; minor shots clear in 3–4. The triangular captures the typical spread."
+    },
+    {
+      "id": "loop-trailer-cuts",
+      "bodyNodeIds": [
+        "mktg-trailer-cut",
+        "mktg-trailer-rev"
+      ],
+      "kickout": {
+        "type": "externalTrigger",
+        "description": "Marketing + studio sign off on trailer."
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 5
+      },
+      "group": "Trailer review cycle",
+      "description": "Teaser → main trailer → final trailer — typically 3 distinct cuts each with notes."
+    }
+  ],
+  "subsystems": [
+    {
+      "id": "ss-dev",
+      "containerNodeId": "sub-dev",
+      "bodyNodeIds": [
+        "c6c59b8f-30d3-4ed5-9c32-46d4221e6ff3",
+        "dev-concept",
+        "dev-script-first",
+        "dev-revision-pass",
+        "dev-notes-review",
+        "dev-greenlight",
+        "dev-director-attach",
+        "dev-lead-attach",
+        "dev-finance-package",
+        "dev-budget-approval",
+        "beb0747d-4b89-42ba-b4bd-cbf3f70a0a0e"
+      ],
+      "entryNodeId": "c6c59b8f-30d3-4ed5-9c32-46d4221e6ff3",
+      "exitNodeId": "beb0747d-4b89-42ba-b4bd-cbf3f70a0a0e",
+      "group": "Production phases"
+    },
+    {
+      "id": "ss-preprod",
+      "containerNodeId": "sub-preprod",
+      "bodyNodeIds": [
+        "999123b2-a06c-4d8b-bc44-604443c78eaa",
+        "pp-casting-supporting",
+        "pp-locations",
+        "pp-crew-hiring",
+        "pp-design",
+        "pp-previs",
+        "pp-set-build",
+        "pp-rehearsal",
+        "pp-leadtalent-fee",
+        "pp-insurance",
+        "pp-final-prep",
+        "2e143194-4ac8-47fc-a728-e40922e8b8d6"
+      ],
+      "entryNodeId": "999123b2-a06c-4d8b-bc44-604443c78eaa",
+      "exitNodeId": "2e143194-4ac8-47fc-a728-e40922e8b8d6",
+      "group": "Production phases"
+    },
+    {
+      "id": "ss-shoot",
+      "containerNodeId": "sub-shoot",
+      "bodyNodeIds": [
+        "aeafbdf4-ca92-4c40-9d08-611dbecba854",
+        "shoot-block1",
+        "shoot-block2",
+        "shoot-block3",
+        "shoot-wrap",
+        "shoot-reshoot-need",
+        "shoot-pickup",
+        "shoot-complete",
+        "3072833e-93df-4005-b19b-7f3748cd2aa2"
+      ],
+      "entryNodeId": "aeafbdf4-ca92-4c40-9d08-611dbecba854",
+      "exitNodeId": "3072833e-93df-4005-b19b-7f3748cd2aa2",
+      "group": "Production phases"
+    },
+    {
+      "id": "ss-post",
+      "containerNodeId": "sub-post",
+      "bodyNodeIds": [
+        "5ff80c83-5b1e-4935-83e7-a41318b1f583",
+        "post-assembly",
+        "post-directors-cut",
+        "post-vfx-bid",
+        "post-vfx-rev-shot",
+        "post-vfx-rev-notes",
+        "post-vfx-budget",
+        "post-color",
+        "post-sound",
+        "post-music",
+        "post-test-screen",
+        "post-test-decision",
+        "post-final-cut",
+        "post-mpaa",
+        "post-delivery",
+        "6fd2777e-9377-4c69-be03-1d9e55d1366d"
+      ],
+      "entryNodeId": "5ff80c83-5b1e-4935-83e7-a41318b1f583",
+      "exitNodeId": "6fd2777e-9377-4c69-be03-1d9e55d1366d",
+      "group": "Production phases"
+    },
+    {
+      "id": "ss-mktg",
+      "containerNodeId": "sub-mktg",
+      "bodyNodeIds": [
+        "df208c70-844e-4c88-94bb-38d465233367",
+        "mktg-strategy",
+        "mktg-strategy-approval",
+        "mktg-trailer-cut",
+        "mktg-trailer-rev",
+        "mktg-poster",
+        "mktg-press-junket",
+        "mktg-paid-buy",
+        "mktg-premiere-prep",
+        "f295c0f9-66c6-4b09-b9ce-d02d8b748a82"
+      ],
+      "entryNodeId": "df208c70-844e-4c88-94bb-38d465233367",
+      "exitNodeId": "f295c0f9-66c6-4b09-b9ce-d02d8b748a82",
+      "group": "Production phases"
+    },
+    {
+      "id": "ss-release",
+      "containerNodeId": "sub-release",
+      "bodyNodeIds": [
+        "b362510b-86d9-48d8-847e-2ce9b3332220",
+        "rel-date-lock",
+        "rel-premiere",
+        "rel-opening",
+        "rel-theatrical-run",
+        "rel-international",
+        "rel-home-window",
+        "08fd1750-054c-410f-8c93-bd369f947691"
+      ],
+      "entryNodeId": "b362510b-86d9-48d8-847e-2ce9b3332220",
+      "exitNodeId": "08fd1750-054c-410f-8c93-bd369f947691",
+      "group": "Production phases"
+    },
+    {
+      "id": "ss-awards",
+      "containerNodeId": "sub-awards",
+      "bodyNodeIds": [
+        "550433b5-8b52-422b-abfa-f7af2ae33079",
+        "aw-festival-strategy",
+        "aw-campaign",
+        "aw-nominations",
+        "aw-ceremonies",
+        "aw-svod",
+        "aw-library",
+        "6896e87e-6bd3-473f-9ae2-73f96e5e4b74"
+      ],
+      "entryNodeId": "550433b5-8b52-422b-abfa-f7af2ae33079",
+      "exitNodeId": "6896e87e-6bd3-473f-9ae2-73f96e5e4b74",
+      "group": "Production phases"
+    }
+  ],
+  "scenarios": [],
+  "comments": []
+}

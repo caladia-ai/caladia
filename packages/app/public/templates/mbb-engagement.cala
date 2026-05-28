@@ -1,0 +1,549 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "MBB Market Research Engagement",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "MBB Consulting (M–F 13h)",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 13,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-associate",
+      "name": "Associate",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 220
+    },
+    {
+      "id": "r-consultant",
+      "name": "Consultant",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 350
+    },
+    {
+      "id": "r-manager",
+      "name": "Engagement Manager",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 500
+    },
+    {
+      "id": "r-partner",
+      "name": "Partner",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 800
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Engagement kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "hypothesis",
+      "nodeType": "activity",
+      "name": "Hypothesis tree",
+      "description": "Structure the engagement's key questions into a MECE hypothesis tree. The consultant drafts the tree; the manager sharpens it before research kicks off so the team isn't chasing the wrong thread for two weeks.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 220,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-associate",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-consultant",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 5
+      }
+    },
+    {
+      "id": "primary",
+      "nodeType": "activity",
+      "name": "Primary research (expert interviews)",
+      "description": "Interview subject matter experts (SMEs), former operators, and industry insiders to gather qualitative insights secondary research can't surface. Associates run interviews in parallel; aim for breadth over polish on the first pass.",
+      "duration": {
+        "value": 10,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 420,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-associate",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 7,
+        "mode": 10,
+        "max": 18
+      }
+    },
+    {
+      "id": "secondary",
+      "nodeType": "activity",
+      "name": "Secondary research (literature & data)",
+      "description": "Pull together public data, industry reports, and academic literature to build the quantitative backbone of the analysis. Associate does the bulk; consultant directs which sources matter and flags gaps for primary research to fill.",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 420,
+        "y": 340
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-associate",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        },
+        {
+          "resourceId": "r-consultant",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 30
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 9
+      }
+    },
+    {
+      "id": "synthesis",
+      "nodeType": "activity",
+      "name": "Synthesis",
+      "description": "Combine primary and secondary findings into a single story. The team aligns on which hypotheses survived the evidence and what the data is actually saying — the moment the engagement either crystallises or has to re-scope.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 620,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-associate",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-consultant",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 6
+      }
+    },
+    {
+      "id": "draft",
+      "nodeType": "activity",
+      "name": "Initial deck draft",
+      "description": "First-pass slide deck capturing the synthesized story — storyline, key charts, supporting evidence. Associate constructs the slides; consultant and manager review for narrative coherence before the partner sees anything.",
+      "duration": {
+        "value": 4,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 800,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-associate",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-consultant",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 10
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 4,
+        "max": 7
+      }
+    },
+    {
+      "id": "revise",
+      "nodeType": "activity",
+      "name": "Revise deck",
+      "description": "Iterate on the draft based on internal critique. Tightens the storyline, sharpens visuals, and addresses the gaps that the partner review just flagged. May loop more than once if the partner pushes back hard.",
+      "duration": {
+        "value": 8,
+        "unit": "hours"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 980,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-associate",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-consultant",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 40
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 4,
+        "mode": 8,
+        "max": 16
+      }
+    },
+    {
+      "id": "review",
+      "nodeType": "activity",
+      "name": "Partner review",
+      "description": "Partner walks the deck, stress-tests the recommendation, and flags weak slides or unsupported claims. Outputs either a green light to deliver, or a 'go fix these' list that sends the team back to Revise.",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 1160,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-partner",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 4,
+        "max": 8
+      }
+    },
+    {
+      "id": "final",
+      "nodeType": "activity",
+      "name": "Final delivery",
+      "description": "Final client presentation. Partner leads the room; manager supports on the analytical narrative; consultant stands by to handle Q&A on the deeper detail.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 1340,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-consultant",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        },
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        },
+        {
+          "resourceId": "r-partner",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Engagement closed",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1520,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "hypothesis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "hypothesis",
+      "to": "primary",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "hypothesis",
+      "to": "secondary",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "primary",
+      "to": "synthesis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "secondary",
+      "to": "synthesis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "synthesis",
+      "to": "draft",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "draft",
+      "to": "revise",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "revise",
+      "to": "review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "review",
+      "to": "final",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "final",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [
+    {
+      "id": "loop-review",
+      "bodyNodeIds": [
+        "revise",
+        "review"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 4
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 1,
+        "mode": 2,
+        "max": 3
+      }
+    }
+  ],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

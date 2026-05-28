@@ -1,0 +1,48 @@
+{
+  "name": "@procsim/app",
+  "private": true,
+  "version": "0.5.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@dagrejs/dagre": "^3.0.0",
+    "@procsim/calendar": "workspace:*",
+    "@procsim/importers": "workspace:*",
+    "@procsim/engine-worker": "workspace:*",
+    "@procsim/file-format": "workspace:*",
+    "@procsim/scheduler": "workspace:*",
+    "@procsim/simulation": "workspace:*",
+    "@xyflow/react": "^12.3.6",
+    "html-to-image": "^1.11.13",
+    "idb-keyval": "^6.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zundo": "^2.3.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/dagre": "^0.7.54",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.3",
+    "vitest": "^2.1.9"
+  },
+  "//browserslist": "Audit I-34. Declares the minimum browsers Caladia supports. Maps roughly to the esbuild targets in vite.config.ts and to the boot-time feature-detect in index.html. Floor picked so all four critical APIs (Worker, IndexedDB, crypto.randomUUID, structuredClone) are universally available; raising it later is cheap, lowering it after launch is not.",
+  "browserslist": [
+    "Chrome >= 100",
+    "Firefox >= 100",
+    "Safari >= 15.4",
+    "Edge >= 100",
+    "not dead"
+  ]
+}

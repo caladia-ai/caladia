@@ -1,0 +1,17 @@
+{
+  "version": "2026.1",
+  "base": "USD",
+  "generatedAt": "2026-05-01T00:00:00Z",
+  "windowDescription": "Average daily mid-market rates, 2026-01-01 to 2026-05-01 (4-month trailing window). Rates expressed as foreign-currency-per-1-USD.",
+  "rates": {
+    "USD": 1.0,
+    "EUR": 0.854277,
+    "GBP": 0.741932,
+    "JPY": 157.401858,
+    "CAD": 1.372391,
+    "AUD": 1.428421,
+    "CHF": 0.784357,
+    "CNY": 6.896317,
+    "INR": 92.250923
+  }
+}

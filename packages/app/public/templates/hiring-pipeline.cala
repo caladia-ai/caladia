@@ -1,0 +1,467 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Hiring Pipeline",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-recruiter",
+      "name": "Recruiter",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 80
+    },
+    {
+      "id": "r-interviewer",
+      "name": "Engineer / Interviewer",
+      "capacity": 4,
+      "calendarId": "cal-default",
+      "costRate": 150
+    },
+    {
+      "id": "r-manager",
+      "name": "Hiring Manager",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 200
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Open Req",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "source",
+      "nodeType": "activity",
+      "name": "Source candidates",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-recruiter",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 12
+      }
+    },
+    {
+      "id": "screen",
+      "nodeType": "activity",
+      "name": "Phone screen",
+      "duration": {
+        "value": 2,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 380,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-recruiter",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "iv-coding",
+      "nodeType": "activity",
+      "name": "Coding interview",
+      "duration": {
+        "value": 1.5,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 100
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-interviewer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "iv-design",
+      "nodeType": "activity",
+      "name": "System design interview",
+      "duration": {
+        "value": 1.5,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-interviewer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "iv-behavioral",
+      "nodeType": "activity",
+      "name": "Behavioral interview",
+      "duration": {
+        "value": 1,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 300
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-interviewer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "iv-manager",
+      "nodeType": "activity",
+      "name": "Hiring manager interview",
+      "duration": {
+        "value": 1,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 400
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "debrief",
+      "nodeType": "activity",
+      "name": "Debrief",
+      "duration": {
+        "value": 2,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-interviewer",
+          "count": 3,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-recruiter",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ]
+    },
+    {
+      "id": "offer",
+      "nodeType": "decision",
+      "name": "Offer & accept?",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 940,
+        "y": 220
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-recruiter",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.65,
+      "failureDelay": {
+        "value": 10,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "onboard",
+      "nodeType": "activity",
+      "name": "Onboarding",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1140,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-manager",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Filled",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1320,
+        "y": 240
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "source",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "source",
+      "to": "screen",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "screen",
+      "to": "iv-coding",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "screen",
+      "to": "iv-design",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "screen",
+      "to": "iv-behavioral",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "screen",
+      "to": "iv-manager",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "iv-coding",
+      "to": "debrief",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "iv-design",
+      "to": "debrief",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "iv-behavioral",
+      "to": "debrief",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "iv-manager",
+      "to": "debrief",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "debrief",
+      "to": "offer",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e12",
+      "from": "offer",
+      "to": "onboard",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e13",
+      "from": "onboard",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

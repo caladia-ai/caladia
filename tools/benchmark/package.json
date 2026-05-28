@@ -1,0 +1,18 @@
+{
+  "name": "@procsim/benchmark",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Performance benchmarks for scheduler and simulation — produces diagram-health-thresholds.json",
+  "type": "module",
+  "scripts": {
+    "bench": "tsx index.ts"
+  },
+  "dependencies": {
+    "@procsim/file-format": "workspace:*",
+    "@procsim/scheduler": "workspace:*",
+    "@procsim/simulation": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0"
+  }
+}

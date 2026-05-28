@@ -1,0 +1,17 @@
+{
+  "version": "2026.0",
+  "base": "USD",
+  "generatedAt": "2025-12-31T00:00:00Z",
+  "windowDescription": "Average daily mid-market rates, 2025-07-01 to 2025-12-31. Superseded by 2026.1. Retained as a test fixture for the FX update banner.",
+  "rates": {
+    "USD": 1.0,
+    "EUR": 0.870000,
+    "GBP": 0.760000,
+    "JPY": 152.000000,
+    "CAD": 1.380000,
+    "AUD": 1.450000,
+    "CHF": 0.800000,
+    "CNY": 7.050000,
+    "INR": 91.500000
+  }
+}

@@ -1,0 +1,549 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Software Feature Release",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-pm",
+      "name": "Product Manager",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 110
+    },
+    {
+      "id": "r-senior-dev",
+      "name": "Senior Engineer",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 130
+    },
+    {
+      "id": "r-junior-dev",
+      "name": "Junior Engineer",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 80
+    },
+    {
+      "id": "r-designer",
+      "name": "Designer",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 95
+    },
+    {
+      "id": "r-qa",
+      "name": "QA Engineer",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 75
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "spec",
+      "nodeType": "activity",
+      "name": "Write spec",
+      "duration": {
+        "value": 16,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-pm",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 12,
+        "mode": 16,
+        "max": 28
+      }
+    },
+    {
+      "id": "design-review",
+      "nodeType": "decision",
+      "name": "Design review",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 380,
+        "y": 220
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-pm",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-senior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.8,
+      "failureDelay": {
+        "value": 8,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "impl-fe",
+      "nodeType": "activity",
+      "name": "Implement frontend",
+      "duration": {
+        "value": 24,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 700,
+        "y": 50
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-designer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 16,
+        "mode": 24,
+        "max": 48
+      },
+      "crashOptions": [
+        {
+          "duration": {
+            "value": 16,
+            "unit": "hours"
+          },
+          "additionalCost": 600,
+          "resourceCostMultiplier": 1.5
+        }
+      ]
+    },
+    {
+      "id": "impl-be",
+      "nodeType": "activity",
+      "name": "Implement backend",
+      "duration": {
+        "value": 32,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 700,
+        "y": 450
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-junior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 24,
+        "mode": 32,
+        "max": 56
+      },
+      "crashOptions": [
+        {
+          "duration": {
+            "value": 20,
+            "unit": "hours"
+          },
+          "additionalCost": 800,
+          "resourceCostMultiplier": 1.5
+        }
+      ]
+    },
+    {
+      "id": "code-review",
+      "nodeType": "decision",
+      "name": "Code review",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1060,
+        "y": 220
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 6,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "qa-test",
+      "nodeType": "activity",
+      "name": "QA testing",
+      "duration": {
+        "value": 8,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1240,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-qa",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 6,
+        "mode": 8,
+        "max": 14
+      }
+    },
+    {
+      "id": "fix-bugs",
+      "nodeType": "activity",
+      "name": "Fix bugs",
+      "duration": {
+        "value": 6,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1420,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-junior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 6,
+        "max": 12
+      }
+    },
+    {
+      "id": "release-prep",
+      "nodeType": "activity",
+      "name": "Release prep",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1660,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-pm",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-senior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "fixedCost": {
+        "value": 200
+      }
+    },
+    {
+      "id": "deploy",
+      "nodeType": "activity",
+      "name": "Deploy to production",
+      "duration": {
+        "value": 2,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1840,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior-dev",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Live",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2020,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "spec",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "spec",
+      "to": "design-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "design-review",
+      "to": "impl-fe",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "design-review",
+      "to": "impl-be",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "impl-fe",
+      "to": "code-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "impl-be",
+      "to": "code-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "code-review",
+      "to": "qa-test",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "qa-test",
+      "to": "fix-bugs",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "fix-bugs",
+      "to": "release-prep",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "release-prep",
+      "to": "deploy",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "deploy",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [
+    {
+      "id": "loop-qa",
+      "bodyNodeIds": [
+        "qa-test",
+        "fix-bugs"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 5
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 1,
+        "mode": 2,
+        "max": 4
+      }
+    }
+  ],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

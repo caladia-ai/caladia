@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "draft": {
+    "projectName": "Widget Release",
+    "startDate": "2025-01-06",
+    "nodes": [
+      {
+        "id": "n1",
+        "name": "Project Kickoff",
+        "nodeType": "start",
+        "duration": {
+          "value": 0,
+          "unit": "hours"
+        },
+        "position": {
+          "x": 0,
+          "y": 100
+        },
+        "consumesResources": false,
+        "resourceAssignments": []
+      },
+      {
+        "id": "n2",
+        "name": "Design",
+        "nodeType": "activity",
+        "duration": {
+          "value": 5,
+          "unit": "days"
+        },
+        "position": {
+          "x": 220,
+          "y": 100
+        },
+        "consumesResources": false,
+        "resourceAssignments": []
+      },
+      {
+        "id": "n3",
+        "name": "Development",
+        "nodeType": "activity",
+        "duration": {
+          "value": 10,
+          "unit": "days"
+        },
+        "position": {
+          "x": 440,
+          "y": 100
+        },
+        "consumesResources": true,
+        "resourceAssignments": [
+          {
+            "resourceId": "r1",
+            "count": 2,
+            "calendarPolicy": "intersection"
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "name": "QA Testing",
+        "nodeType": "activity",
+        "duration": {
+          "value": 3,
+          "unit": "days"
+        },
+        "position": {
+          "x": 660,
+          "y": 100
+        },
+        "consumesResources": true,
+        "resourceAssignments": [
+          {
+            "resourceId": "r1",
+            "count": 1,
+            "calendarPolicy": "intersection"
+          }
+        ],
+        "notes": "Run regression suite"
+      },
+      {
+        "id": "n5",
+        "name": "Project Complete",
+        "nodeType": "end",
+        "duration": {
+          "value": 0,
+          "unit": "hours"
+        },
+        "position": {
+          "x": 880,
+          "y": 100
+        },
+        "consumesResources": false,
+        "resourceAssignments": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "from": "n1",
+        "to": "n2",
+        "type": "FS",
+        "lag": {
+          "value": 0,
+          "unit": "hours"
+        }
+      },
+      {
+        "id": "e2",
+        "from": "n2",
+        "to": "n3",
+        "type": "FS",
+        "lag": {
+          "value": 0,
+          "unit": "hours"
+        }
+      },
+      {
+        "id": "e3",
+        "from": "n3",
+        "to": "n4",
+        "type": "SS",
+        "lag": {
+          "value": 0,
+          "unit": "hours"
+        }
+      },
+      {
+        "id": "e4",
+        "from": "n3",
+        "to": "n5",
+        "type": "FS",
+        "lag": {
+          "value": 0,
+          "unit": "hours"
+        }
+      },
+      {
+        "id": "e5",
+        "from": "n4",
+        "to": "n5",
+        "type": "FS",
+        "lag": {
+          "value": 0,
+          "unit": "hours"
+        }
+      }
+    ],
+    "resources": [
+      {
+        "id": "r1",
+        "name": "Engineers",
+        "capacity": 3
+      }
+    ]
+  },
+  "ambiguities": []
+}

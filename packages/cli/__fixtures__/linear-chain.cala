@@ -1,0 +1,60 @@
+{
+  "kind": "caladia-project",
+  "version": 3,
+  "project": {
+    "name": "Linear Chain",
+    "startDate": "2026-01-05",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon-Fri 8h",
+      "workingDays": [false, true, true, true, true, true, false],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [],
+  "nodes": [
+    {
+      "id": "A",
+      "nodeType": "activity",
+      "name": "Build",
+      "duration": { "value": 8, "unit": "hours" },
+      "distribution": { "type": "triangular", "min": 4, "mode": 8, "max": 16 },
+      "position": { "x": 0, "y": 0 },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "B",
+      "nodeType": "activity",
+      "name": "Test",
+      "duration": { "value": 8, "unit": "hours" },
+      "position": { "x": 200, "y": 0 },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "A",
+      "to": "B",
+      "type": "FS",
+      "lag": { "value": 0, "unit": "hours" }
+    }
+  ],
+  "loops": [],
+  "subsystems": [],
+  "scenarios": []
+}

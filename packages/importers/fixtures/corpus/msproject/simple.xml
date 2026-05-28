@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/project">
+  <Name>Widget Release</Name>
+  <StartDate>2025-01-06T00:00:00</StartDate>
+  <Task>
+    <UID>0</UID>
+    <ID>0</ID>
+    <Name>Widget Release</Name>
+    <Summary>1</Summary>
+  </Task>
+  <Task>
+    <UID>1</UID>
+    <ID>1</ID>
+    <Name>Project Kickoff</Name>
+    <Milestone>1</Milestone>
+    <Duration>PT0H0M0S</Duration>
+  </Task>
+  <Task>
+    <UID>2</UID>
+    <ID>2</ID>
+    <Name>Design</Name>
+    <Duration>PT40H0M0S</Duration>
+    <PredecessorLink>
+      <PredecessorUID>1</PredecessorUID>
+      <Type>0</Type>
+      <LinkLag>0</LinkLag>
+    </PredecessorLink>
+  </Task>
+  <Task>
+    <UID>3</UID>
+    <ID>3</ID>
+    <Name>Development</Name>
+    <Duration>PT80H0M0S</Duration>
+    <PredecessorLink>
+      <PredecessorUID>2</PredecessorUID>
+      <Type>0</Type>
+      <LinkLag>0</LinkLag>
+    </PredecessorLink>
+  </Task>
+  <Task>
+    <UID>4</UID>
+    <ID>4</ID>
+    <Name>QA Testing</Name>
+    <Duration>PT24H0M0S</Duration>
+    <PredecessorLink>
+      <PredecessorUID>3</PredecessorUID>
+      <Type>1</Type>
+      <LinkLag>0</LinkLag>
+    </PredecessorLink>
+    <Notes>Run regression suite</Notes>
+  </Task>
+  <Task>
+    <UID>5</UID>
+    <ID>5</ID>
+    <Name>Project Complete</Name>
+    <Milestone>1</Milestone>
+    <Duration>PT0H0M0S</Duration>
+    <PredecessorLink>
+      <PredecessorUID>3</PredecessorUID>
+      <Type>0</Type>
+      <LinkLag>0</LinkLag>
+    </PredecessorLink>
+    <PredecessorLink>
+      <PredecessorUID>4</PredecessorUID>
+      <Type>0</Type>
+      <LinkLag>0</LinkLag>
+    </PredecessorLink>
+  </Task>
+  <Resource>
+    <UID>0</UID>
+    <Name>Unassigned</Name>
+    <Type>0</Type>
+  </Resource>
+  <Resource>
+    <UID>1</UID>
+    <Name>Engineers</Name>
+    <Type>0</Type>
+    <MaxUnits>3</MaxUnits>
+  </Resource>
+  <Assignment>
+    <TaskUID>3</TaskUID>
+    <ResourceUID>1</ResourceUID>
+    <Units>2</Units>
+  </Assignment>
+  <Assignment>
+    <TaskUID>4</TaskUID>
+    <ResourceUID>1</ResourceUID>
+    <Units>1</Units>
+  </Assignment>
+</Project>

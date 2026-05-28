@@ -1,0 +1,20 @@
+# Build outputs
+**/dist/
+**/.turbo/
+**/*.tsbuildinfo
+
+# Vendored / generated
+packages/importers/vendor/
+packages/app/public/
+packages/file-format/src/fx-snapshots/
+
+# Workspace-managed
+pnpm-lock.yaml
+
+# Test fixtures (byte-sensitive snapshots — engine output must match exactly).
+**/__fixtures__/**
+
+# Project data files (not source)
+**/*.cala
+**/*.calasub
+**/*.procsim

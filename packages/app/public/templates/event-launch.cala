@@ -1,0 +1,548 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Annual Conference",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "budget": 120000,
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-event-mgr",
+      "name": "Event Manager",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 100
+    },
+    {
+      "id": "r-coordinator",
+      "name": "Event Coordinator",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 65
+    },
+    {
+      "id": "r-marketing",
+      "name": "Marketing",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 90
+    },
+    {
+      "id": "r-av",
+      "name": "AV Technician",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 80
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 350
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "venue",
+      "nodeType": "decision",
+      "name": "Venue selection",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 220,
+        "y": 320
+      },
+      "group": "Logistics",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-event-mgr",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 10
+      },
+      "passProbability": 0.7,
+      "failureDelay": {
+        "value": 3,
+        "unit": "days"
+      },
+      "fixedCost": {
+        "value": 15000
+      }
+    },
+    {
+      "id": "speakers",
+      "nodeType": "activity",
+      "name": "Speaker outreach",
+      "duration": {
+        "value": 10,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 50
+      },
+      "group": "Content",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-coordinator",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 7,
+        "mode": 10,
+        "max": 20
+      },
+      "fixedCost": {
+        "value": 8000
+      }
+    },
+    {
+      "id": "catering",
+      "nodeType": "activity",
+      "name": "Catering booking",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 250
+      },
+      "group": "Logistics",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-coordinator",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "fixedCost": {
+        "value": 22000
+      }
+    },
+    {
+      "id": "av-setup",
+      "nodeType": "activity",
+      "name": "AV planning",
+      "duration": {
+        "value": 4,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 450
+      },
+      "group": "Logistics",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-av",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 4,
+        "max": 7
+      },
+      "fixedCost": {
+        "value": 12000
+      }
+    },
+    {
+      "id": "marketing",
+      "nodeType": "activity",
+      "name": "Marketing collateral",
+      "duration": {
+        "value": 6,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 650
+      },
+      "group": "Marketing",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 4,
+        "mode": 6,
+        "max": 10
+      }
+    },
+    {
+      "id": "registration",
+      "nodeType": "activity",
+      "name": "Registration platform",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 820,
+        "y": 650
+      },
+      "group": "Marketing",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "fixedCost": {
+        "value": 4500
+      }
+    },
+    {
+      "id": "promote",
+      "nodeType": "activity",
+      "name": "Pre-event promotion",
+      "duration": {
+        "value": 10,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1080,
+        "y": 650
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-marketing",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 8,
+        "mode": 10,
+        "max": 14
+      },
+      "fixedCost": {
+        "value": 18000
+      }
+    },
+    {
+      "id": "dry-run",
+      "nodeType": "activity",
+      "name": "Dry run / rehearsal",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1080,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-event-mgr",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-coordinator",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-av",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "crashOptions": [
+        {
+          "duration": {
+            "value": 0.5,
+            "unit": "days"
+          },
+          "additionalCost": 1500,
+          "resourceCostMultiplier": 1.5
+        }
+      ]
+    },
+    {
+      "id": "event-day",
+      "nodeType": "activity",
+      "name": "Event day",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1540,
+        "y": 350
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-event-mgr",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-coordinator",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-av",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "fixedCost": {
+        "value": 5000
+      }
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Event complete",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1740,
+        "y": 350
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "venue",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "venue",
+      "to": "speakers",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "venue",
+      "to": "catering",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "venue",
+      "to": "av-setup",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "venue",
+      "to": "marketing",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "marketing",
+      "to": "registration",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "registration",
+      "to": "promote",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "speakers",
+      "to": "dry-run",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "catering",
+      "to": "dry-run",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "av-setup",
+      "to": "dry-run",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "dry-run",
+      "to": "event-day",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e12",
+      "from": "promote",
+      "to": "event-day",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e13",
+      "from": "event-day",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

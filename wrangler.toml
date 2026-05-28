@@ -1,0 +1,24 @@
+# Cloudflare Pages configuration for caladia-ai/caladia.
+#
+# In-tree source of truth for the Pages project's build settings.
+# Cloudflare Pages reads this file when the project is connected to
+# the repo via its Git integration.
+#
+# Deploy model: Cloudflare-managed auto-build.
+#   - "Connect to Git" in the Cloudflare Pages dashboard binds this
+#     repo to a Pages project named to match `name` below.
+#   - On push to `main`, Cloudflare runs the `[build].command` and
+#     serves `pages_build_output_dir`.
+#   - No GitHub Actions deploy step is needed; CI only runs
+#     typecheck + tests (see .github/workflows/ci.yml).
+#
+# If you ever switch to wrangler-CLI deploy from CI, add a
+# CLOUDFLARE_API_TOKEN repo secret and a workflow that runs
+# `wrangler pages deploy packages/app/dist --project-name=<name>`.
+
+name = "caladia"
+compatibility_date = "2026-05-28"
+pages_build_output_dir = "packages/app/dist"
+
+[build]
+command = "pnpm install --frozen-lockfile && pnpm -r build"

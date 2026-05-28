@@ -1,0 +1,601 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "caladia-subsystem"
+    },
+    "version": {
+      "type": "number",
+      "const": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "nodeType": {
+            "type": "string",
+            "enum": ["start", "activity", "end", "decision", "subsystem"],
+            "default": "activity"
+          },
+          "name": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": 0
+              },
+              "unit": {
+                "type": "string",
+                "enum": ["hours", "days", "weeks"]
+              }
+            },
+            "required": ["value", "unit"],
+            "additionalProperties": false
+          },
+          "position": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              }
+            },
+            "required": ["x", "y"],
+            "additionalProperties": false
+          },
+          "width": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "height": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "color": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "group": {
+            "type": "string"
+          },
+          "calendarId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "consumesResources": {
+            "type": "boolean"
+          },
+          "resourceAssignments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "count": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0
+                },
+                "calendarPolicy": {
+                  "type": "string",
+                  "enum": ["intersection", "resourceWins", "activityWins"]
+                }
+              },
+              "required": ["resourceId", "count", "calendarPolicy"],
+              "additionalProperties": false
+            }
+          },
+          "distribution": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "triangular"
+                  },
+                  "min": {
+                    "type": "number"
+                  },
+                  "mode": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  }
+                },
+                "required": ["type", "min", "mode", "max"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "pert-beta"
+                  },
+                  "min": {
+                    "type": "number"
+                  },
+                  "mode": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  }
+                },
+                "required": ["type", "min", "mode", "max"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "normal"
+                  },
+                  "mean": {
+                    "type": "number"
+                  },
+                  "stddev": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": ["type", "mean", "stddev"],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "anchorDate": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "passProbability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "failureDelay": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": 0
+              },
+              "unit": {
+                "type": "string",
+                "enum": ["hours", "days", "weeks"]
+              }
+            },
+            "required": ["value", "unit"],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "duration",
+          "position",
+          "calendarId",
+          "consumesResources",
+          "resourceAssignments"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": ["FS", "SS", "FF", "SF"]
+          },
+          "lag": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string",
+                "enum": ["hours", "days", "weeks"]
+              }
+            },
+            "required": ["value", "unit"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["id", "from", "to", "type", "lag"],
+        "additionalProperties": false
+      }
+    },
+    "loops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bodyNodeIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "kickout": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "maxIterations"
+                  },
+                  "value": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": ["type", "value"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "timeBudget"
+                  },
+                  "value": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": ["type", "value"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "convergenceCriterion"
+                  },
+                  "threshold": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": ["type", "threshold"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "externalTrigger"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": ["type", "description"],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "expectedIterations": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "triangular"
+                  },
+                  "min": {
+                    "type": "number"
+                  },
+                  "mode": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  }
+                },
+                "required": ["type", "min", "mode", "max"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "pert-beta"
+                  },
+                  "min": {
+                    "type": "number"
+                  },
+                  "mode": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  }
+                },
+                "required": ["type", "min", "mode", "max"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "normal"
+                  },
+                  "mean": {
+                    "type": "number"
+                  },
+                  "stddev": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": ["type", "mean", "stddev"],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "group": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "bodyNodeIds", "kickout", "expectedIterations"],
+        "additionalProperties": false
+      }
+    },
+    "calendars": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "workingDays": {
+            "type": "array",
+            "minItems": 7,
+            "maxItems": 7,
+            "items": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "hoursPerDay": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "daysPerWeek": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 7
+          },
+          "holidayPreset": {
+            "type": "string",
+            "enum": ["US_FEDERAL", "CANADA_FEDERAL", "EU_COMMON", "NONE"]
+          },
+          "holidayPresetVersion": {
+            "type": "string"
+          },
+          "exceptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["holiday", "working"]
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": ["date", "type", "name"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "workingDays",
+          "hoursPerDay",
+          "daysPerWeek",
+          "holidayPreset",
+          "holidayPresetVersion",
+          "exceptions"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capacity": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "calendarId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": ["id", "name", "capacity", "calendarId"],
+        "additionalProperties": false
+      }
+    },
+    "entryNodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exitNodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subsystems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "containerNodeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bodyNodeIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "entryNodeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "exitNodeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "group": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "fileName": {
+                "type": "string"
+              },
+              "contentHash": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "importedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "sourceName": {
+                "type": "string"
+              }
+            },
+            "required": ["fileName", "contentHash", "importedAt", "sourceName"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["id", "containerNodeId", "bodyNodeIds", "entryNodeId", "exitNodeId"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "version",
+    "name",
+    "nodes",
+    "edges",
+    "loops",
+    "calendars",
+    "resources",
+    "entryNodeId",
+    "exitNodeId",
+    "subsystems"
+  ],
+  "additionalProperties": false,
+  "title": "CaladiaSubsystem",
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

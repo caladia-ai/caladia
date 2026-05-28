@@ -1,0 +1,1337 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "M&A Due Diligence",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "weeks",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "budget": 2000000,
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "PE / Investment Banking (M–Sat 14h)",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hoursPerDay": 14,
+      "daysPerWeek": 6,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-lead",
+      "name": "Deal Lead",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 600
+    },
+    {
+      "id": "r-senior",
+      "name": "Senior Advisor",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 400
+    },
+    {
+      "id": "r-junior",
+      "name": "Junior Advisor",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 250
+    },
+    {
+      "id": "r-legal",
+      "name": "Legal Counsel",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 1000
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 60,
+        "y": 360
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "loi-gate",
+      "nodeType": "decision",
+      "name": "LOI signed?",
+      "description": "Letter of Intent gate. Deal Lead and Legal Counsel review the LOI terms and decide whether to formally enter due diligence. Signing kicks off the four workstreams in parallel; the failure path tacks a week onto the timeline while terms get renegotiated.",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 240,
+        "y": 340
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-lead",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        },
+        {
+          "resourceId": "r-legal",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        }
+      ],
+      "passProbability": 0.9,
+      "failureDelay": {
+        "value": 7,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "sub-financial",
+      "nodeType": "subsystem",
+      "name": "Financial DD",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 440,
+        "y": 120
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-legal",
+      "nodeType": "subsystem",
+      "name": "Legal DD",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 440,
+        "y": 280
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-ops",
+      "nodeType": "subsystem",
+      "name": "Operations DD",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 440,
+        "y": 440
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "sub-it",
+      "nodeType": "subsystem",
+      "name": "IT DD",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 440,
+        "y": 600
+      },
+      "width": 200,
+      "height": 60,
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "fin-review",
+      "nodeType": "activity",
+      "name": "Initial financial review",
+      "description": "Scope-setting pass on the target's financials — high-level P&L, balance sheet, cash-flow patterns. Junior pulls the data; senior identifies which threads warrant a deep dive.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 80,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 70
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        }
+      ]
+    },
+    {
+      "id": "fin-deepdive",
+      "nodeType": "activity",
+      "name": "Financial deep dive",
+      "description": "Detailed financial analysis — historical trends, quality of earnings, working-capital normalisation, debt structure, revenue concentration. Junior runs the modelling; senior shapes the storyline; lead reviews critical findings.",
+      "duration": {
+        "value": 10,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 7,
+        "mode": 10,
+        "max": 18
+      },
+      "fixedCost": {
+        "value": 35000
+      }
+    },
+    {
+      "id": "fin-report",
+      "nodeType": "activity",
+      "name": "Financial findings",
+      "description": "Synthesise the financial deep dive into a workstream report. Junior drafts the deck and supporting exhibits; senior reviews and refines before it goes into the synthesis package.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 30
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        }
+      ]
+    },
+    {
+      "id": "leg-review",
+      "nodeType": "activity",
+      "name": "Initial legal review",
+      "description": "Scope-setting pass on the target's legal posture — corporate structure, material contracts, pending litigation, IP estate. Legal Counsel identifies which threads warrant deep review.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 80,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-legal",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "leg-deepdive",
+      "nodeType": "activity",
+      "name": "Legal deep dive",
+      "description": "Detailed legal review — material contract terms, change-of-control clauses, litigation exposure, IP chain-of-title, regulatory posture. Specialist track; counsel drives end-to-end.",
+      "duration": {
+        "value": 12,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-legal",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 8,
+        "mode": 12,
+        "max": 22
+      },
+      "fixedCost": {
+        "value": 40000
+      }
+    },
+    {
+      "id": "leg-report",
+      "nodeType": "activity",
+      "name": "Legal findings",
+      "description": "Workstream report — legal risk flags, contract-assignment issues, recommended reps & warranties. Feeds the synthesis package alongside the other workstream outputs.",
+      "duration": {
+        "value": 4,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-legal",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "ops-review",
+      "nodeType": "activity",
+      "name": "Initial ops review",
+      "description": "Scope-setting pass on operations — facilities, supply chain, manufacturing footprint, vendor concentration. Junior gathers data; senior identifies critical threads for the deep dive.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 80,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 70
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        }
+      ]
+    },
+    {
+      "id": "ops-deepdive",
+      "nodeType": "activity",
+      "name": "Operations deep dive",
+      "description": "Detailed operational analysis — capacity utilisation, supplier dependencies, working-capital efficiency, key operational risks. Junior models; senior shapes; lead reviews critical findings.",
+      "duration": {
+        "value": 8,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 5,
+        "mode": 8,
+        "max": 15
+      },
+      "fixedCost": {
+        "value": 20000
+      }
+    },
+    {
+      "id": "ops-report",
+      "nodeType": "activity",
+      "name": "Operations findings",
+      "description": "Workstream report on operational findings. Junior drafts the deck; senior reviews before synthesis.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 30
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        }
+      ]
+    },
+    {
+      "id": "it-review",
+      "nodeType": "activity",
+      "name": "Initial IT review",
+      "description": "Scope-setting pass on IT — application portfolio, infrastructure footprint, technical debt, cyber posture. Junior inventories; senior identifies critical threads.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 80,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 70
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        }
+      ]
+    },
+    {
+      "id": "it-deepdive",
+      "nodeType": "activity",
+      "name": "IT deep dive",
+      "description": "Detailed IT analysis — system dependencies, integration costs, security posture, technical-debt remediation needs. Junior models; senior shapes; lead reviews.",
+      "duration": {
+        "value": 9,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 5,
+        "mode": 9,
+        "max": 14
+      },
+      "fixedCost": {
+        "value": 25000
+      }
+    },
+    {
+      "id": "it-report",
+      "nodeType": "activity",
+      "name": "IT findings",
+      "description": "Workstream report on IT findings. Junior drafts; senior reviews before synthesis.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 520,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0,
+          "share": 30
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "nodeType": "activity",
+      "name": "Synthesis",
+      "description": "Combine the four workstream reports into a single deal recommendation — cross-cutting risks, valuation impact, deal-stopper flags. Junior packages the deck; senior shapes the recommendation; lead drives the narrative for IC.",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 680,
+        "y": 360
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-lead",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        },
+        {
+          "resourceId": "r-senior",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 10
+      }
+    },
+    {
+      "id": "confirm-gate",
+      "nodeType": "decision",
+      "name": "Findings acceptable?",
+      "description": "Internal go/no-go gate after due diligence. Deal Lead and Senior Advisor review the synthesis package and decide whether the deal still makes sense. Material concerns route to renegotiation; clean findings advance to integration planning.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 880,
+        "y": 340
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-lead",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 25
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 25
+        }
+      ],
+      "passProbability": 0.75,
+      "failureDelay": {
+        "value": 21,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "integration",
+      "nodeType": "activity",
+      "name": "Integration planning",
+      "description": "Plan the post-close integration — synergy capture, day-1 operating model, retention plans for key staff, IT cutover. Joint exercise across lead, senior, and junior; output is the 100-day plan that goes to the new ownership.",
+      "duration": {
+        "value": 10,
+        "unit": "days"
+      },
+      "durationSemantic": "effort",
+      "position": {
+        "x": 1100,
+        "y": 360
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-lead",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 20
+        },
+        {
+          "resourceId": "r-senior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 50
+        },
+        {
+          "resourceId": "r-junior",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 7,
+        "mode": 10,
+        "max": 18
+      }
+    },
+    {
+      "id": "reg-gate",
+      "nodeType": "decision",
+      "name": "Regulatory clearance",
+      "description": "Antitrust / regulatory filings (HSR, EU competition, etc.) and the statutory waiting period. Legal Counsel drives filings; Deal Lead handles material agency responses if any are required.",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1320,
+        "y": 340
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-legal",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 70
+        },
+        {
+          "resourceId": "r-lead",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 30
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 30,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "close-gate",
+      "nodeType": "decision",
+      "name": "Close approval (IC)",
+      "description": "Final Investment Committee approval — the deal team presents the case; IC votes. Deal Lead leads the pitch; Legal Counsel confirms documentation readiness.",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1520,
+        "y": 340
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-lead",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 60
+        },
+        {
+          "resourceId": "r-legal",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1,
+          "share": 40
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 14,
+        "unit": "days"
+      },
+      "fixedCost": {
+        "value": 25000
+      }
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Deal closed",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1720,
+        "y": 360
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "b9346db5-c8df-41c2-8d62-138f2c3590c3",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -24,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "d2d955e1-848e-4791-a7ea-f21d781eec7d",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 740,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "c694c86a-b4a8-437f-bcbd-7b094efba58b",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -24,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "b1b38d87-61f6-407f-a7aa-69d014bcda62",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 740,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "44c0807e-916d-4b1a-91bc-94ea99773410",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -24,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "d58f5602-05d1-419f-b8dd-132cbd225fe6",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 740,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "f8cbf8f4-88fd-4350-a72b-30b4dc5c2d9c",
+      "nodeType": "subsystemEntry",
+      "name": "Entry",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": -24,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "1a102f27-b539-4384-a760-015d6df40c85",
+      "nodeType": "subsystemExit",
+      "name": "Exit",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 740,
+        "y": 200
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "loi-gate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "loi-gate",
+      "to": "sub-financial",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "loi-gate",
+      "to": "sub-legal",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "loi-gate",
+      "to": "sub-ops",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "loi-gate",
+      "to": "sub-it",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "sub-financial",
+      "to": "synthesis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "sub-legal",
+      "to": "synthesis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "sub-ops",
+      "to": "synthesis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "sub-it",
+      "to": "synthesis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "synthesis",
+      "to": "confirm-gate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "confirm-gate",
+      "to": "integration",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e12",
+      "from": "integration",
+      "to": "reg-gate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e13",
+      "from": "reg-gate",
+      "to": "close-gate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e14",
+      "from": "close-gate",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e15",
+      "from": "fin-review",
+      "to": "fin-deepdive",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e16",
+      "from": "fin-deepdive",
+      "to": "fin-report",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e17",
+      "from": "leg-review",
+      "to": "leg-deepdive",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e18",
+      "from": "leg-deepdive",
+      "to": "leg-report",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e19",
+      "from": "ops-review",
+      "to": "ops-deepdive",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e20",
+      "from": "ops-deepdive",
+      "to": "ops-report",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e21",
+      "from": "it-review",
+      "to": "it-deepdive",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e22",
+      "from": "it-deepdive",
+      "to": "it-report",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "53ab6243-a357-4821-8f70-e1128778cf08",
+      "from": "b9346db5-c8df-41c2-8d62-138f2c3590c3",
+      "to": "fin-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "a0252607-54c8-4f0e-86d3-c47aebfb7e48",
+      "from": "fin-report",
+      "to": "d2d955e1-848e-4791-a7ea-f21d781eec7d",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "866414dd-951f-44d5-b095-4d4ed62fd77d",
+      "from": "c694c86a-b4a8-437f-bcbd-7b094efba58b",
+      "to": "leg-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "d2649d29-a425-4d5d-9a85-be4335c000b9",
+      "from": "leg-report",
+      "to": "b1b38d87-61f6-407f-a7aa-69d014bcda62",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "1b10e890-8ceb-4933-b1e0-1df1b6401409",
+      "from": "44c0807e-916d-4b1a-91bc-94ea99773410",
+      "to": "ops-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "4c43b7d9-529f-48df-b2af-735548798f81",
+      "from": "ops-report",
+      "to": "d58f5602-05d1-419f-b8dd-132cbd225fe6",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "2109d28e-4eba-4d8f-ad4a-9507c4205b2a",
+      "from": "f8cbf8f4-88fd-4350-a72b-30b4dc5c2d9c",
+      "to": "it-review",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "a0d11844-5053-4a61-abf7-d85da5863c66",
+      "from": "it-report",
+      "to": "1a102f27-b539-4384-a760-015d6df40c85",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [],
+  "subsystems": [
+    {
+      "id": "ss-financial",
+      "containerNodeId": "sub-financial",
+      "bodyNodeIds": [
+        "b9346db5-c8df-41c2-8d62-138f2c3590c3",
+        "fin-review",
+        "fin-deepdive",
+        "fin-report",
+        "d2d955e1-848e-4791-a7ea-f21d781eec7d"
+      ],
+      "entryNodeId": "b9346db5-c8df-41c2-8d62-138f2c3590c3",
+      "exitNodeId": "d2d955e1-848e-4791-a7ea-f21d781eec7d",
+      "group": "Workstreams"
+    },
+    {
+      "id": "ss-legal",
+      "containerNodeId": "sub-legal",
+      "bodyNodeIds": [
+        "c694c86a-b4a8-437f-bcbd-7b094efba58b",
+        "leg-review",
+        "leg-deepdive",
+        "leg-report",
+        "b1b38d87-61f6-407f-a7aa-69d014bcda62"
+      ],
+      "entryNodeId": "c694c86a-b4a8-437f-bcbd-7b094efba58b",
+      "exitNodeId": "b1b38d87-61f6-407f-a7aa-69d014bcda62",
+      "group": "Workstreams"
+    },
+    {
+      "id": "ss-ops",
+      "containerNodeId": "sub-ops",
+      "bodyNodeIds": [
+        "44c0807e-916d-4b1a-91bc-94ea99773410",
+        "ops-review",
+        "ops-deepdive",
+        "ops-report",
+        "d58f5602-05d1-419f-b8dd-132cbd225fe6"
+      ],
+      "entryNodeId": "44c0807e-916d-4b1a-91bc-94ea99773410",
+      "exitNodeId": "d58f5602-05d1-419f-b8dd-132cbd225fe6",
+      "group": "Workstreams"
+    },
+    {
+      "id": "ss-it",
+      "containerNodeId": "sub-it",
+      "bodyNodeIds": [
+        "f8cbf8f4-88fd-4350-a72b-30b4dc5c2d9c",
+        "it-review",
+        "it-deepdive",
+        "it-report",
+        "1a102f27-b539-4384-a760-015d6df40c85"
+      ],
+      "entryNodeId": "f8cbf8f4-88fd-4350-a72b-30b4dc5c2d9c",
+      "exitNodeId": "1a102f27-b539-4384-a760-015d6df40c85",
+      "group": "Workstreams"
+    }
+  ],
+  "scenarios": [],
+  "comments": []
+}

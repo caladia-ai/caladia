@@ -1,0 +1,534 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Product Launch Campaign",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "budget": 80000,
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-strategist",
+      "name": "Campaign Strategist",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 120
+    },
+    {
+      "id": "r-designer",
+      "name": "Designer",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 95
+    },
+    {
+      "id": "r-copywriter",
+      "name": "Copywriter",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 85
+    },
+    {
+      "id": "r-channel",
+      "name": "Channel Manager",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 90
+    },
+    {
+      "id": "r-pr",
+      "name": "PR Specialist",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 100
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Kickoff",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 320
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "brief",
+      "nodeType": "activity",
+      "name": "Campaign brief & strategy",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 320
+      },
+      "group": "Planning",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-strategist",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 1.5,
+        "mode": 2,
+        "max": 4
+      }
+    },
+    {
+      "id": "creative",
+      "nodeType": "activity",
+      "name": "Creative concept",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 20
+      },
+      "group": "Creative",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-designer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-copywriter",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 2,
+        "mode": 3,
+        "max": 6
+      }
+    },
+    {
+      "id": "legal",
+      "nodeType": "decision",
+      "name": "Legal review",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 880,
+        "y": -10
+      },
+      "group": "Creative",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-strategist",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 1,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "landing",
+      "nodeType": "activity",
+      "name": "Landing page",
+      "duration": {
+        "value": 4,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 220
+      },
+      "group": "Channels",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-designer",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 4,
+        "max": 7
+      },
+      "fixedCost": {
+        "value": 1200
+      }
+    },
+    {
+      "id": "paid",
+      "nodeType": "activity",
+      "name": "Paid ad setup",
+      "duration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1140,
+        "y": 20
+      },
+      "group": "Channels",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-channel",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "fixedCost": {
+        "value": 25000
+      }
+    },
+    {
+      "id": "organic",
+      "nodeType": "activity",
+      "name": "Organic social content",
+      "duration": {
+        "value": 3,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 420
+      },
+      "group": "Channels",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-channel",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-copywriter",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 5
+      },
+      "fixedCost": {
+        "value": 800
+      }
+    },
+    {
+      "id": "pr",
+      "nodeType": "activity",
+      "name": "PR outreach",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 620
+      },
+      "group": "Outreach",
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-pr",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 4,
+        "mode": 5,
+        "max": 10
+      },
+      "fixedCost": {
+        "value": 3500
+      }
+    },
+    {
+      "id": "qc",
+      "nodeType": "activity",
+      "name": "QC and approval",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1600,
+        "y": 320
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-strategist",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "launch",
+      "nodeType": "activity",
+      "name": "Launch day",
+      "duration": {
+        "value": 4,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1840,
+        "y": 320
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-strategist",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-channel",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "fixedCost": {
+        "value": 1500
+      }
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Live",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2080,
+        "y": 320
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "brief",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "brief",
+      "to": "creative",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "brief",
+      "to": "landing",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "brief",
+      "to": "organic",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "brief",
+      "to": "pr",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "creative",
+      "to": "legal",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "legal",
+      "to": "paid",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "landing",
+      "to": "qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "paid",
+      "to": "qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "organic",
+      "to": "qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "pr",
+      "to": "qc",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e12",
+      "from": "qc",
+      "to": "launch",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e13",
+      "from": "launch",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

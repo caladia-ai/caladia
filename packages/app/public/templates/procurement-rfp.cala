@@ -1,0 +1,484 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Procurement / RFP Cycle",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "days",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "NONE",
+      "holidayPresetVersion": "1.0",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-procurement",
+      "name": "Procurement Lead",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 120
+    },
+    {
+      "id": "r-technical",
+      "name": "Technical Evaluator",
+      "capacity": 2,
+      "calendarId": "cal-default",
+      "costRate": 140
+    },
+    {
+      "id": "r-legal",
+      "name": "Legal Counsel",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 220
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Need identified",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "draft",
+      "nodeType": "activity",
+      "name": "Draft RFP",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-procurement",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-technical",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 8
+      },
+      "fixedCost": {
+        "value": 1500
+      }
+    },
+    {
+      "id": "issue",
+      "nodeType": "activity",
+      "name": "Issue RFP",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 380,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-procurement",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "vendor-a",
+      "nodeType": "activity",
+      "name": "Vendor A response",
+      "duration": {
+        "value": 14,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 140
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": [],
+      "distribution": {
+        "type": "triangular",
+        "min": 10,
+        "mode": 14,
+        "max": 28
+      }
+    },
+    {
+      "id": "vendor-b",
+      "nodeType": "activity",
+      "name": "Vendor B response",
+      "duration": {
+        "value": 14,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": [],
+      "distribution": {
+        "type": "triangular",
+        "min": 10,
+        "mode": 14,
+        "max": 28
+      }
+    },
+    {
+      "id": "vendor-c",
+      "nodeType": "activity",
+      "name": "Vendor C response",
+      "duration": {
+        "value": 14,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 560,
+        "y": 420
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": [],
+      "distribution": {
+        "type": "triangular",
+        "min": 10,
+        "mode": 14,
+        "max": 28
+      }
+    },
+    {
+      "id": "evaluate",
+      "nodeType": "activity",
+      "name": "Evaluate proposals",
+      "duration": {
+        "value": 5,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 760,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-technical",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-procurement",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 5,
+        "max": 10
+      }
+    },
+    {
+      "id": "shortlist",
+      "nodeType": "decision",
+      "name": "Shortlist passes?",
+      "duration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 940,
+        "y": 260
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-procurement",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.8,
+      "failureDelay": {
+        "value": 5,
+        "unit": "days"
+      }
+    },
+    {
+      "id": "negotiate",
+      "nodeType": "activity",
+      "name": "Negotiate contract",
+      "duration": {
+        "value": 10,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1120,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-procurement",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-legal",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 5,
+        "mode": 10,
+        "max": 21
+      },
+      "fixedCost": {
+        "value": 5000
+      }
+    },
+    {
+      "id": "deliver",
+      "nodeType": "activity",
+      "name": "Delivery & handoff",
+      "duration": {
+        "value": 15,
+        "unit": "days"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1300,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-procurement",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 10,
+        "mode": 15,
+        "max": 35
+      }
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Contract live",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1480,
+        "y": 280
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "draft",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "draft",
+      "to": "issue",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "issue",
+      "to": "vendor-a",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "issue",
+      "to": "vendor-b",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "issue",
+      "to": "vendor-c",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "vendor-a",
+      "to": "evaluate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "vendor-b",
+      "to": "evaluate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "vendor-c",
+      "to": "evaluate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "evaluate",
+      "to": "shortlist",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "shortlist",
+      "to": "negotiate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e11",
+      "from": "negotiate",
+      "to": "deliver",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e12",
+      "from": "deliver",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

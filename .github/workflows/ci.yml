@@ -1,0 +1,85 @@
+# Phase 50 Slice 13 — typecheck + test gate on every PR and every push to main.
+#
+# Scope is intentionally lite: the app's Vite build is NOT run here.
+# Cloudflare Pages already builds + previews every branch push, and its
+# status surfaces as a check on the PR — duplicating that here would
+# only burn CI minutes without catching anything new. What CI catches
+# that Cloudflare doesn't: TypeScript strict regressions
+# (Vite/esbuild is transpile-only) and Vitest unit/integration
+# regressions (Cloudflare runs no tests).
+#
+# The engine packages ARE built here because the app's tests import
+# from @procsim/file-format etc. via the package `exports` field,
+# which resolves to dist/index.js. In a clean CI clone with no prior
+# build, those dist files don't exist and the app suite would fail to
+# resolve. Engine builds are fast (pure tsc emit, no bundling).
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel stale runs on the same PR ref when a new commit arrives,
+# but never cancel runs against main.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: typecheck + test
+    runs-on: ubuntu-latest
+    # TZ pin matches the engine's local-time design (NOT a workaround).
+    # `packages/calendar/src/index.ts:16` documents the model:
+    # "Working day runs 08:00–(08:00+hoursPerDay) local time."
+    # The simulation engine and scheduler are local-time-anchored by
+    # design — a project authored in EDT renders 8am–5pm EDT — so its
+    # `toISOString()` output is host-TZ-dependent. To make snapshot
+    # tests cross-host deterministic, both CI and local invocations
+    # pin TZ to America/New_York (the project's canonical authoring
+    # TZ). Root `package.json`'s `test` script also pins it for local
+    # runs. See audit row C-19 (Slice 13a) for the full design
+    # rationale.
+    env:
+      TZ: America/New_York
+    steps:
+      - uses: actions/checkout@v4
+
+      # pnpm must be installed before setup-node so the latter's
+      # `cache: 'pnpm'` resolver can find the binary.
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Engines only — the app's Vite build is Cloudflare's job.
+      # Engines emit to dist/ which the app's tests import via package
+      # `exports`. Without this step, `pnpm -r test` ENOENTs.
+      - name: Build engine packages
+        run: pnpm --filter '!@procsim/app' -r build
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Typecheck
+        run: pnpm -r typecheck
+
+      - name: Test
+        run: pnpm -r test

@@ -1,0 +1,543 @@
+{
+  "kind": "caladia-project",
+  "version": 7,
+  "project": {
+    "name": "Phase II Clinical Trial",
+    "startDate": "2026-06-01",
+    "defaultCalendarId": "cal-default",
+    "displayUnit": "weeks",
+    "shareMode": "percentage"
+  },
+  "currency": "USD",
+  "fxSnapshotVersion": "2026.1",
+  "calendars": [
+    {
+      "id": "cal-default",
+      "name": "Mon–Fri 8h",
+      "workingDays": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "hoursPerDay": 8,
+      "daysPerWeek": 5,
+      "holidayPreset": "US_FEDERAL",
+      "holidayPresetVersion": "2024.1",
+      "exceptions": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "r-pi",
+      "name": "Principal Investigator",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 250
+    },
+    {
+      "id": "r-cra",
+      "name": "Clinical Research Associate",
+      "capacity": 3,
+      "calendarId": "cal-default",
+      "costRate": 130
+    },
+    {
+      "id": "r-biostat",
+      "name": "Biostatistician",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 180
+    },
+    {
+      "id": "r-regulatory",
+      "name": "Regulatory Affairs",
+      "capacity": 1,
+      "calendarId": "cal-default",
+      "costRate": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": "start",
+      "nodeType": "start",
+      "name": "Protocol drafted",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 40,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    },
+    {
+      "id": "protocol",
+      "nodeType": "activity",
+      "name": "Finalize protocol",
+      "duration": {
+        "value": 3,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 200,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-pi",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 2,
+        "mode": 3,
+        "max": 6
+      },
+      "fixedCost": {
+        "value": 5000
+      }
+    },
+    {
+      "id": "irb",
+      "nodeType": "decision",
+      "name": "IRB review",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 400,
+        "y": 220
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 3,
+        "mode": 4,
+        "max": 10
+      },
+      "passProbability": 0.7,
+      "failureDelay": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "fixedCost": {
+        "value": 12000
+      }
+    },
+    {
+      "id": "amendment",
+      "nodeType": "activity",
+      "name": "Protocol amendment",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 600,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-pi",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 1,
+        "mode": 2,
+        "max": 4
+      }
+    },
+    {
+      "id": "site-activate",
+      "nodeType": "activity",
+      "name": "Site activation",
+      "duration": {
+        "value": 6,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 800,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cra",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 4,
+        "mode": 6,
+        "max": 14
+      },
+      "fixedCost": {
+        "value": 25000
+      }
+    },
+    {
+      "id": "recruit",
+      "nodeType": "activity",
+      "name": "Patient recruitment",
+      "duration": {
+        "value": 12,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1000,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cra",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 8,
+        "mode": 12,
+        "max": 30
+      },
+      "crashOptions": [
+        {
+          "duration": {
+            "value": 8,
+            "unit": "weeks"
+          },
+          "additionalCost": 35000,
+          "resourceCostMultiplier": 1.4
+        }
+      ]
+    },
+    {
+      "id": "treat",
+      "nodeType": "activity",
+      "name": "Treatment phase",
+      "duration": {
+        "value": 16,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1200,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-cra",
+          "count": 2,
+          "calendarPolicy": "intersection",
+          "parallelism": 1
+        },
+        {
+          "resourceId": "r-pi",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ]
+    },
+    {
+      "id": "interim",
+      "nodeType": "decision",
+      "name": "Interim analysis",
+      "duration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1400,
+        "y": 220
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        },
+        {
+          "resourceId": "r-pi",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "passProbability": 0.85,
+      "failureDelay": {
+        "value": 4,
+        "unit": "weeks"
+      }
+    },
+    {
+      "id": "final-analysis",
+      "nodeType": "activity",
+      "name": "Final analysis",
+      "duration": {
+        "value": 4,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1600,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-biostat",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "triangular",
+        "min": 3,
+        "mode": 4,
+        "max": 8
+      }
+    },
+    {
+      "id": "submit",
+      "nodeType": "activity",
+      "name": "Regulatory submission",
+      "duration": {
+        "value": 8,
+        "unit": "weeks"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 1800,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": true,
+      "resourceAssignments": [
+        {
+          "resourceId": "r-regulatory",
+          "count": 1,
+          "calendarPolicy": "intersection",
+          "parallelism": 0
+        }
+      ],
+      "distribution": {
+        "type": "pert-beta",
+        "min": 6,
+        "mode": 8,
+        "max": 16
+      },
+      "crashOptions": [
+        {
+          "duration": {
+            "value": 4,
+            "unit": "weeks"
+          },
+          "additionalCost": 60000,
+          "resourceCostMultiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "nodeType": "end",
+      "name": "Submitted",
+      "duration": {
+        "value": 0,
+        "unit": "hours"
+      },
+      "durationSemantic": "time",
+      "position": {
+        "x": 2000,
+        "y": 250
+      },
+      "calendarId": null,
+      "consumesResources": false,
+      "resourceAssignments": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "start",
+      "to": "protocol",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e2",
+      "from": "protocol",
+      "to": "irb",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e3",
+      "from": "irb",
+      "to": "amendment",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e4",
+      "from": "amendment",
+      "to": "site-activate",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e5",
+      "from": "site-activate",
+      "to": "recruit",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e6",
+      "from": "recruit",
+      "to": "treat",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e7",
+      "from": "treat",
+      "to": "interim",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e8",
+      "from": "interim",
+      "to": "final-analysis",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e9",
+      "from": "final-analysis",
+      "to": "submit",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "e10",
+      "from": "submit",
+      "to": "end",
+      "type": "FS",
+      "lag": {
+        "value": 0,
+        "unit": "hours"
+      }
+    }
+  ],
+  "loops": [
+    {
+      "id": "loop-amendment",
+      "bodyNodeIds": [
+        "amendment"
+      ],
+      "kickout": {
+        "type": "maxIterations",
+        "value": 3
+      },
+      "expectedIterations": {
+        "type": "triangular",
+        "min": 1,
+        "mode": 1,
+        "max": 3
+      }
+    }
+  ],
+  "subsystems": [],
+  "scenarios": [],
+  "comments": []
+}

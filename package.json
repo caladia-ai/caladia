@@ -1,0 +1,28 @@
+{
+  "name": "caladia",
+  "private": true,
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "comment:test": "TZ pin matches engine's local-time design (audit C-19, Slice 13a). Numeric outputs are TZ-stable but serialized Date fields aren't, so snapshot tests need a canonical TZ. America/New_York is the project's canonical authoring TZ. CI sets the same TZ at the workflow level.",
+    "test": "TZ=America/New_York pnpm -r run test",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "comment:dev": "First build engines once so dist/ exists for the app's initial Vite resolve, then run the engines' tsc --watch alongside the app's Vite dev server. `pnpm -r --parallel run dev` runs `dev` in every package that defines it; engines emit JS into dist/ on every save and Vite picks the new bundle up live.",
+    "dev": "pnpm --filter '!@procsim/app' -r run build && pnpm -r --parallel run dev"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.4.0",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "17.6.0",
+    "prettier": "3.8.3",
+    "typescript-eslint": "8.59.4"
+  }
+}

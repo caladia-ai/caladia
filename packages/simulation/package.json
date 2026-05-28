@@ -1,0 +1,31 @@
+{
+  "name": "@procsim/simulation",
+  "version": "0.5.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch --preserveWatchOutput",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "bench": "tsx bench/run-sim.ts"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@procsim/calendar": "workspace:*",
+    "@procsim/file-format": "workspace:*",
+    "@procsim/scheduler": "workspace:*",
+    "pure-rand": "^6.1.0"
+  },
+  "devDependencies": {
+    "tsx": "4.22.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
