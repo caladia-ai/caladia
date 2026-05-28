@@ -1,24 +1,24 @@
 # Cloudflare Pages configuration for caladia-ai/caladia.
 #
-# In-tree source of truth for the Pages project's build settings.
-# Cloudflare Pages reads this file when the project is connected to
-# the repo via its Git integration.
+# This file is read by Cloudflare Pages when the project is connected
+# to the repo via the dashboard's Git integration. It controls the
+# Pages runtime settings — compatibility date and serve directory.
 #
-# Deploy model: Cloudflare-managed auto-build.
-#   - "Connect to Git" in the Cloudflare Pages dashboard binds this
-#     repo to a Pages project named to match `name` below.
-#   - On push to `main`, Cloudflare runs the `[build].command` and
-#     serves `pages_build_output_dir`.
-#   - No GitHub Actions deploy step is needed; CI only runs
-#     typecheck + tests (see .github/workflows/ci.yml).
+# Build settings (build command, install command, root directory)
+# live in the Cloudflare dashboard, NOT in this file — Cloudflare
+# Pages does not support a [build] section in wrangler.toml. Set
+# them at project creation time, or afterwards under Settings →
+# Builds & deployments:
 #
-# If you ever switch to wrangler-CLI deploy from CI, add a
-# CLOUDFLARE_API_TOKEN repo secret and a workflow that runs
-# `wrangler pages deploy packages/app/dist --project-name=<name>`.
+#   Build command:           pnpm install --frozen-lockfile && pnpm -r build
+#   Build output directory:  packages/app/dist
+#   Production branch:       main
+#
+# Deploy model: Cloudflare-managed auto-build. On push to `main`,
+# Cloudflare runs the build command above and serves the output
+# directory. Preview builds fire on every branch. No GitHub Actions
+# deploy step is needed; CI runs typecheck + tests only.
 
 name = "caladia"
 compatibility_date = "2026-05-28"
 pages_build_output_dir = "packages/app/dist"
-
-[build]
-command = "pnpm install --frozen-lockfile && pnpm -r build"
