@@ -66,6 +66,18 @@ interface AppShellProps {
 
 const TABS: Tab[] = ['canvas', 'gantt', 'resources', 'simulate', 'risks'];
 
+// Mobile Slice 2 — single-glyph icons for the bottom tab bar (visible
+// only at `<md` viewports). Matches the rail's mixed-vocabulary
+// convention (Unicode glyphs for layout-like concepts, emoji for
+// richer concepts like Resources / Simulate).
+const MOBILE_TAB_ICONS: Record<Tab, string> = {
+  canvas: '▦', // grid — diagram surface
+  gantt: '▤', // horizontal bars — Gantt
+  resources: '👥', // people — matches the rail's resource palette glyph
+  simulate: '🎲', // dice — signals Monte Carlo / randomness
+  risks: '⚠', // warning — risks
+};
+
 export function AppShell({
   project,
   activeTab,
@@ -114,6 +126,10 @@ export function AppShell({
   // the user-facing distinction between File and Export wasn't earning its
   // top-bar real estate — both lived on the right rail of the header.
   const [caladiaMenuOpen, setCaladiaMenuOpen] = useState(false);
+  // Mobile Slice 2 — hamburger menu (visible only at `<md` viewports)
+  // that holds the Inspector toggle / Settings / Dark-mode buttons that
+  // sit inline on desktop. Same DropdownItem pattern as the Caladia menu.
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // Phase 27 — template picker modal visibility.
   const [templatePickerOpen, setTemplatePickerOpen] = useState(false);
 
@@ -353,7 +369,7 @@ export function AppShell({
     <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
       {/* ── Top bar ───────────────────────────────────────────────────── */}
       <header className="h-[60px] shrink-0 flex items-center gap-3 px-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-        <div className="inline-flex items-center gap-2.5 flex-1">
+        <div className="inline-flex items-center gap-2.5 flex-1 min-w-0">
           <div className="relative">
             <button
               onClick={() => setCaladiaMenuOpen((o) => !o)}
@@ -475,13 +491,18 @@ export function AppShell({
             )}
           </div>
           <span className="h-[18px] w-px bg-gray-200 dark:bg-gray-800" />
-          <span className="text-[13px] font-medium text-gray-800 dark:text-gray-200 truncate max-w-[28ch]">
+          <span className="text-[13px] font-medium text-gray-800 dark:text-gray-200 truncate max-w-[16ch] md:max-w-[28ch]">
             {projectName}
           </span>
-          <span className="font-mono text-[11px] text-gray-400 dark:text-gray-500">.cala</span>
+          <span className="font-mono text-[11px] text-gray-400 dark:text-gray-500 max-md:hidden">
+            .cala
+          </span>
         </div>
 
-        <nav className="inline-flex bg-gray-100 dark:bg-gray-800 rounded-lg p-[3px]">
+        {/* Mobile Slice 2 — desktop tab nav hidden on `<md`; tabs move
+            to the bottom bar (rendered below the canvas area, before
+            the footer) for one-handed reachability. */}
+        <nav className="hidden md:inline-flex bg-gray-100 dark:bg-gray-800 rounded-lg p-[3px]">
           {TABS.map((t, i) => (
             <button
               key={t}
@@ -502,52 +523,105 @@ export function AppShell({
           ))}
         </nav>
 
-        <div className="inline-flex items-center gap-1.5 flex-1 justify-end">
+        <div className="inline-flex items-center gap-1.5 flex-1 justify-end max-md:flex-none">
           {/* File and Export are merged under the Caladia menu (Phase 18
               slice 2 follow-up); dark-mode toggle moved here from the
-              footer so it sits with the other top-of-page chrome. */}
-          <button
-            type="button"
-            onClick={toggleInspectorHidden}
-            title={inspectorHidden ? 'Show Inspector panel' : 'Hide Inspector panel'}
-            aria-label={inspectorHidden ? 'Show Inspector panel' : 'Hide Inspector panel'}
-            aria-pressed={!inspectorHidden}
-            className="w-9 h-9 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 inline-flex items-center justify-center text-[16px] transition-colors"
-          >
-            {inspectorHidden ? '◫' : '◨'}
-          </button>
-          {/* Phase 41 Slice 3 — direct entry point to Project Settings,
-              mirrors the Caladia ▾ → "Project settings…" item. Same modal,
-              same state hook; the menu entry stays for menu-driven users. */}
-          <button
-            type="button"
-            onClick={() => setProjectSettingsOpen(true)}
-            title="Project settings"
-            aria-label="Open project settings"
-            className="w-9 h-9 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 inline-flex items-center justify-center text-[16px] transition-colors"
-          >
-            ⚙
-          </button>
-          <button
-            type="button"
-            onClick={toggleDarkMode}
-            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="w-9 h-9 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 inline-flex items-center justify-center text-[16px] transition-colors"
-          >
-            {darkMode ? '☀' : '🌙'}
-          </button>
+              footer so it sits with the other top-of-page chrome.
+              Mobile Slice 2 — on `<md` viewports these three icon
+              buttons collapse into the hamburger dropdown below. */}
+          <div className="hidden md:inline-flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={toggleInspectorHidden}
+              title={inspectorHidden ? 'Show Inspector panel' : 'Hide Inspector panel'}
+              aria-label={inspectorHidden ? 'Show Inspector panel' : 'Hide Inspector panel'}
+              aria-pressed={!inspectorHidden}
+              className="w-9 h-9 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 inline-flex items-center justify-center text-[16px] transition-colors"
+            >
+              {inspectorHidden ? '◫' : '◨'}
+            </button>
+            {/* Phase 41 Slice 3 — direct entry point to Project Settings,
+                mirrors the Caladia ▾ → "Project settings…" item. Same modal,
+                same state hook; the menu entry stays for menu-driven users. */}
+            <button
+              type="button"
+              onClick={() => setProjectSettingsOpen(true)}
+              title="Project settings"
+              aria-label="Open project settings"
+              className="w-9 h-9 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 inline-flex items-center justify-center text-[16px] transition-colors"
+            >
+              ⚙
+            </button>
+            <button
+              type="button"
+              onClick={toggleDarkMode}
+              title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="w-9 h-9 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 inline-flex items-center justify-center text-[16px] transition-colors"
+            >
+              {darkMode ? '☀' : '🌙'}
+            </button>
+          </div>
+
+          {/* Mobile hamburger — collapses the three icon buttons above
+              on `<md`. Same DropdownItem pattern as the Caladia menu. */}
+          <div className="md:hidden relative">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((o) => !o)}
+              title="More"
+              aria-label="More actions"
+              aria-expanded={mobileMenuOpen}
+              className="w-9 h-9 max-md:w-11 max-md:h-11 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 inline-flex items-center justify-center text-[18px] transition-colors"
+            >
+              ☰
+            </button>
+            {mobileMenuOpen && (
+              <>
+                <div className="fixed inset-0 z-30" onClick={() => setMobileMenuOpen(false)} />
+                <div className="absolute right-0 top-full mt-1 z-40 w-48 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg py-1 text-sm">
+                  <DropdownItem
+                    onSelect={() => {
+                      setMobileMenuOpen(false);
+                      toggleInspectorHidden();
+                    }}
+                  >
+                    {inspectorHidden ? 'Show Inspector' : 'Hide Inspector'}
+                  </DropdownItem>
+                  <DropdownItem
+                    onSelect={() => {
+                      setMobileMenuOpen(false);
+                      setProjectSettingsOpen(true);
+                    }}
+                  >
+                    Project settings…
+                  </DropdownItem>
+                  <DropdownItem
+                    onSelect={() => {
+                      setMobileMenuOpen(false);
+                      toggleDarkMode();
+                    }}
+                  >
+                    {darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                  </DropdownItem>
+                </div>
+              </>
+            )}
+          </div>
+
           <button
             disabled={!onShare}
             onClick={onShare}
+            aria-label="Share"
             title={
               onShare
                 ? 'Download a self-contained HTML snapshot of your plan'
                 : 'Sharing is disabled while the schedule has errors'
             }
-            className="ml-0.5 inline-flex items-center gap-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-3.5 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="ml-0.5 inline-flex items-center justify-center gap-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-3.5 py-2 max-md:w-11 max-md:h-11 max-md:px-0 max-md:py-0 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            <span aria-hidden>↗</span> Share
+            <span aria-hidden>↗</span>
+            <span className="max-md:sr-only">Share</span>
           </button>
         </div>
       </header>
@@ -786,6 +860,34 @@ export function AppShell({
         <main className="flex-1 flex flex-col overflow-hidden min-w-0">{children}</main>
       </div>
 
+      {/* ── Mobile bottom tab bar (Slice 2) ───────────────────────────────
+          Rendered only on `<md` viewports; the desktop tab nav in the
+          header takes over above 768 px. Icon-only with `aria-label`
+          for screen readers. 56 px tall for comfortable thumb taps. */}
+      <nav className="md:hidden h-14 shrink-0 flex border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+        {TABS.map((t, i) => {
+          const icon = MOBILE_TAB_ICONS[t];
+          const isActive = t === activeTab;
+          return (
+            <button
+              key={t}
+              type="button"
+              onClick={() => onTabChange(t)}
+              aria-label={`${t.charAt(0).toUpperCase()}${t.slice(1)} (${i + 1})`}
+              aria-current={isActive ? 'page' : undefined}
+              className={[
+                'flex-1 inline-flex items-center justify-center text-2xl transition-colors',
+                isActive
+                  ? 'text-emerald-600 dark:text-emerald-500'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',
+              ].join(' ')}
+            >
+              {icon}
+            </button>
+          );
+        })}
+      </nav>
+
       {/* ── Footer ────────────────────────────────────────────────────── */}
       <footer className="h-[30px] shrink-0 flex items-center px-3 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-xs">
         <div className="flex-1 inline-flex items-center gap-2.5">
@@ -892,7 +994,7 @@ interface RailButtonProps {
 
 function RailButton({ children, onClick, title, primary, active, disabled }: RailButtonProps) {
   const base =
-    'w-9 h-9 rounded-lg inline-flex items-center justify-center text-base transition-colors';
+    'w-9 h-9 max-md:w-11 max-md:h-11 rounded-lg inline-flex items-center justify-center text-base transition-colors';
   const skin = primary
     ? `bg-emerald-600 hover:bg-emerald-700 text-white ${active ? 'ring-2 ring-emerald-600/25' : ''}`
     : `text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 ${

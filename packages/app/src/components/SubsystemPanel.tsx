@@ -135,7 +135,11 @@ export function SubsystemPanel({ nodeId, onClose }: SubsystemPanelProps) {
     : '';
 
   return (
-    <aside className="w-72 border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-col overflow-y-auto shrink-0">
+    <aside className="w-72 border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-col overflow-y-auto shrink-0 max-md:fixed max-md:inset-x-0 max-md:bottom-[86px] max-md:w-full! max-md:max-w-full! max-md:max-h-[60vh] max-md:border-l-0 max-md:border-t max-md:rounded-t-lg max-md:shadow-xl max-md:z-40">
+      {/* Mobile drag indicator pill — visual cue that this is a bottom sheet. */}
+      <div className="md:hidden flex justify-center pt-1.5 pb-1">
+        <div className="h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-700" />
+      </div>
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
         <span className="text-sm font-semibold text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5">
@@ -143,7 +147,7 @@ export function SubsystemPanel({ nodeId, onClose }: SubsystemPanelProps) {
         </span>
         <button
           onClick={onClose}
-          className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+          className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 max-md:w-11 max-md:h-11 max-md:inline-flex max-md:items-center max-md:justify-center"
           aria-label="Close panel"
         >
           ×

@@ -1029,7 +1029,7 @@ export function GanttView({ project, result, containerRef }: GanttViewProps) {
                     {node.name}
                   </span>
                   <span className="shrink-0 inline-flex items-center gap-1 ml-1.5">
-                    <span className="font-mono text-[10px] text-gray-500 dark:text-gray-400">
+                    <span className="font-mono text-[10px] max-md:text-xs text-gray-500 dark:text-gray-400">
                       {formatDuration(node.duration)}
                     </span>
                     {(node.resourceAssignments ?? []).length > 0 && (
@@ -1069,7 +1069,7 @@ export function GanttView({ project, result, containerRef }: GanttViewProps) {
               >
                 <span className="text-amber-600 dark:text-amber-400 text-[14px] shrink-0">📈</span>
                 <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400 truncate">
+                  <span className="text-[11px] max-md:text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400 truncate">
                     Cumulative cost
                   </span>
                   <span className="text-[9.5px] text-amber-600/80 dark:text-amber-500/80 truncate">
@@ -1714,7 +1714,7 @@ export function GanttView({ project, result, containerRef }: GanttViewProps) {
                 const flipLeft = cx > totalChartWidth - 220;
                 return (
                   <div
-                    className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] leading-tight"
+                    className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] max-md:text-xs leading-tight"
                     style={{
                       top: HEADER_H + 4,
                       left: flipLeft ? undefined : cx + 8,
@@ -1723,7 +1723,7 @@ export function GanttView({ project, result, containerRef }: GanttViewProps) {
                       zIndex: 3,
                     }}
                   >
-                    <div className="text-gray-500 dark:text-gray-400 text-[10px] mb-0.5">
+                    <div className="text-gray-500 dark:text-gray-400 text-[10px] max-md:text-xs mb-0.5">
                       {cursorDate.toLocaleDateString(undefined, {
                         weekday: 'short',
                         month: 'short',

@@ -187,7 +187,7 @@ export function GanttHeader({
             <button
               type="button"
               onClick={() => setSearch('')}
-              className="text-gray-400 dark:text-gray-500 hover:text-gray-700 text-[11px]"
+              className="text-gray-400 dark:text-gray-500 hover:text-gray-700 text-[11px] max-md:text-xs"
               title="Clear"
             >
               ×
@@ -202,7 +202,7 @@ export function GanttHeader({
           <button
             type="button"
             onClick={zoomGanttOut}
-            className="px-2 py-1 text-[11.5px] font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-40"
+            className="px-2 py-1 text-[11.5px] max-md:text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-40"
             title="Zoom out  ·  ["
             disabled={ganttZoom <= 0.025}
           >
@@ -211,7 +211,7 @@ export function GanttHeader({
           <button
             type="button"
             onClick={resetGanttZoom}
-            className="px-2 py-1 text-[11.5px] font-mono text-gray-500 dark:text-gray-400 border-x border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors w-12 text-center"
+            className="px-2 py-1 text-[11.5px] max-md:text-xs font-mono text-gray-500 dark:text-gray-400 border-x border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors w-12 text-center"
             title="Reset zoom to 100%  ·  0"
           >
             {zoomPct}%
@@ -219,7 +219,7 @@ export function GanttHeader({
           <button
             type="button"
             onClick={zoomGanttIn}
-            className="px-2 py-1 text-[11.5px] font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-40"
+            className="px-2 py-1 text-[11.5px] max-md:text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-40"
             title="Zoom in  ·  ]"
             disabled={ganttZoom >= 3}
           >
@@ -234,7 +234,7 @@ export function GanttHeader({
         <button
           type="button"
           onClick={onFitToView}
-          className="text-[11.5px] font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          className="text-[11.5px] max-md:text-xs font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           title="Fit the whole project in view"
         >
           Fit
@@ -244,7 +244,7 @@ export function GanttHeader({
         <button
           type="button"
           onClick={onJumpToday}
-          className="text-[11.5px] font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          className="text-[11.5px] max-md:text-xs font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           title="Scroll to today"
         >
           Today
@@ -256,7 +256,7 @@ export function GanttHeader({
           <button
             type="button"
             onClick={onOpenCrash}
-            className="text-[11.5px] font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            className="text-[11.5px] max-md:text-xs font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             title="Greedy: assign compression options to hit a deadline"
           >
             Compress to deadline
@@ -330,13 +330,15 @@ function Kpi({
             : 'text-gray-900 dark:text-gray-100';
   return (
     <div className="flex flex-col gap-px min-w-[110px]">
-      <div className="text-[10px] font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
+      <div className="text-[10px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
         {label}
       </div>
       <div className={`text-[16px] font-bold leading-tight tracking-tight ${valueColor}`}>
         {value}
       </div>
-      <div className="text-[10.5px] text-gray-400 dark:text-gray-500 mt-0.5">{sub}</div>
+      <div className="text-[10.5px] max-md:text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+        {sub}
+      </div>
     </div>
   );
 }
@@ -365,7 +367,7 @@ function ToggleBtn({
       disabled={disabled}
       title={title}
       className={[
-        'text-[11.5px] font-medium px-3 py-1 rounded-md border transition-colors disabled:opacity-40 disabled:cursor-not-allowed',
+        'text-[11.5px] max-md:text-xs font-medium px-3 py-1 rounded-md border transition-colors disabled:opacity-40 disabled:cursor-not-allowed',
         on
           ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
           : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800',

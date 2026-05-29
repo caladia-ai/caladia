@@ -566,10 +566,10 @@ function VerdictBar({
   }
 
   return (
-    <div className="shrink-0 flex items-stretch gap-5 px-6 py-4 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-b from-emerald-50/40 to-white dark:from-gray-900 dark:to-gray-900 flex-wrap">
+    <div className="shrink-0 flex items-stretch gap-5 px-6 py-4 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-b from-emerald-50/40 to-white dark:from-gray-900 dark:to-gray-900 flex-wrap max-md:grid max-md:grid-cols-2 max-md:gap-3 max-md:px-3 max-md:py-3">
       {/* P50 finish — main verdict */}
-      <div className="flex flex-col gap-1 min-w-[170px] justify-center">
-        <div className="text-[10.5px] font-semibold uppercase tracking-[0.06em] text-gray-500 dark:text-gray-400">
+      <div className="flex flex-col gap-1 min-w-[170px] justify-center max-md:min-w-0">
+        <div className="text-[10.5px] max-md:text-xs font-semibold uppercase tracking-[0.06em] text-gray-500 dark:text-gray-400">
           P50 finish
         </div>
         {p50Days !== null ? (
@@ -580,7 +580,7 @@ function VerdictBar({
                 days
               </span>
             </div>
-            <div className="text-[11.5px] text-gray-500 dark:text-gray-400">
+            <div className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
               {p10Days !== null && p95Days !== null
                 ? `P10 – P95: ${p10Days.toFixed(0)} – ${p95Days.toFixed(0)}d`
                 : '—'}
@@ -596,16 +596,16 @@ function VerdictBar({
       <Sep />
 
       {/* Target probability */}
-      <div className="flex flex-col gap-1 min-w-[210px] justify-center">
+      <div className="flex flex-col gap-1 min-w-[210px] justify-center max-md:min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10.5px] font-medium text-gray-500 dark:text-gray-400 uppercase tracking-[0.06em]">
+          <span className="text-[10.5px] max-md:text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-[0.06em]">
             Target
           </span>
           <input
             type="date"
             value={target}
             onChange={(e) => setTarget(e.target.value)}
-            className="bg-transparent border-0 p-0 text-[11.5px] text-gray-700 dark:text-gray-300 focus:outline-none"
+            className="bg-transparent border-0 p-0 text-[11.5px] max-md:text-xs text-gray-700 dark:text-gray-300 focus:outline-none"
           />
         </div>
         <div
@@ -622,7 +622,7 @@ function VerdictBar({
         >
           {targetProbPct !== null ? `${targetProbPct}%` : '—'}
         </div>
-        <div className="text-[11.5px] text-gray-500 dark:text-gray-400">
+        <div className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
           {targetDays !== null
             ? `chance of meeting target (${targetDays.toFixed(0)}d)`
             : 'set a target to see probability'}
@@ -634,12 +634,14 @@ function VerdictBar({
       {hasCost && (
         <>
           <Sep />
-          <div className="flex flex-col gap-1 min-w-[210px] justify-center">
+          <div className="flex flex-col gap-1 min-w-[210px] justify-center max-md:min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10.5px] font-medium text-gray-500 dark:text-gray-400 uppercase tracking-[0.06em]">
+              <span className="text-[10.5px] max-md:text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-[0.06em]">
                 Budget
               </span>
-              <span className="text-gray-400 dark:text-gray-500 text-[11.5px]">{glyph}</span>
+              <span className="text-gray-400 dark:text-gray-500 text-[11.5px] max-md:text-xs">
+                {glyph}
+              </span>
               <input
                 type="text"
                 inputMode="numeric"
@@ -666,7 +668,7 @@ function VerdictBar({
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') e.currentTarget.blur();
                 }}
-                className="bg-transparent border-0 p-0 text-[11.5px] text-gray-700 dark:text-gray-300 focus:outline-none w-[14ch]"
+                className="bg-transparent border-0 p-0 text-[11.5px] max-md:text-xs text-gray-700 dark:text-gray-300 focus:outline-none w-[14ch]"
               />
             </div>
             <div
@@ -683,7 +685,7 @@ function VerdictBar({
             >
               {budgetProbPct !== null ? `${budgetProbPct}%` : '—'}
             </div>
-            <div className="text-[11.5px] text-gray-500 dark:text-gray-400">
+            <div className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
               {budget !== undefined
                 ? `chance of meeting budget (${formatMoneyDual(budget, project.currency, currencyDisplay, fxSnapshot)})`
                 : 'set a budget to see probability'}
@@ -695,8 +697,8 @@ function VerdictBar({
       <Sep />
 
       {/* Run meta — flat label/value pairs with breathing room */}
-      <div className="flex flex-col gap-1.5 min-w-[170px] justify-center">
-        <div className="text-[10.5px] font-semibold uppercase tracking-[0.06em] text-gray-500 dark:text-gray-400">
+      <div className="flex flex-col gap-1.5 min-w-[170px] justify-center max-md:min-w-0">
+        <div className="text-[10.5px] max-md:text-xs font-semibold uppercase tracking-[0.06em] text-gray-500 dark:text-gray-400">
           Run
         </div>
         <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[12px] items-baseline">
@@ -723,7 +725,7 @@ function VerdictBar({
               </span>
             ) : (
               <span
-                className="text-amber-700 dark:text-amber-400 text-right text-[11px]"
+                className="text-amber-700 dark:text-amber-400 text-right text-[11px] max-md:text-xs"
                 title="One or more diagnostics (percentiles, criticality, per-node P95, cost stats) are still drifting between consecutive 50-iteration samples. Try more iterations or narrower distributions."
               >
                 not yet
@@ -737,10 +739,10 @@ function VerdictBar({
         </div>
       </div>
 
-      <div className="flex-1" />
+      <div className="flex-1 max-md:hidden" />
 
       {/* Run controls */}
-      <div className="flex items-center gap-2 flex-wrap">
+      <div className="flex items-center gap-2 flex-wrap max-md:col-span-2 max-md:justify-center">
         {running ? (
           <>
             <div className="w-32 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
@@ -750,11 +752,11 @@ function VerdictBar({
               />
             </div>
             {progress !== null && progress > 0 ? (
-              <span className="text-[11px] text-emerald-700 dark:text-emerald-400 w-9 tabular-nums">
+              <span className="text-[11px] max-md:text-xs text-emerald-700 dark:text-emerald-400 w-9 tabular-nums">
                 {Math.round(progress * 100)}%
               </span>
             ) : (
-              <span className="text-[11px] text-emerald-700 dark:text-emerald-400 italic">
+              <span className="text-[11px] max-md:text-xs text-emerald-700 dark:text-emerald-400 italic">
                 {warmupMessage ?? '0%'}
               </span>
             )}
@@ -810,7 +812,7 @@ function VerdictBar({
 
         <div className="inline-flex items-center gap-1 ml-1">
           <span
-            className="font-mono text-[10.5px] text-gray-500 dark:text-gray-400 tabular-nums select-all"
+            className="font-mono text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400 tabular-nums select-all"
             title="Current RNG seed — same seed + same inputs = byte-identical simulation"
           >
             seed&nbsp;{seed}
@@ -830,7 +832,12 @@ function VerdictBar({
 }
 
 function Sep() {
-  return <div className="w-px bg-gray-200 dark:bg-gray-700" />;
+  // Hidden on mobile (`<md`): the parent KPI band uses `flex-wrap`, so
+  // when cards wrap to new rows these 1-px vertical dividers become
+  // orphan vertical lines hanging beside the wrapped content. On
+  // wrapped layouts the `gap-5` between cards already provides plenty
+  // of visual separation.
+  return <div className="w-px bg-gray-200 dark:bg-gray-700 max-md:hidden" />;
 }
 
 /**
@@ -976,7 +983,7 @@ function IterPreset({
       type="button"
       onClick={onClick}
       className={[
-        'px-2.5 py-1 text-[11px] font-medium border-r border-gray-100 dark:border-gray-800 last:border-r-0 transition-colors',
+        'px-2.5 py-1 text-[11px] max-md:text-xs font-medium border-r border-gray-100 dark:border-gray-800 last:border-r-0 transition-colors',
         active
           ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
           : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800',
@@ -1182,7 +1189,7 @@ function HistogramCard({
           <div className="text-[13px] font-semibold text-gray-900 dark:text-gray-100">
             Project finish distribution
           </div>
-          <div className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">
+          <div className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 mt-0.5">
             {mode === 'histogram'
               ? `Histogram of ${sorted.length.toLocaleString()} simulated finish dates · P10 / P50 / P80 / P95 marked`
               : `Cumulative distribution of ${sorted.length.toLocaleString()} simulated finish dates — y is the probability of finishing on or before x`}
@@ -1428,7 +1435,7 @@ function HistogramCard({
                       <div className="text-[13px] font-semibold" style={{ color: m.color }}>
                         {m.label}
                       </div>
-                      <div className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">
+                      <div className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 mt-0.5">
                         {m.day.toFixed(0)}d
                       </div>
                     </div>
@@ -1456,7 +1463,7 @@ function HistogramCard({
                     const cursorDate = new Date(cursorMs);
                     return (
                       <div
-                        className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] leading-tight"
+                        className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] max-md:text-xs leading-tight"
                         style={{
                           left: flipLeft ? undefined : `calc(${(cursorX / VBOX_W) * 100}% + 8px)`,
                           right: flipLeft
@@ -1467,7 +1474,7 @@ function HistogramCard({
                           zIndex: 3,
                         }}
                       >
-                        <div className="text-gray-500 dark:text-gray-400 text-[10px] mb-0.5">
+                        <div className="text-gray-500 dark:text-gray-400 text-[10px] max-md:text-xs mb-0.5">
                           Day {day.toFixed(0)} ·{' '}
                           {cursorDate.toLocaleDateString(undefined, {
                             month: 'short',
@@ -1562,7 +1569,7 @@ function ChartModeTab({
       type="button"
       onClick={onClick}
       className={[
-        'px-2.5 py-1 rounded text-[11.5px] font-medium transition-colors',
+        'px-2.5 py-1 rounded text-[11.5px] max-md:text-xs font-medium transition-colors',
         on
           ? 'bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-[0_1px_2px_rgba(15,23,42,0.06)]'
           : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',
@@ -1877,7 +1884,7 @@ function CumulativeSvg({
           const flipLeft = cursorX > VBOX_W * 0.65;
           return (
             <div
-              className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] leading-tight"
+              className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] max-md:text-xs leading-tight"
               style={{
                 left: flipLeft ? undefined : `calc(${(cursorX / VBOX_W) * 100}% + 8px)`,
                 right: flipLeft ? `calc(${((VBOX_W - cursorX) / VBOX_W) * 100}% + 8px)` : undefined,
@@ -1886,7 +1893,7 @@ function CumulativeSvg({
                 zIndex: 3,
               }}
             >
-              <div className="text-gray-500 dark:text-gray-400 text-[10px] mb-0.5">
+              <div className="text-gray-500 dark:text-gray-400 text-[10px] max-md:text-xs mb-0.5">
                 Day {cursorDay.toFixed(1)} ·{' '}
                 {cursorDate.toLocaleDateString(undefined, {
                   month: 'short',
@@ -2037,7 +2044,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
           <div className="text-[13px] font-semibold text-gray-900 dark:text-gray-100">
             Project cost distribution
           </div>
-          <div className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">
+          <div className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 mt-0.5">
             {mode === 'histogram'
               ? `Histogram of ${sortedCosts.length.toLocaleString()} simulated project costs · P10 / P50 / P80 / P95 marked`
               : `Cumulative distribution of ${sortedCosts.length.toLocaleString()} simulated project costs — y is the probability of finishing at or under x`}
@@ -2188,7 +2195,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
             {placed.map((m) => (
               <div
                 key={m.label}
-                className="absolute text-[10.5px] font-semibold"
+                className="absolute text-[10.5px] max-md:text-xs font-semibold"
                 style={{
                   left: `${(m.x / VBOX_W) * 100}%`,
                   top: `${((PLOT_BOTTOM + 10 + m.row * ROW_GAP) / VBOX_H) * 100}%`,
@@ -2201,7 +2208,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
             ))}
             {/* Axis x labels — min, mid, max */}
             <div
-              className="absolute text-[10px] text-gray-500 dark:text-gray-400"
+              className="absolute text-[10px] max-md:text-xs text-gray-500 dark:text-gray-400"
               style={{
                 left: `${(xAxisLeft / VBOX_W) * 100}%`,
                 top: `${((PLOT_BOTTOM + 36) / VBOX_H) * 100}%`,
@@ -2211,7 +2218,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
               {formatMoney(minCost, project.currency)}
             </div>
             <div
-              className="absolute text-[10px] text-gray-500 dark:text-gray-400"
+              className="absolute text-[10px] max-md:text-xs text-gray-500 dark:text-gray-400"
               style={{
                 left: `${((xAxisLeft + xAxisW / 2) / VBOX_W) * 100}%`,
                 top: `${((PLOT_BOTTOM + 36) / VBOX_H) * 100}%`,
@@ -2221,7 +2228,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
               {formatMoney((minCost + maxCost) / 2, project.currency)}
             </div>
             <div
-              className="absolute text-[10px] text-gray-500 dark:text-gray-400"
+              className="absolute text-[10px] max-md:text-xs text-gray-500 dark:text-gray-400"
               style={{
                 left: `${(xAxisRight / VBOX_W) * 100}%`,
                 top: `${((PLOT_BOTTOM + 36) / VBOX_H) * 100}%`,
@@ -2233,7 +2240,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
             {/* Budget pill */}
             {budgetX !== null && budget !== undefined && budget >= minCost && budget <= maxCost && (
               <div
-                className="absolute text-[10.5px] font-semibold bg-emerald-600 text-white rounded px-1.5 py-0.5"
+                className="absolute text-[10.5px] max-md:text-xs font-semibold bg-emerald-600 text-white rounded px-1.5 py-0.5"
                 style={{
                   left: `${(budgetX / VBOX_W) * 100}%`,
                   top: `${(PLOT_TOP / VBOX_H) * 100}%`,
@@ -2262,7 +2269,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
                 const bin = binIdx >= 0 ? bins[binIdx] : null;
                 return (
                   <div
-                    className="absolute rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] leading-tight"
+                    className="absolute rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] max-md:text-xs leading-tight"
                     style={{
                       left: flipLeft ? undefined : `calc(${(cx / VBOX_W) * 100}% + 8px)`,
                       right: flipLeft
@@ -2273,7 +2280,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
                       zIndex: 3,
                     }}
                   >
-                    <div className="text-gray-500 dark:text-gray-400 text-[10px] mb-0.5">
+                    <div className="text-gray-500 dark:text-gray-400 text-[10px] max-md:text-xs mb-0.5">
                       {formatMoney(cost, project.currency)}
                     </div>
                     {bin && (
@@ -2296,7 +2303,7 @@ function CostChartCard({ result, project }: { result: SimulationResult; project:
       </div>
 
       {budget !== undefined && (
-        <div className="flex items-center justify-between text-[11.5px] text-gray-600 dark:text-gray-300 px-1">
+        <div className="flex items-center justify-between text-[11.5px] max-md:text-xs text-gray-600 dark:text-gray-300 px-1">
           <span>
             <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{passPct}%</span>{' '}
             at or under budget
@@ -2421,7 +2428,7 @@ function RunPicker({
   return (
     <label className="flex items-center gap-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-3 py-2">
       <span className={`w-2 h-2 rounded-full ${dot} shrink-0`} />
-      <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-gray-500 dark:text-gray-400 shrink-0">
+      <span className="text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.06em] text-gray-500 dark:text-gray-400 shrink-0">
         {label}
       </span>
       <select
@@ -2501,7 +2508,7 @@ function CompareDeltas({
           positiveIsGood
         />
       ) : (
-        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-3 text-[11px] text-gray-400 dark:text-gray-500">
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-3 text-[11px] max-md:text-xs text-gray-400 dark:text-gray-500">
           Set a target on the Monte Carlo tab to see target-probability delta.
         </div>
       )}
@@ -2535,11 +2542,11 @@ function DeltaTile({
   const sign = delta > 0 ? '+' : '';
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-3 flex flex-col gap-1">
-      <div className="text-[10.5px] font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
+      <div className="text-[10.5px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
         {label}
       </div>
       <div className="flex items-baseline gap-2">
-        <span className="text-[11px] text-gray-500 dark:text-gray-400 inline-flex items-center gap-1">
+        <span className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 inline-flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />A
         </span>
         <span className="text-[14px] font-semibold tabular-nums text-gray-900 dark:text-gray-100">
@@ -2547,7 +2554,7 @@ function DeltaTile({
         </span>
       </div>
       <div className="flex items-baseline gap-2">
-        <span className="text-[11px] text-gray-500 dark:text-gray-400 inline-flex items-center gap-1">
+        <span className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 inline-flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />B
         </span>
         <span className="text-[14px] font-semibold tabular-nums text-gray-900 dark:text-gray-100">
@@ -2622,7 +2629,7 @@ function CompareHistogram({
         <div className="text-[13px] font-semibold text-gray-900 dark:text-gray-100">
           Distribution overlay
         </div>
-        <div className="inline-flex items-center gap-3 text-[11px]">
+        <div className="inline-flex items-center gap-3 text-[11px] max-md:text-xs">
           <span className="inline-flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />A
           </span>
@@ -2761,7 +2768,7 @@ function CompareDriversCard({
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-full px-3 py-1 text-[11.5px] text-gray-700 dark:text-gray-300">
+    <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-full px-3 py-1 text-[11.5px] max-md:text-xs text-gray-700 dark:text-gray-300">
       {children}
     </div>
   );
@@ -2853,7 +2860,7 @@ function RiskDriversCard({
               </div>
               <div className="inline-flex items-center gap-1.5">
                 <VariancePill bucket={b} />
-                <span className="text-[10.5px] text-gray-500 dark:text-gray-400">
+                <span className="text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
                   {impactLabel}
                 </span>
               </div>
@@ -2886,7 +2893,7 @@ function VariancePill({ bucket }: { bucket: 'high' | 'medium' | 'low' }) {
   }[bucket];
   return (
     <span
-      className={`text-[9px] font-semibold uppercase tracking-[0.04em] px-1.5 py-0.5 rounded-full ${styles}`}
+      className={`text-[9px] max-md:text-xs font-semibold uppercase tracking-[0.04em] px-1.5 py-0.5 rounded-full ${styles}`}
     >
       {bucket}
     </span>
@@ -2909,7 +2916,7 @@ function CorrelationPill({ rho }: { rho: number }) {
   }[bucket];
   return (
     <span
-      className={`text-[9px] font-semibold uppercase tracking-[0.04em] px-1.5 py-0.5 rounded-full ${styles}`}
+      className={`text-[9px] max-md:text-xs font-semibold uppercase tracking-[0.04em] px-1.5 py-0.5 rounded-full ${styles}`}
     >
       {bucket}
     </span>
@@ -3154,7 +3161,7 @@ function SensitivityCard({ result, project }: { result: SimulationResult; projec
       <select
         value={selectedId}
         onChange={(e) => setPickedId(e.target.value)}
-        className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded px-2 py-1 text-[11.5px] focus:outline-none focus:ring-1 focus:ring-emerald-500"
+        className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded px-2 py-1 text-[11.5px] max-md:text-xs focus:outline-none focus:ring-1 focus:ring-emerald-500"
         title="Pick an input variable (sorted by |ρ|)"
       >
         {sortedIds.map((id) => {
@@ -3170,7 +3177,7 @@ function SensitivityCard({ result, project }: { result: SimulationResult; projec
 
       {/* ρ value + qualitative pill */}
       <div className="flex items-center justify-between gap-2 px-0.5">
-        <span className="text-[11px] font-mono text-gray-700 dark:text-gray-300">
+        <span className="text-[11px] max-md:text-xs font-mono text-gray-700 dark:text-gray-300">
           ρ ={' '}
           <span className="font-semibold text-gray-900 dark:text-gray-100">{rho.toFixed(3)}</span>
         </span>
@@ -3187,7 +3194,7 @@ function SensitivityCard({ result, project }: { result: SimulationResult; projec
         nodeName={nodeName}
       />
 
-      <div className="text-[10px] text-gray-400 dark:text-gray-500">
+      <div className="text-[10px] max-md:text-xs text-gray-400 dark:text-gray-500">
         {xs.length.toLocaleString()} retained samples · selected by |ρ|
       </div>
     </SideCard>
@@ -3239,7 +3246,10 @@ function Scatter({
   const n = Math.min(xs.length, ys.length);
   if (n === 0) {
     return (
-      <div ref={ref} className="text-[11px] text-gray-500 dark:text-gray-400 px-1 py-3 text-center">
+      <div
+        ref={ref}
+        className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 px-1 py-3 text-center"
+      >
         No samples to plot.
       </div>
     );
@@ -3373,17 +3383,17 @@ function Scatter({
       </svg>
       {/* HTML overlay labels — kept out of SVG per "text scales with stretch"
           gotcha documented in CLAUDE.md. */}
-      <div className="absolute inset-x-0 -bottom-0.5 flex items-center justify-between px-1 pointer-events-none text-[9px] text-gray-400 dark:text-gray-500 font-mono">
+      <div className="absolute inset-x-0 -bottom-0.5 flex items-center justify-between px-1 pointer-events-none text-[9px] max-md:text-xs text-gray-400 dark:text-gray-500 font-mono">
         <span>{fmtX(xMin)}</span>
         <span className="text-gray-500 dark:text-gray-400">{xLabel} →</span>
         <span>{fmtX(xMax)}</span>
       </div>
-      <div className="absolute top-0 left-1 text-[9px] text-gray-400 dark:text-gray-500 font-mono pointer-events-none">
+      <div className="absolute top-0 left-1 text-[9px] max-md:text-xs text-gray-400 dark:text-gray-500 font-mono pointer-events-none">
         ↑ {yLabel}
       </div>
       {hover && (
         <div
-          className="absolute pointer-events-none z-10 bg-gray-900 dark:bg-gray-800 text-white text-[10px] font-mono px-1.5 py-1 rounded shadow whitespace-nowrap"
+          className="absolute pointer-events-none z-10 bg-gray-900 dark:bg-gray-800 text-white text-[10px] max-md:text-xs font-mono px-1.5 py-1 rounded shadow whitespace-nowrap"
           style={{
             // Position the tooltip near the highlighted point, offset to
             // avoid overlapping the cursor.
@@ -3421,7 +3431,11 @@ function SideCard({
           <div className="text-[12.5px] font-semibold text-gray-900 dark:text-gray-100">
             {title}
           </div>
-          {sub && <div className="text-[10.5px] text-gray-500 dark:text-gray-400">{sub}</div>}
+          {sub && (
+            <div className="text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
+              {sub}
+            </div>
+          )}
         </div>
         {headerAside}
       </div>
@@ -3444,7 +3458,7 @@ function SubToggle({
       type="button"
       onClick={onClick}
       className={[
-        'px-2 py-0.5 rounded text-[10.5px] font-medium transition-colors',
+        'px-2 py-0.5 rounded text-[10.5px] max-md:text-xs font-medium transition-colors',
         on
           ? 'bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-[0_1px_2px_rgba(15,23,42,0.06)]'
           : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',
