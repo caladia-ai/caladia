@@ -44,10 +44,12 @@ import { AutosaveDisabledBanner } from './components/AutosaveDisabledBanner.js';
 import { SelectionToolbar } from './components/SelectionToolbar.js';
 import { CanvasZoom, CanvasKeyboardShortcuts, CanvasFitOnLoad } from './components/CanvasZoom.js';
 import { ResourcePalette } from './components/ResourcePalette.js';
+import { MobileSelectionAutoFit } from './components/MobileSelectionAutoFit.js';
 import { PlacementOverlay } from './components/PlacementOverlay.js';
 import { CommentToolBinder } from './components/CommentToolBinder.js';
 import { DEFAULT_NODE_W, DEFAULT_NODE_H } from './utils/placement.js';
 import { NamingCallout } from './components/NamingCallout.js';
+import { useIsMobile } from './hooks/useIsMobile.js';
 import { useKeyboardShortcuts } from './hooks/useKeyboard.js';
 import { useSchedule } from './hooks/useSchedule.js';
 import {
@@ -418,6 +420,12 @@ export function App() {
   }, [project.subsystems, currentSubsystemId, drillOutTo]);
 
   const scheduleOutcome = useSchedule();
+
+  // Mobile Slice 3 — drive React Flow's gesture model from viewport
+  // size. Mobile (< 768 px) gets one-finger-drag-pan + tap-to-select;
+  // desktop keeps the rubber-band-on-drag model. Pinch-zoom works
+  // either way via RF's `zoomOnPinch` default.
+  const isMobile = useIsMobile();
 
   // ── Canvas cursor / pan mode ──────────────────────────────────────────────
   // isActivePanning: CanvasPanner has pointer capture — show grabbing cursor.
@@ -997,11 +1005,21 @@ export function App() {
                   multiSelectionKeyCode={['Meta', 'Shift', 'Control']}
                   fitView
                   // ── Interaction mode ──────────────────────────────────────
-                  // Canvas drag = rubber-band selection (always).
-                  // Shift+drag and middle-mouse pan are handled by <CanvasPanner>
-                  // which intercepts pointer events before RF sees them.
-                  selectionOnDrag={true}
-                  panOnDrag={false}
+                  // Desktop: canvas drag = rubber-band selection. Shift+drag
+                  // and middle-mouse pan are handled by <CanvasPanner> which
+                  // intercepts pointer events before RF sees them.
+                  // Mobile Slice 3: one-finger drag pans instead, since
+                  // rubber-banding with a thumb is awkward and there's no
+                  // middle-mouse / spacebar to fall back on. Pinch-zoom is
+                  // already on via RF's `zoomOnPinch` default.
+                  selectionOnDrag={!isMobile}
+                  panOnDrag={isMobile}
+                  // `paneClickDistance` and `nodeDragThreshold` get a small
+                  // bump on mobile so a tap with slight finger wobble still
+                  // registers as a click on the pane / a select on a node,
+                  // instead of starting a pan or a node drag immediately.
+                  paneClickDistance={isMobile ? 8 : 1}
+                  nodeDragThreshold={isMobile ? 5 : 0}
                   // ── Connection handles ────────────────────────────────────
                   // Increase snap radius so connections snap to handles from
                   // further away; makes wiring large diagrams less fiddly.
@@ -1029,6 +1047,7 @@ export function App() {
                   <CanvasZoom />
                   <CanvasKeyboardShortcuts />
                   <CanvasFitOnLoad />
+                  <MobileSelectionAutoFit />
                   <PlacementOverlay />
                   <CommentToolBinder />
                   <NamingCallout />

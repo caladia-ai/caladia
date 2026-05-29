@@ -136,7 +136,7 @@ function DecisionRisksSection({
       <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
         Decision-gate risks
       </h2>
-      <p className="text-[11.5px] text-gray-500 dark:text-gray-400">
+      <p className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
         Every decision gate with a non-zero chance of failure. Cost-of-delay estimates
         assigned-resource billing during the failure delay (working hours × rates × counts ×
         shares).
@@ -163,7 +163,7 @@ function DecisionRisksSection({
       {header}
       <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
+          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
             <tr>
               <Th>Name</Th>
               <Th align="right">Failure probability</Th>
@@ -244,7 +244,7 @@ function LoopRisksSection({ risks, project, onLocate, onSwitchToCanvas }: LoopRi
   const header = (
     <div className="flex flex-col gap-0.5">
       <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Loop risks</h2>
-      <p className="text-[11.5px] text-gray-500 dark:text-gray-400">
+      <p className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
         Loops whose iteration count could vary — worst case adds
         <span className="font-mono"> (max − min) × </span> sum of body durations to the schedule.
         Loops with a fixed iteration count are omitted.
@@ -278,7 +278,7 @@ function LoopRisksSection({ risks, project, onLocate, onSwitchToCanvas }: LoopRi
       {header}
       <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
+          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
             <tr>
               <Th>Loop</Th>
               <Th align="right">Iterations (min–max)</Th>
@@ -352,7 +352,7 @@ function ActivityVariationSection({
   const header = (
     <div className="flex flex-col gap-0.5">
       <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Activity variation</h2>
-      <p className="text-[11.5px] text-gray-500 dark:text-gray-400">
+      <p className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
         Activities whose duration distribution has a wide spread — worst case is &gt;1.75× the
         expected duration. High-variance activities often dominate sensitivity analyses.
       </p>
@@ -378,7 +378,7 @@ function ActivityVariationSection({
       {header}
       <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
+          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
             <tr>
               <Th>Name</Th>
               <Th align="right">Expected</Th>
@@ -450,7 +450,7 @@ function CostDriversSection({
   const header = (
     <div className="flex flex-col gap-0.5">
       <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Cost drivers</h2>
-      <p className="text-[11.5px] text-gray-500 dark:text-gray-400">
+      <p className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
         Activities whose cost variance contributes most to the project's cost distribution.
         Auto-detected from the latest simulation run.
       </p>
@@ -511,7 +511,7 @@ function CostDriversSection({
       {header}
       <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
         {overBudgetGap !== null && (
-          <div className="px-4 py-2 bg-amber-50 dark:bg-amber-950/30 border-b border-amber-200 dark:border-amber-900 text-[11.5px] text-amber-800 dark:text-amber-300">
+          <div className="px-4 py-2 bg-amber-50 dark:bg-amber-950/30 border-b border-amber-200 dark:border-amber-900 text-[11.5px] max-md:text-xs text-amber-800 dark:text-amber-300">
             P95 cost is{' '}
             <span className="font-mono font-semibold">
               {formatMoney(p95Cost, project.currency)}
@@ -524,7 +524,7 @@ function CostDriversSection({
           </div>
         )}
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
+          <thead className="bg-gray-50 dark:bg-gray-800/40 text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
             <tr>
               <Th>Name</Th>
               <Th align="right">Cost spread</Th>
@@ -569,7 +569,7 @@ function CostDriversSection({
                   </Td>
                   {gapShare !== null && (
                     <Td align="right">
-                      <span className="inline-flex items-center text-[11px] font-medium bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 rounded px-1.5 py-0.5">
+                      <span className="inline-flex items-center text-[11px] max-md:text-xs font-medium bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 rounded px-1.5 py-0.5">
                         ≈{formatMoney(gapShare, project.currency)}
                       </span>
                     </Td>
@@ -582,7 +582,7 @@ function CostDriversSection({
             })}
           </tbody>
         </table>
-        <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-800 text-[10.5px] text-gray-400 dark:text-gray-500">
+        <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-800 text-[10.5px] max-md:text-xs text-gray-400 dark:text-gray-500">
           Top {visible.length} of {tornado.length} drivers · based on simulation run{' '}
           {latestRun.iterations.toLocaleString()} iters · seed {latestRun.seed}
         </div>
@@ -619,7 +619,7 @@ function RowButton({
       type="button"
       onClick={onClick}
       title={title}
-      className="text-[11.5px] font-medium px-2 py-0.5 rounded text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      className="text-[11.5px] max-md:text-xs font-medium px-2 py-0.5 rounded text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
     >
       {children}
     </button>

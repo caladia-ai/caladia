@@ -434,7 +434,7 @@ function ResourceForm({
                   Rate is uncertain
                 </span>
                 {!hasRate && (
-                  <span className="text-[10px] text-gray-400 dark:text-gray-500">
+                  <span className="text-[10px] max-md:text-xs text-gray-400 dark:text-gray-500">
                     (set a cost rate first)
                   </span>
                 )}
@@ -443,7 +443,9 @@ function ResourceForm({
                 <>
                   <div className="flex items-start gap-1.5">
                     <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-                      <label className="text-[10.5px] text-gray-400 truncate">Best case</label>
+                      <label className="text-[10.5px] max-md:text-xs text-gray-400 truncate">
+                        Best case
+                      </label>
                       <div className="relative">
                         <input
                           type="number"
@@ -455,16 +457,18 @@ function ResourceForm({
                           onChange={(e) => setBestPct(e.target.value)}
                           className="w-full rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 pl-5 pr-1.5 py-1 text-sm focus:outline-none"
                         />
-                        <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[11px] text-gray-400 pointer-events-none">
+                        <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[11px] max-md:text-xs text-gray-400 pointer-events-none">
                           −
                         </span>
-                        <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[11px] text-gray-400 pointer-events-none">
+                        <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[11px] max-md:text-xs text-gray-400 pointer-events-none">
                           %
                         </span>
                       </div>
                     </div>
                     <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-                      <label className="text-[10.5px] text-gray-400 truncate">Worst case</label>
+                      <label className="text-[10.5px] max-md:text-xs text-gray-400 truncate">
+                        Worst case
+                      </label>
                       <div className="relative">
                         <input
                           type="number"
@@ -475,17 +479,17 @@ function ResourceForm({
                           onChange={(e) => setWorstPct(e.target.value)}
                           className="w-full rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 pl-5 pr-1.5 py-1 text-sm focus:outline-none"
                         />
-                        <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[11px] text-gray-400 pointer-events-none">
+                        <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[11px] max-md:text-xs text-gray-400 pointer-events-none">
                           +
                         </span>
-                        <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[11px] text-gray-400 pointer-events-none">
+                        <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[11px] max-md:text-xs text-gray-400 pointer-events-none">
                           %
                         </span>
                       </div>
                     </div>
                   </div>
                   {(previewBest !== null || previewWorst !== null) && (
-                    <div className="text-[10px] text-gray-500 dark:text-gray-400 pl-5 font-mono">
+                    <div className="text-[10px] max-md:text-xs text-gray-500 dark:text-gray-400 pl-5 font-mono">
                       Range: {glyph}
                       {(previewBest ?? parsedRate).toFixed(2)} → {glyph}
                       {parsedRate.toFixed(2)} → {glyph}
@@ -805,7 +809,7 @@ function ResourcesChartToolbar({
                 type="button"
                 onClick={() => onToggleResource(res.id)}
                 title={hidden ? `Show ${res.name}` : `Hide ${res.name}`}
-                className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[11px] transition-colors ${
+                className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[11px] max-md:text-xs transition-colors ${
                   hidden
                     ? 'border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-600 line-through'
                     : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -823,7 +827,7 @@ function ResourcesChartToolbar({
             <button
               type="button"
               onClick={onClearHidden}
-              className="text-[10.5px] text-emerald-700 dark:text-emerald-400 hover:underline"
+              className="text-[10.5px] max-md:text-xs text-emerald-700 dark:text-emerald-400 hover:underline"
             >
               Show all
             </button>
@@ -847,7 +851,7 @@ function ResourcesChartToolbar({
           type="button"
           onClick={onZoomReset}
           title="Reset zoom"
-          className="px-2 h-7 inline-flex items-center justify-center font-mono text-[11px] text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 border-r border-gray-100 dark:border-gray-800 min-w-[3.5ch]"
+          className="px-2 h-7 inline-flex items-center justify-center font-mono text-[11px] max-md:text-xs text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 border-r border-gray-100 dark:border-gray-800 min-w-[3.5ch]"
         >
           {zoom}×
         </button>
@@ -1067,7 +1071,7 @@ function StackedAllocationChart({
           const overCap = total > teamCapacity;
           return (
             <div
-              className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] leading-tight"
+              className="absolute pointer-events-none rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-[11px] max-md:text-xs leading-tight"
               style={{
                 top: 6,
                 left: flipLeft ? undefined : `calc(${cxFrac * 100}% + 8px)`,
@@ -1077,7 +1081,7 @@ function StackedAllocationChart({
                 zIndex: 3,
               }}
             >
-              <div className="text-gray-500 dark:text-gray-400 text-[10px] mb-0.5">
+              <div className="text-gray-500 dark:text-gray-400 text-[10px] max-md:text-xs mb-0.5">
                 {cursorDate.toLocaleDateString(undefined, {
                   weekday: 'short',
                   month: 'short',
@@ -1101,7 +1105,10 @@ function StackedAllocationChart({
                   const color = STACK_PALETTE[idx % STACK_PALETTE.length] ?? STACK_PALETTE[0]!;
                   const over = v > res.capacity;
                   return (
-                    <div key={res.id} className="flex justify-between gap-2 text-[10.5px]">
+                    <div
+                      key={res.id}
+                      className="flex justify-between gap-2 text-[10.5px] max-md:text-xs"
+                    >
                       <span className="inline-flex items-center gap-1.5 truncate">
                         <span
                           className="inline-block w-2 h-2 rounded-sm shrink-0"
@@ -1345,7 +1352,7 @@ function ConflictCard({
   return (
     <div className="border border-rose-200 dark:border-rose-900 bg-rose-50/70 dark:bg-rose-950/30 rounded-lg p-3.5 flex flex-col gap-2">
       <div className="inline-flex items-center gap-2">
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 text-[10.5px] font-semibold">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 text-[10.5px] max-md:text-xs font-semibold">
           {conflict.overDays.length} conflict{conflict.overDays.length === 1 ? '' : 's'}
         </span>
         <span className="text-[13px] font-semibold text-rose-900 dark:text-rose-200">
@@ -1365,7 +1372,7 @@ function ConflictCard({
             <div key={name} className="flex items-center gap-2 text-[12px]">
               <span className="w-1 h-3.5 rounded-sm bg-amber-400" />
               <span className="text-gray-800 dark:text-gray-200 font-medium flex-1">{name}</span>
-              <span className="text-[11px] text-gray-500 dark:text-gray-400 tabular-nums">
+              <span className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 tabular-nums">
                 contributes {contribution} of {conflict.peakCount}/{conflict.capacity} peak
               </span>
             </div>
@@ -1382,7 +1389,7 @@ function ConflictCard({
               ? 'Computing leveling plan…'
               : 'Compute an auto-leveling plan that shifts lower-priority activities later until no resource is over capacity'
           }
-          className="text-[11.5px] font-medium px-2.5 py-1 rounded border bg-rose-600 hover:bg-rose-700 text-white border-rose-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="text-[11.5px] max-md:text-xs font-medium px-2.5 py-1 rounded border bg-rose-600 hover:bg-rose-700 text-white border-rose-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {busy ? 'Computing…' : 'Suggest leveling'}
         </button>
@@ -1393,7 +1400,7 @@ function ConflictCard({
           aria-expanded={openAction === 'reassign'}
           title="Move one or more of these activities to a different resource"
           className={[
-            'text-[11.5px] font-medium px-2.5 py-1 rounded border transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
+            'text-[11.5px] max-md:text-xs font-medium px-2.5 py-1 rounded border transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
             openAction === 'reassign'
               ? 'bg-rose-100 dark:bg-rose-900/60 text-rose-800 dark:text-rose-200 border-rose-300 dark:border-rose-800'
               : 'bg-white dark:bg-gray-900 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-50 dark:hover:bg-rose-950/40',
@@ -1408,7 +1415,7 @@ function ConflictCard({
           aria-expanded={openAction === 'capacity'}
           title={`Bump ${conflict.resourceName}'s capacity to cover peak demand (${conflict.peakCount})`}
           className={[
-            'text-[11.5px] font-medium px-2.5 py-1 rounded border transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
+            'text-[11.5px] max-md:text-xs font-medium px-2.5 py-1 rounded border transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
             openAction === 'capacity'
               ? 'bg-rose-100 dark:bg-rose-900/60 text-rose-800 dark:text-rose-200 border-rose-300 dark:border-rose-800'
               : 'bg-white dark:bg-gray-900 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-50 dark:hover:bg-rose-950/40',
@@ -1463,7 +1470,7 @@ interface KpiData {
 
 function ResourcesKpi({ data }: { data: KpiData }) {
   return (
-    <div className="shrink-0 flex items-center gap-3.5 px-4 py-2.5 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-b from-white to-emerald-50/40 dark:from-gray-900 dark:to-gray-900">
+    <div className="shrink-0 flex items-center gap-3.5 px-4 py-2.5 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-b from-white to-emerald-50/40 dark:from-gray-900 dark:to-gray-900 max-md:flex-wrap">
       <Kpi
         label="Total work"
         value={`${Math.round(data.totalWorkHours)}h`}
@@ -1543,19 +1550,24 @@ function Kpi({
             : 'text-gray-900 dark:text-gray-100';
   return (
     <div className="flex flex-col gap-px min-w-[120px]">
-      <div className="text-[10px] font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
+      <div className="text-[10px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
         {label}
       </div>
       <div className={`text-[16px] font-bold leading-tight tracking-tight ${valueColor}`}>
         {value}
       </div>
-      <div className="text-[10.5px] text-gray-400 dark:text-gray-500 mt-0.5 truncate">{sub}</div>
+      <div className="text-[10.5px] max-md:text-xs text-gray-400 dark:text-gray-500 mt-0.5 truncate">
+        {sub}
+      </div>
     </div>
   );
 }
 
 function Sep() {
-  return <div className="w-px h-9 bg-gray-200 dark:bg-gray-700" />;
+  // Hidden on mobile (`<md`) for the same reason SimulateView's Sep is:
+  // the parent KPI band wraps on mobile (`max-md:flex-wrap`), so these
+  // 1-px verticals become orphan lines hanging beside wrapped cards.
+  return <div className="w-px h-9 bg-gray-200 dark:bg-gray-700 max-md:hidden" />;
 }
 
 // ── Main panel ────────────────────────────────────────────────────────────────
@@ -1897,13 +1909,17 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
 
   // ── Render ────────────────────────────────────────────────────────────────
 
+  // Mobile Slice 5c — outer becomes the page scroller on `<md`; the
+  // inner left + right panes drop their own scroll and stack vertically
+  // so the right "Allocation timeline" panel isn't squeezed off-screen
+  // by the 320-px left pane.
   return (
-    <div className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-gray-900">
+    <div className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-gray-900 max-md:overflow-y-auto">
       <ResourcesKpi data={kpi} />
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden max-md:flex-col max-md:overflow-visible">
         {/* ── Resource list (left) ───────────────────────────────────── */}
-        <div className="w-[320px] shrink-0 border-r border-gray-200 dark:border-gray-700 flex flex-col bg-white dark:bg-gray-900">
+        <div className="w-[320px] shrink-0 border-r border-gray-200 dark:border-gray-700 flex flex-col bg-white dark:bg-gray-900 max-md:w-full max-md:border-r-0 max-md:border-b">
           <div className="px-4 py-3 flex items-center justify-between">
             <h2 className="text-[13px] font-semibold text-gray-900 dark:text-gray-100">
               Resource Pool
@@ -1953,7 +1969,7 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
             </FilterChip>
           </div>
 
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto max-md:flex-none max-md:overflow-visible">
             {project.resources.length === 0 && !adding && (
               <div className="px-4 py-8 text-center text-sm text-gray-400 dark:text-gray-500">
                 No resources yet.
@@ -2070,18 +2086,18 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
                       <span className="text-[13px] font-medium text-gray-900 dark:text-gray-100 truncate">
                         {res.name}
                       </span>
-                      <span className="text-[10.5px] text-gray-400 dark:text-gray-500 shrink-0">
+                      <span className="text-[10.5px] max-md:text-xs text-gray-400 dark:text-gray-500 shrink-0">
                         ×{res.capacity}
                       </span>
                     </div>
                     <div className="inline-flex items-center gap-1 shrink-0">
                       {overCapDays > 0 && (
-                        <span className="text-[10px] font-medium px-1.5 py-px rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300">
+                        <span className="text-[10px] max-md:text-xs font-medium px-1.5 py-px rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300">
                           {overCapDays} over-cap
                         </span>
                       )}
                       {overCapDays === 0 && idle && (
-                        <span className="text-[10px] font-medium px-1.5 py-px rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                        <span className="text-[10px] max-md:text-xs font-medium px-1.5 py-px rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
                           idle
                         </span>
                       )}
@@ -2090,14 +2106,14 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
                           setAdding(false);
                           setEditingId(res.id);
                         }}
-                        className="text-[11px] text-gray-400 hover:text-emerald-700 px-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="text-[11px] max-md:text-xs text-gray-400 hover:text-emerald-700 px-1 opacity-0 group-hover:opacity-100 transition-opacity"
                         title="Edit resource"
                       >
                         ✎
                       </button>
                       <button
                         onClick={() => deleteResource(res.id)}
-                        className="text-[11px] text-gray-400 hover:text-red-500 px-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="text-[11px] max-md:text-xs text-gray-400 hover:text-red-500 px-1 opacity-0 group-hover:opacity-100 transition-opacity"
                         title="Delete resource"
                       >
                         ×
@@ -2108,7 +2124,7 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
                   {/* Sparkline + hours */}
                   <div className="flex items-center gap-2">
                     <Sparkline vals={days} capacity={res.capacity} />
-                    <span className="ml-auto text-[11px] font-mono text-gray-500 dark:text-gray-400 shrink-0">
+                    <span className="ml-auto text-[11px] max-md:text-xs font-mono text-gray-500 dark:text-gray-400 shrink-0">
                       {Math.round(summary?.totalHours ?? 0)}h
                     </span>
                   </div>
@@ -2119,7 +2135,7 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
                       <span
                         key={i}
                         className={[
-                          'inline-flex items-center justify-center w-[16px] h-[16px] text-[9px] font-semibold rounded',
+                          'inline-flex items-center justify-center w-[16px] h-[16px] text-[9px] max-md:text-xs font-semibold rounded',
                           uiDays[i]
                             ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400'
                             : 'bg-gray-100 dark:bg-gray-800 text-gray-300 dark:text-gray-600',
@@ -2128,7 +2144,7 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
                         {label}
                       </span>
                     ))}
-                    <span className="text-[10px] text-gray-400 dark:text-gray-500 ml-1.5">
+                    <span className="text-[10px] max-md:text-xs text-gray-400 dark:text-gray-500 ml-1.5">
                       {hoursPerDay}h/d
                     </span>
                   </div>
@@ -2139,7 +2155,7 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
                       (the stored number IS in the override currency; no
                       FX conversion at display time). */}
                   {(res.costRate ?? 0) > 0 || (res.costPerUse ?? 0) > 0 ? (
-                    <div className="flex items-center gap-2 text-[10.5px] text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center gap-2 text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
                       {(res.costRate ?? 0) > 0 && (
                         <span>
                           <span className="text-gray-400 dark:text-gray-500">rate</span>{' '}
@@ -2201,7 +2217,7 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
                           }
                         }
                         return (
-                          <div className="flex items-center justify-between text-[10.5px] text-gray-500 dark:text-gray-400">
+                          <div className="flex items-center justify-between text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
                             <span className="text-gray-400 dark:text-gray-500">
                               Cost contribution
                             </span>
@@ -2233,13 +2249,13 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
         </div>
 
         {/* ── Right detail pane ───────────────────────────────────────── */}
-        <div className="flex-1 flex flex-col overflow-auto bg-white dark:bg-gray-900 p-4 gap-3">
+        <div className="flex-1 flex flex-col overflow-auto bg-white dark:bg-gray-900 p-4 gap-3 max-md:flex-none max-md:overflow-visible">
           <div className="flex items-start justify-between gap-3">
             <div>
               <div className="text-[13px] font-semibold text-gray-900 dark:text-gray-100">
                 Allocation timeline
               </div>
-              <div className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">
+              <div className="text-[11px] max-md:text-xs text-gray-500 dark:text-gray-400 mt-0.5">
                 {detailTab === 'stacked'
                   ? 'Stacked by resource — over-capacity days highlighted'
                   : detailTab === 'per'
@@ -2263,7 +2279,7 @@ export function ResourcesPanel({ project, result }: ResourcesPanelProps) {
               >
                 Conflicts
                 {conflicts.length > 0 && (
-                  <span className="ml-1 text-[10px] font-semibold text-rose-600 dark:text-rose-400">
+                  <span className="ml-1 text-[10px] max-md:text-xs font-semibold text-rose-600 dark:text-rose-400">
                     {conflicts.length}
                   </span>
                 )}
@@ -2430,7 +2446,7 @@ function CostOfDelayTable({ data, project }: { data: CostOfDelayResult; project:
         <h3 className="text-[13px] font-semibold text-gray-700 dark:text-gray-200">
           Cost of delay
         </h3>
-        <span className="text-[10.5px] text-gray-400 dark:text-gray-500">
+        <span className="text-[10.5px] max-md:text-xs text-gray-400 dark:text-gray-500">
           Critical-path activities with compression options · cheapest $/day-saved first
         </span>
       </div>
@@ -2442,7 +2458,7 @@ function CostOfDelayTable({ data, project }: { data: CostOfDelayResult; project:
       ) : (
         <table className="w-full text-[12px]">
           <thead>
-            <tr className="text-left text-[10.5px] uppercase tracking-wide text-gray-400 dark:text-gray-500 border-b border-gray-100 dark:border-gray-800">
+            <tr className="text-left text-[10.5px] max-md:text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500 border-b border-gray-100 dark:border-gray-800">
               <th className="py-1 pr-2 font-medium">Activity</th>
               <th className="py-1 pr-2 font-medium text-right">Nominal → Compressed</th>
               <th className="py-1 pr-2 font-medium text-right">Added cost</th>
@@ -2476,7 +2492,7 @@ function CostOfDelayTable({ data, project }: { data: CostOfDelayResult; project:
       )}
 
       {nonCriticalWithOptionsCount > 0 && (
-        <p className="text-[10.5px] text-gray-400 dark:text-gray-500 mt-1">
+        <p className="text-[10.5px] max-md:text-xs text-gray-400 dark:text-gray-500 mt-1">
           {nonCriticalWithOptionsCount} more node
           {nonCriticalWithOptionsCount === 1 ? ' has' : 's have'} compression options on
           non-critical paths (no projectEnd impact — not shown).
@@ -2519,7 +2535,7 @@ function LevelingPreviewModal({
             <div className="text-[14px] font-semibold text-gray-900 dark:text-gray-100">
               Auto-level plan
             </div>
-            <div className="text-[11.5px] text-gray-500 dark:text-gray-400 mt-0.5">
+            <div className="text-[11.5px] max-md:text-xs text-gray-500 dark:text-gray-400 mt-0.5">
               {error
                 ? 'Nothing to apply'
                 : plan
@@ -2567,10 +2583,10 @@ function LevelingPreviewModal({
                     <span className="font-medium text-gray-900 dark:text-gray-100 flex-1 truncate">
                       {c.nodeName}
                     </span>
-                    <span className="text-gray-500 dark:text-gray-400 font-mono text-[11px]">
+                    <span className="text-gray-500 dark:text-gray-400 font-mono text-[11px] max-md:text-xs">
                       {baseline} → {next}
                     </span>
-                    <span className="text-[10.5px] text-gray-500 dark:text-gray-400 inline-flex items-center gap-1 ml-2">
+                    <span className="text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400 inline-flex items-center gap-1 ml-2">
                       <span>+{Math.round(c.addedLagHours)}h lag on</span>
                       <span className="font-medium text-gray-700 dark:text-gray-300">
                         {c.predecessorName} → {c.nodeName}
@@ -2581,14 +2597,14 @@ function LevelingPreviewModal({
               })}
               {plan.skipped.length > 0 && (
                 <div className="mt-2 pt-2 border-t border-gray-100 dark:border-gray-800">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.05em] text-amber-700 dark:text-amber-400 mb-1.5">
+                  <div className="text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-amber-700 dark:text-amber-400 mb-1.5">
                     Skipped
                   </div>
                   <div className="flex flex-col gap-1">
                     {plan.skipped.map((s) => (
                       <div
                         key={s.nodeId}
-                        className="text-[11.5px] text-gray-600 dark:text-gray-400"
+                        className="text-[11.5px] max-md:text-xs text-gray-600 dark:text-gray-400"
                       >
                         <span className="font-medium text-gray-800 dark:text-gray-200">
                           {s.nodeName}
@@ -2600,7 +2616,7 @@ function LevelingPreviewModal({
                 </div>
               )}
               {plan.remainingConflicts > 0 && (
-                <div className="mt-2 px-3 py-2 rounded-md bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 text-[11.5px] text-amber-800 dark:text-amber-300">
+                <div className="mt-2 px-3 py-2 rounded-md bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 text-[11.5px] max-md:text-xs text-amber-800 dark:text-amber-300">
                   {plan.remainingConflicts} over-cap day{plan.remainingConflicts === 1 ? '' : 's'}{' '}
                   couldn&apos;t be resolved automatically
                   {plan.hitIterationCap ? ' (iteration cap reached)' : ''}.
@@ -2655,7 +2671,7 @@ function IncreaseCapacityPanel({
   return (
     <div className="mt-1 rounded-md border border-rose-200 dark:border-rose-900 bg-white/60 dark:bg-rose-950/30 p-3 flex flex-col gap-2">
       <div className="flex items-center justify-between gap-3 text-[12px]">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.05em] text-rose-800 dark:text-rose-300">
+        <span className="text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-rose-800 dark:text-rose-300">
           Increase {conflict.resourceName} capacity
         </span>
         <button
@@ -2696,7 +2712,7 @@ function IncreaseCapacityPanel({
         </span>
         <span
           className={[
-            'text-[11px] flex-1 min-w-0',
+            'text-[11px] max-md:text-xs flex-1 min-w-0',
             fullyResolves
               ? 'text-emerald-700 dark:text-emerald-400'
               : 'text-amber-700 dark:text-amber-400',
@@ -2710,7 +2726,7 @@ function IncreaseCapacityPanel({
           type="button"
           onClick={() => onApply(newCapacity)}
           disabled={newCapacity <= current}
-          className="text-[11.5px] font-medium px-2.5 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="text-[11.5px] max-md:text-xs font-medium px-2.5 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Apply
         </button>
@@ -2854,10 +2870,10 @@ function ReassignPanel({
     <div className="mt-1 rounded-md border border-rose-200 dark:border-rose-900 bg-white/60 dark:bg-rose-950/30 p-3 flex flex-col gap-2">
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col gap-0.5 min-w-0">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.05em] text-rose-800 dark:text-rose-300">
+          <span className="text-[11px] max-md:text-xs font-semibold uppercase tracking-[0.05em] text-rose-800 dark:text-rose-300">
             Reassign from {conflict.resourceName}
           </span>
-          <span className="text-[10.5px] text-gray-500 dark:text-gray-400">
+          <span className="text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
             {conflict.overflow > 0 && candidates.length > 0 ? (
               <>
                 Over capacity by {conflict.overflow}. Splitting{' '}
@@ -2872,7 +2888,7 @@ function ReassignPanel({
             )}
           </span>
           {applied.size > 0 && (
-            <span className="text-[10.5px] text-emerald-700 dark:text-emerald-400 mt-0.5">
+            <span className="text-[10.5px] max-md:text-xs text-emerald-700 dark:text-emerald-400 mt-0.5">
               {applied.size} of {candidateIds.length || conflict.activityIds.length} applied
             </span>
           )}
@@ -2892,7 +2908,7 @@ function ReassignPanel({
           There&apos;s only one resource in this project — add another resource before reassigning.
         </div>
       ) : allCandidatesApplied && !showAll ? (
-        <div className="px-2 py-1.5 rounded bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 text-[11.5px] text-emerald-800 dark:text-emerald-300">
+        <div className="px-2 py-1.5 rounded bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 text-[11.5px] max-md:text-xs text-emerald-800 dark:text-emerald-300">
           Split applied across {candidateIds.length} activit
           {candidateIds.length === 1 ? 'y' : 'ies'} — the schedule updates above.
         </div>
@@ -2924,7 +2940,7 @@ function ReassignPanel({
                   {node.name}
                 </span>
                 <span
-                  className="text-[10px] text-gray-500 dark:text-gray-400 tabular-nums"
+                  className="text-[10px] max-md:text-xs text-gray-500 dark:text-gray-400 tabular-nums"
                   title={
                     isCandidate
                       ? 'High slack — safer to move to a fallback resource'
@@ -2934,7 +2950,7 @@ function ReassignPanel({
                   slack {Math.round(slackH)}h
                 </span>
                 <label
-                  className="inline-flex items-center gap-1 text-[10.5px] text-gray-600 dark:text-gray-400"
+                  className="inline-flex items-center gap-1 text-[10.5px] max-md:text-xs text-gray-600 dark:text-gray-400"
                   title={`This activity demands ${contribution} unit${contribution === 1 ? '' : 's'} from ${conflict.resourceName}. Reducing the count splits the demand; choosing ${contribution} moves the activity entirely.`}
                 >
                   Move
@@ -2950,11 +2966,13 @@ function ReassignPanel({
                         : 1;
                       setCounts((prev) => ({ ...prev, [nodeId]: next }));
                     }}
-                    className="w-12 rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-1.5 py-0.5 text-[11.5px] text-gray-900 dark:text-gray-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    className="w-12 rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-1.5 py-0.5 text-[11.5px] max-md:text-xs text-gray-900 dark:text-gray-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   />
                   <span className="text-gray-400 dark:text-gray-500">/ {contribution}</span>
                 </label>
-                <span className="text-[10.5px] text-gray-500 dark:text-gray-400">→</span>
+                <span className="text-[10.5px] max-md:text-xs text-gray-500 dark:text-gray-400">
+                  →
+                </span>
                 <select
                   value={pick}
                   onChange={(e) => setPicks((prev) => ({ ...prev, [nodeId]: e.target.value }))}
@@ -2964,7 +2982,7 @@ function ReassignPanel({
                       : undefined
                   }
                   className={[
-                    'border rounded-md px-1.5 py-0.5 text-[11.5px] focus:outline-none focus:ring-2 focus:ring-emerald-400',
+                    'border rounded-md px-1.5 py-0.5 text-[11.5px] max-md:text-xs focus:outline-none focus:ring-2 focus:ring-emerald-400',
                     wontFit
                       ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900 text-amber-900 dark:text-amber-200'
                       : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100',
@@ -2980,7 +2998,7 @@ function ReassignPanel({
                 <button
                   type="button"
                   onClick={() => applyRow(nodeId)}
-                  className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
+                  className="text-[11px] max-md:text-xs font-medium px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
                 >
                   Apply
                 </button>
@@ -2993,7 +3011,7 @@ function ReassignPanel({
               <button
                 type="button"
                 onClick={() => setShowAll((v) => !v)}
-                className="text-[10.5px] text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 underline-offset-2 hover:underline"
+                className="text-[10.5px] max-md:text-xs text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 underline-offset-2 hover:underline"
               >
                 {showAll
                   ? `Show only suggested (${candidateIds.length})`
@@ -3010,7 +3028,7 @@ function ReassignPanel({
                 onClick={() => {
                   for (const id of candidatesRemaining) applyRow(id);
                 }}
-                className="text-[11.5px] font-medium px-3 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
+                className="text-[11.5px] max-md:text-xs font-medium px-3 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
               >
                 Apply suggested ({candidatesRemaining.length})
               </button>
@@ -3040,14 +3058,14 @@ function FilterChip({
       type="button"
       onClick={onClick}
       className={[
-        'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] border transition-colors',
+        'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] max-md:text-xs border transition-colors',
         on
           ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
           : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800',
       ].join(' ')}
     >
       {children}
-      <span className="text-[10px] opacity-70">{count}</span>
+      <span className="text-[10px] max-md:text-xs opacity-70">{count}</span>
     </button>
   );
 }
@@ -3068,7 +3086,7 @@ function DetailTabBtn({
       type="button"
       onClick={onClick}
       className={[
-        'px-2.5 py-1 rounded text-[11.5px] font-medium transition-colors',
+        'px-2.5 py-1 rounded text-[11.5px] max-md:text-xs font-medium transition-colors',
         on
           ? `bg-white dark:bg-gray-900 ${accent ? 'text-rose-700 dark:text-rose-300' : 'text-gray-900 dark:text-gray-100'} shadow-[0_1px_2px_rgba(15,23,42,0.06)]`
           : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',

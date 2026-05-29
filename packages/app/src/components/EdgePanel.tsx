@@ -29,17 +29,21 @@ export function EdgePanel({ edgeId, onClose }: EdgePanelProps) {
   return (
     <aside
       style={{ width }}
-      className="relative shrink-0 border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-col overflow-y-auto"
+      className="relative shrink-0 border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-col overflow-y-auto max-md:fixed max-md:inset-x-0 max-md:bottom-[86px] max-md:w-full! max-md:max-w-full! max-md:max-h-[60vh] max-md:border-l-0 max-md:border-t max-md:rounded-t-lg max-md:shadow-xl max-md:z-40"
     >
       <div
-        className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-emerald-400 transition-colors z-10"
+        className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-emerald-400 transition-colors z-10 max-md:hidden"
         onMouseDown={onMouseDown}
       />
+      {/* Mobile drag indicator pill — visual cue that this is a bottom sheet. */}
+      <div className="md:hidden flex justify-center pt-1.5 pb-1">
+        <div className="h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-700" />
+      </div>
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-700">
         <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Edge</h2>
         <button
           onClick={onClose}
-          className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 text-lg leading-none"
+          className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 text-lg leading-none max-md:w-11 max-md:h-11 max-md:inline-flex max-md:items-center max-md:justify-center"
           aria-label="Close panel"
         >
           ×
