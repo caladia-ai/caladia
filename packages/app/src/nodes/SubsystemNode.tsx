@@ -113,7 +113,7 @@ export function SubsystemNode({ id, data, selected }: NodeProps<SubsystemNodeTyp
       <Handle
         type="target"
         position={Position.Left}
-        className="!bg-indigo-400 dark:!bg-indigo-500 hover:!bg-indigo-500 transition-colors"
+        className="bg-indigo-400! dark:bg-indigo-500! hover:bg-indigo-500! transition-colors"
       />
 
       {/* Header accent — multi-color group stripe when group highlighting is on
@@ -199,7 +199,7 @@ export function SubsystemNode({ id, data, selected }: NodeProps<SubsystemNodeTyp
       <Handle
         type="source"
         position={Position.Right}
-        className="!bg-indigo-400 dark:!bg-indigo-500 hover:!bg-indigo-500 transition-colors"
+        className="bg-indigo-400! dark:bg-indigo-500! hover:bg-indigo-500! transition-colors"
       />
     </div>
   );

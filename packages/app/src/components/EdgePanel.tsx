@@ -1,6 +1,7 @@
 import type { DurationUnit, EdgeType } from '@procsim/file-format';
 import { beginEdit, commitEdit, useDomainStore } from '../store/domainStore.js';
 import { useResizable } from '../hooks/useResizable.js';
+import { useSwipeToDismiss } from '../hooks/useSwipeToDismiss.js';
 
 interface EdgePanelProps {
   edgeId: string;
@@ -20,6 +21,7 @@ export function EdgePanel({ edgeId, onClose }: EdgePanelProps) {
   const updateEdgeLag = useDomainStore((s) => s.updateEdgeLag);
   const deleteEdges = useDomainStore((s) => s.deleteEdges);
   const { width, onMouseDown } = useResizable(288);
+  const swipe = useSwipeToDismiss(onClose);
 
   const edge = project.edges.find((e) => e.id === edgeId);
   if (!edge) return null;
@@ -35,8 +37,8 @@ export function EdgePanel({ edgeId, onClose }: EdgePanelProps) {
         className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-emerald-400 transition-colors z-10 max-md:hidden"
         onMouseDown={onMouseDown}
       />
-      {/* Mobile drag indicator pill — visual cue that this is a bottom sheet. */}
-      <div className="md:hidden flex justify-center pt-1.5 pb-1">
+      {/* Mobile drag indicator pill — visual cue + swipe-down-to-dismiss. */}
+      <div className="md:hidden flex justify-center pt-1.5 pb-1" {...swipe}>
         <div className="h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-700" />
       </div>
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-700">

@@ -42,7 +42,7 @@ export function ReplaceProjectConfirmModal({
         aria-labelledby="replace-project-confirm-title"
         className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none p-4"
       >
-        <div className="pointer-events-auto w-full max-w-lg flex flex-col rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-xl">
+        <div className="pointer-events-auto w-full max-w-lg max-md:max-w-none flex flex-col rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-xl">
           <div className="flex items-start justify-between px-5 pt-4 pb-2">
             <h2
               id="replace-project-confirm-title"
@@ -54,7 +54,7 @@ export function ReplaceProjectConfirmModal({
               type="button"
               onClick={onCancel}
               aria-label="Cancel"
-              className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-xl leading-none -mt-0.5"
+              className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-xl leading-none -mt-0.5 max-md:w-11 max-md:h-11 max-md:inline-flex max-md:items-center max-md:justify-center"
             >
               ×
             </button>

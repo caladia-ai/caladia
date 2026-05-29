@@ -388,7 +388,7 @@ export function TemplatePickerModal({ onPick, onPickBlank, onClose }: TemplatePi
           <button
             type="button"
             onClick={onClose}
-            className="text-gray-400 dark:text-gray-500 hover:text-gray-700 w-[22px] h-[22px] inline-flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="text-gray-400 dark:text-gray-500 hover:text-gray-700 w-[22px] h-[22px] max-md:w-11 max-md:h-11 inline-flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             aria-label="Cancel"
           >
             ×

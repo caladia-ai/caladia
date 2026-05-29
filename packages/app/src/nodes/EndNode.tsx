@@ -79,7 +79,7 @@ export function EndNode({ data, selected }: NodeProps<EndNodeType>) {
       <Handle
         type="target"
         position={Position.Left}
-        className="!bg-gray-400 dark:!bg-gray-500 hover:!bg-blue-400 dark:hover:!bg-blue-500 transition-colors"
+        className="bg-gray-400! dark:bg-gray-500! hover:bg-blue-400! dark:hover:bg-blue-500! transition-colors"
       />
     </div>
   );

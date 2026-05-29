@@ -237,7 +237,7 @@ export function ProjectSettingsModal({
         aria-labelledby="project-settings-title"
         className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none p-4"
       >
-        <div className="pointer-events-auto w-full max-w-lg max-h-[90vh] flex flex-col rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-xl">
+        <div className="pointer-events-auto w-full max-w-lg max-md:max-w-none max-h-[90vh] flex flex-col rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-xl">
           <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100 dark:border-gray-800 shrink-0">
             <h2
               id="project-settings-title"
@@ -247,7 +247,7 @@ export function ProjectSettingsModal({
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 text-lg leading-none"
+              className="text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 text-lg leading-none max-md:w-11 max-md:h-11 max-md:inline-flex max-md:items-center max-md:justify-center"
               aria-label="Close"
             >
               ×

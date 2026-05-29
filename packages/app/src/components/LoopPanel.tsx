@@ -7,6 +7,7 @@ import { useDomainStore, beginEdit, commitEdit } from '../store/domainStore.js';
 import { GroupAutocomplete } from './GroupAutocomplete.js';
 import { NumericInput } from './NumericInput.js';
 import { computeAllGroupNames, autoGroupColor } from '../utils/groupColors.js';
+import { useSwipeToDismiss } from '../hooks/useSwipeToDismiss.js';
 
 interface LoopPanelProps {
   loopId: string;
@@ -25,6 +26,7 @@ export function LoopPanel({ loopId, onClose }: LoopPanelProps) {
   // so the override persists across reload + threads through undo.
   const groupColors = useDomainStore((s) => s.project.groupColors);
   const setGroupColor = useDomainStore((s) => s.updateGroupColor);
+  const swipe = useSwipeToDismiss(onClose);
 
   const loop = project.loops.find((l) => l.id === loopId);
   if (!loop) return null;
@@ -49,8 +51,8 @@ export function LoopPanel({ loopId, onClose }: LoopPanelProps) {
 
   return (
     <div className="w-72 border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-col overflow-y-auto shrink-0 max-md:fixed max-md:inset-x-0 max-md:bottom-[86px] max-md:w-full! max-md:max-w-full! max-md:max-h-[60vh] max-md:border-l-0 max-md:border-t max-md:rounded-t-lg max-md:shadow-xl max-md:z-40">
-      {/* Mobile drag indicator pill — visual cue that this is a bottom sheet. */}
-      <div className="md:hidden flex justify-center pt-1.5 pb-1">
+      {/* Mobile drag indicator pill — visual cue + swipe-down-to-dismiss. */}
+      <div className="md:hidden flex justify-center pt-1.5 pb-1" {...swipe}>
         <div className="h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-700" />
       </div>
       {/* Header */}

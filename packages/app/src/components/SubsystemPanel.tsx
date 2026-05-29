@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDomainStore, beginEdit, commitEdit } from '../store/domainStore.js';
 import { useViewStore } from '../store/viewStore.js';
 import { useSchedule } from '../hooks/useSchedule.js';
+import { useSwipeToDismiss } from '../hooks/useSwipeToDismiss.js';
 import { downloadSubsystemFile, sha256Hex, pickAndReadSubsystemFile } from '../fileio.js';
 import { loadSubsystemFile, currencyGlyph, SCHEMA_LIMITS } from '@procsim/file-format';
 
@@ -34,6 +35,7 @@ export function SubsystemPanel({ nodeId, onClose }: SubsystemPanelProps) {
   // the schedule has errors (`!ok`) we hide the row gracefully rather than
   // surfacing a stale number.
   const scheduleOutcome = useSchedule();
+  const swipe = useSwipeToDismiss(onClose);
 
   const node = project.nodes.find((n) => n.id === nodeId);
   const sub = project.subsystems.find((s) => s.containerNodeId === nodeId);
@@ -136,8 +138,8 @@ export function SubsystemPanel({ nodeId, onClose }: SubsystemPanelProps) {
 
   return (
     <aside className="w-72 border-l border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex flex-col overflow-y-auto shrink-0 max-md:fixed max-md:inset-x-0 max-md:bottom-[86px] max-md:w-full! max-md:max-w-full! max-md:max-h-[60vh] max-md:border-l-0 max-md:border-t max-md:rounded-t-lg max-md:shadow-xl max-md:z-40">
-      {/* Mobile drag indicator pill — visual cue that this is a bottom sheet. */}
-      <div className="md:hidden flex justify-center pt-1.5 pb-1">
+      {/* Mobile drag indicator pill — visual cue + swipe-down-to-dismiss. */}
+      <div className="md:hidden flex justify-center pt-1.5 pb-1" {...swipe}>
         <div className="h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-700" />
       </div>
       {/* Header */}

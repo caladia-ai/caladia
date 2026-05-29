@@ -122,6 +122,11 @@ export function AppShell({
   const setCommentToolActive = useViewStore((s) => s.setCommentToolActive);
 
   const [addOpen, setAddOpen] = useState(false);
+  // Mobile rail collapse — on `<md` the floating rail hides behind a FAB so
+  // it doesn't eat canvas width; tapping the FAB opens it as an overlay.
+  // Desktop ignores this (the aside always shows; the FAB/backdrop are
+  // `md:hidden`).
+  const [railOpen, setRailOpen] = useState(false);
   // Single "Caladia ▾" menu (file + contextual export items merged) since
   // the user-facing distinction between File and Export wasn't earning its
   // top-bar real estate — both lived on the right rail of the header.
@@ -637,9 +642,28 @@ export function AppShell({
           top stats cards and the rail's buttons are mostly canvas-only
           anyway. Undo/Redo stay accessible via ⌘Z / ⌘⇧Z everywhere. */}
       <div className="flex-1 flex overflow-hidden relative">
+        {/* Mobile — FAB that opens the rail; hidden once the rail is open. */}
+        {isCanvas && !railOpen && (
+          <button
+            type="button"
+            onClick={() => setRailOpen(true)}
+            aria-label="Editing tools"
+            className={`md:hidden absolute ${drilledIn ? 'top-10' : 'top-3'} left-3 z-20 w-11 h-11 inline-flex items-center justify-center rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-[0_1px_2px_rgba(15,23,42,0.06),0_8px_24px_-8px_rgba(15,23,42,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_-8px_rgba(0,0,0,0.5)] text-gray-600 dark:text-gray-400 text-lg`}
+          >
+            🧰
+          </button>
+        )}
+        {/* Mobile — tap-outside backdrop to collapse the rail. */}
+        {isCanvas && railOpen && (
+          <div
+            className="md:hidden fixed inset-0 z-10"
+            onClick={() => setRailOpen(false)}
+            aria-hidden
+          />
+        )}
         {isCanvas && (
           <aside
-            className={`absolute ${drilledIn ? 'top-10' : 'top-3'} left-3 z-20 w-[60px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-[0_1px_2px_rgba(15,23,42,0.06),0_8px_24px_-8px_rgba(15,23,42,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_-8px_rgba(0,0,0,0.5)] flex flex-col items-center py-2 gap-1.5`}
+            className={`${railOpen ? '' : 'max-md:hidden'} absolute ${drilledIn ? 'top-10' : 'top-3'} left-3 z-20 w-[60px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-[0_1px_2px_rgba(15,23,42,0.06),0_8px_24px_-8px_rgba(15,23,42,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_-8px_rgba(0,0,0,0.5)] flex flex-col items-center py-2 gap-1.5`}
           >
             {/* Group 1: Add / Loop / Wrap */}
             <RailGroup>
