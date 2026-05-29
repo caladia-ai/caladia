@@ -109,7 +109,7 @@ export function GanttHeader({
   const healthTone = warningCount === 0 ? 'g-kpi-ok' : 'g-kpi-warn';
 
   return (
-    <div className="shrink-0 flex items-center gap-3.5 px-4 py-2.5 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-b from-white to-emerald-50/40 dark:from-gray-900 dark:to-gray-900">
+    <div className="shrink-0 max-md:overflow-x-auto flex items-center gap-3.5 px-4 py-2.5 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-b from-white to-emerald-50/40 dark:from-gray-900 dark:to-gray-900">
       {/* Project ends */}
       <Kpi
         label="Project ends"
@@ -169,7 +169,7 @@ export function GanttHeader({
         tone={healthTone}
       />
 
-      <div className="flex-1" />
+      <div className="flex-1 max-md:hidden" />
 
       {/* Toolstrip */}
       <div className="inline-flex items-center gap-2">

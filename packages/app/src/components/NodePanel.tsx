@@ -16,6 +16,7 @@ import { beginEdit, commitEdit, useDomainStore } from '../store/domainStore.js';
 import { useViewStore } from '../store/viewStore.js';
 import type { InspectorSectionId } from '../store/viewStore.js';
 import { useResizable } from '../hooks/useResizable.js';
+import { useSwipeToDismiss } from '../hooks/useSwipeToDismiss.js';
 import { useSchedule } from '../hooks/useSchedule.js';
 import { GroupAutocomplete } from './GroupAutocomplete.js';
 import { NumericInput } from './NumericInput.js';
@@ -1052,6 +1053,7 @@ export function NodePanel({ nodeId, onClose }: NodePanelProps) {
   // row's three-dropdown layout (value / unit / semantic). Resize bounds
   // (200..800) unchanged; users who dragged it narrower keep their pick.
   const { width, onMouseDown } = useResizable(320);
+  const swipe = useSwipeToDismiss(onClose);
 
   // Audit I-18 — group colors moved to domainStore (project.groupColors),
   // so the override persists across reload + threads through undo.
@@ -1227,10 +1229,8 @@ export function NodePanel({ nodeId, onClose }: NodePanelProps) {
           className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-emerald-400 transition-colors z-10 max-md:hidden"
           onMouseDown={onMouseDown}
         />
-        {/* Mobile drag indicator pill — visual cue that this is a bottom
-            sheet. No swipe-to-dismiss yet; × button + canvas-tap-clear
-            handle dismissal. */}
-        <div className="md:hidden flex justify-center pt-1.5 pb-1">
+        {/* Mobile drag indicator pill — visual cue + swipe-down-to-dismiss. */}
+        <div className="md:hidden flex justify-center pt-1.5 pb-1" {...swipe}>
           <div className="h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-700" />
         </div>
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-700">
@@ -1347,10 +1347,8 @@ export function NodePanel({ nodeId, onClose }: NodePanelProps) {
         className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-emerald-400 transition-colors z-10 max-md:hidden"
         onMouseDown={onMouseDown}
       />
-      {/* Mobile drag indicator pill — visual cue that this is a bottom
-          sheet. No swipe-to-dismiss yet; × button + canvas-tap-clear
-          handle dismissal. */}
-      <div className="md:hidden flex justify-center pt-1.5 pb-1">
+      {/* Mobile drag indicator pill — visual cue + swipe-down-to-dismiss. */}
+      <div className="md:hidden flex justify-center pt-1.5 pb-1" {...swipe}>
         <div className="h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-700" />
       </div>
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-700">
