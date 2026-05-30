@@ -5,9 +5,9 @@
  * Displays:
  *  • Parse summary (node / edge / resource counts)
  *  • Ambiguity list (items the LLM authoring skill should resolve)
- *  • "Copy AI Prompt" button — copies a ready-to-paste Claude prompt to the
- *    clipboard that includes the ImportDraft JSON and asks Claude to produce
- *    a valid Caladia project file.
+ *  • "Copy AI Prompt" button — copies a ready-to-paste AI prompt to the
+ *    clipboard that includes the ImportDraft JSON and asks an AI assistant
+ *    to produce a valid Caladia project file.
  */
 
 import { useState } from 'react';
@@ -255,8 +255,8 @@ export function ImportModal({ result, fileName, onClose }: ImportModalProps) {
 
       {/* Instructions */}
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
-        Copy the AI prompt below and paste it into a Claude conversation. Claude will resolve the
-        ambiguities and produce a ready-to-open Caladia project file.
+        Copy the AI prompt below and paste it into an AI assistant (ChatGPT, Claude, Gemini, etc.).
+        It will resolve the ambiguities and produce a ready-to-open Caladia project file.
       </p>
 
       {/* Actions */}
