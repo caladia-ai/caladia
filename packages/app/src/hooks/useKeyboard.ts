@@ -4,6 +4,7 @@ import { redoWithFeedback, undoWithFeedback, useDomainStore } from '../store/dom
 import { useViewStore } from '../store/viewStore.js';
 import { computeAutoLayout } from '../lib/autolayout.js';
 import { placeNode } from '../utils/placement.js';
+import { downloadProjectFile } from '../fileio.js';
 
 // Phase 49 Slice 6 — tab-navigation list, keyed off the digit keys 1–5.
 // Order MUST match the tab order surfaced in `AppShell`; `setActiveTab`
@@ -67,6 +68,7 @@ function isEditableTarget(target: EventTarget | null): boolean {
  *   Delete/Backspace  delete selection
  *   ⌘/Ctrl+C      copy selected nodes to clipboard
  *   ⌘/Ctrl+V      paste clipboard (offset by 40,40)
+ *   ⌘/Ctrl+S      save (download) the project file — works on any tab / field
  *
  * Canvas-tab shortcuts (no modifier, not in an input):
  *   A             add Activity — enter placement mode
@@ -257,6 +259,18 @@ export function useKeyboardShortcuts(): void {
             return;
           }
         }
+      }
+
+      // Save — ⌘/Ctrl+S downloads the project as a .cala file, same as the
+      // Caladia menu's "Save". Fires on every tab and even inside inputs (so
+      // it always blocks the browser's native "Save Page As" dialog), unlike
+      // the letter shortcuts which gate on `!editable`.
+      if (mod && !e.shiftKey && !e.altKey && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        const project = useDomainStore.getState().project;
+        downloadProjectFile(project);
+        useViewStore.getState().markProjectSaved(project);
+        return;
       }
 
       // Undo / redo — route through the feedback wrappers so each keystroke
