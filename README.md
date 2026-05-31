@@ -62,7 +62,7 @@
 - **Multi-node alignment + distribute** — Select two or more nodes and the floating toolbar offers align (Left / Centre / Right / Top / Middle / Bottom) and distribute. Already-aligned selections are a no-op — no phantom undo step.
 - **Snap-to-grid** — Toggleable 16 px grid. Drag-end and placement-click both snap to it. The dot background marks the grid so what you see is where things land.
 - **Wire-on-place** — While placing a node, hover over an existing node's source handle to arm a ghost connection. Click commits the new node and every armed wire in one undo step. Esc pops one wire at a time before falling through to cancel.
-- **Keyboard shortcuts** — `A` / `D` / `S` / `E` enter placement for activity / decision / start / end nodes. `C` drops a comment, `L` wraps the selection as a loop, `G` as a sub-system, `P` opens the resource palette. Arrow keys nudge the placement ghost. Standard ⌘/Ctrl+Z, ⌘/Ctrl+C/V, Delete, and Space-to-fit.
+- **Keyboard shortcuts** — `A` / `D` / `S` / `E` enter placement for activity / decision / start / end nodes. `C` drops a comment, `L` wraps the selection as a loop, `G` as a sub-system, `P` opens the resource palette. Arrow keys nudge the placement ghost. Standard ⌘/Ctrl+Z, ⌘/Ctrl+C/V, ⌘/Ctrl+S to save, Delete, and Space-to-fit.
 
 </details>
 
@@ -118,11 +118,11 @@ Core packages are pure and framework-free — no React, no DOM, no `Date.now()` 
 
 Projects are saved as `.cala` files (JSON, MIME `application/json`). The schema is versioned, so old files keep loading via migration — see `packages/file-format/src/schema.ts` for the Zod definition (the source of truth for all types).
 
-| Extension  | Description                                                                                                                                                                                                                                                                                              |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.cala`    | Project file (V7 JSON). Contains nodes, edges, loops, calendars, resources, scenarios, sub-systems, free-floating comments, plus project currency / pinned FX snapshot / optional budget for cost modelling. Sub-systems carry auto-injected structural entry/exit port nodes (Simulink-style) since V7. |
-| `.procsim` | Legacy project file (V1 / V2 JSON). Still loads cleanly; migrated forward through V1→V2→…→V7 and saved back as `.cala`.                                                                                                                                                                                  |
-| `.calasub` | Stand-alone sub-system file (v4 JSON). Contains the body nodes/edges/loops plus the calendars and resources they reference, plus the structural port nodes since v4.                                                                                                                                     |
+| Extension  | Description                                                                                                                                                                                                                                                                             |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.cala`    | Project file (V7 JSON). Contains nodes, edges, loops, calendars, resources, scenarios, sub-systems, free-floating comments, plus project currency / pinned FX snapshot / optional budget for cost modelling. Sub-systems carry auto-injected structural entry/exit port nodes since V7. |
+| `.procsim` | Legacy project file (V1 / V2 JSON). Still loads cleanly; migrated forward through V1→V2→…→V7 and saved back as `.cala`.                                                                                                                                                                 |
+| `.calasub` | Stand-alone sub-system file (v4 JSON). Contains the body nodes/edges/loops plus the calendars and resources they reference, plus the structural port nodes since v4.                                                                                                                    |
 
 ---
 
