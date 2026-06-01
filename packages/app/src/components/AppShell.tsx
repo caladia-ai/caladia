@@ -18,10 +18,12 @@ import { useViewStore } from '../store/viewStore.js';
 import { downloadProjectFile, pickAndReadFile, pickAndReadBinaryFile } from '../fileio.js';
 import { ImportModal, ValidateModal } from './ImportModal.js';
 import { ProjectSettingsModal } from './ProjectSettingsModal.js';
+import { OnboardingOverlay } from './OnboardingOverlay.js';
 import { ReplaceProjectConfirmModal } from './ReplaceProjectConfirmModal.js';
 import { TemplatePickerModal } from './TemplatePickerModal.js';
 import { ToastContainer } from './Toast.js';
 import { hasUserContent } from '../utils/projectContent.js';
+import { shouldShowOnboarding } from '../utils/onboarding.js';
 
 type Tab = 'canvas' | 'gantt' | 'resources' | 'simulate' | 'risks';
 
@@ -138,20 +140,17 @@ export function AppShell({
   // Phase 27 — template picker modal visibility.
   const [templatePickerOpen, setTemplatePickerOpen] = useState(false);
 
-  const isProjectDirty = useViewStore((s) => s.isProjectDirty);
   const markProjectSaved = useViewStore((s) => s.markProjectSaved);
   const markTemplatePickerSeen = useViewStore((s) => s.markTemplatePickerSeen);
-  const hasSeenTemplatePicker = useViewStore((s) => s.hasSeenTemplatePicker);
+  const hasSeenOnboarding = useViewStore((s) => s.hasSeenOnboarding);
+  const markOnboardingSeen = useViewStore((s) => s.markOnboardingSeen);
 
-  // Phase 27 — first-run auto-open of the template picker. Fires once
-  // per browser (localStorage-gated) when the user lands on a fresh,
-  // unmodified default project. Skipped on reloads where the user has
-  // either already seen the picker or has been editing their project.
+  // Once the project has user content (they picked a template or added a
+  // second node), the first-run onboarding overlay is done — mark it seen so
+  // it never returns, even if they later clear back to an empty canvas.
   useEffect(() => {
-    if (hasSeenTemplatePicker) return;
-    if (isProjectDirty(project)) return;
-    setTemplatePickerOpen(true);
-  }, []);
+    if (!hasSeenOnboarding && hasUserContent(project)) markOnboardingSeen();
+  }, [hasSeenOnboarding, project, markOnboardingSeen]);
 
   /**
    * Pending destructive action: when the project has user content
@@ -882,6 +881,22 @@ export function AppShell({
         )}
 
         <main className="flex-1 flex flex-col overflow-hidden min-w-0">{children}</main>
+
+        {/* First-run onboarding — Excalidraw-style welcome over the empty
+            canvas. Mounted on the canvas tab; `visible` fades it in / out. */}
+        {isCanvas && (
+          <OnboardingOverlay
+            visible={shouldShowOnboarding({
+              isCanvas,
+              hasSeenOnboarding,
+              templatePickerOpen,
+              hasContent: hasUserContent(project),
+            })}
+            onDismiss={markOnboardingSeen}
+            onBrowseTemplates={handleOpenTemplatePicker}
+            onPickTemplate={handleTemplatePick}
+          />
+        )}
       </div>
 
       {/* ── Mobile bottom tab bar (Slice 2) ───────────────────────────────
