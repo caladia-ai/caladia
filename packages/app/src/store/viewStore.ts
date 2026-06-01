@@ -52,6 +52,9 @@ const INSPECTOR_HIDDEN_KEY = 'caladia:inspectorHidden';
 // Phase 27 — Template picker first-run flag. Once the user has been shown
 // the picker (or dismissed it once), don't auto-open it again on reload.
 const TEMPLATE_PICKER_SEEN_KEY = 'caladia:hasSeenTemplatePicker';
+// First-run onboarding overlay (the empty-canvas welcome card). Same
+// localStorage-flag pattern as the template picker above.
+const ONBOARDING_SEEN_KEY = 'caladia:hasSeenOnboarding';
 // Phase 41 — per-section open/closed state for the Inspector's node-properties
 // panel. Persisted so the user's chosen layout (e.g. "I always want Cost
 // expanded") survives reloads.
@@ -236,6 +239,22 @@ function loadInspectorHidden(): boolean {
 function saveInspectorHidden(hidden: boolean): void {
   try {
     localStorage.setItem(INSPECTOR_HIDDEN_KEY, String(hidden));
+  } catch {
+    // ignore
+  }
+}
+
+function loadHasSeenOnboarding(): boolean {
+  try {
+    return localStorage.getItem(ONBOARDING_SEEN_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+function saveHasSeenOnboarding(seen: boolean): void {
+  try {
+    localStorage.setItem(ONBOARDING_SEEN_KEY, String(seen));
   } catch {
     // ignore
   }
@@ -559,6 +578,14 @@ interface ViewState {
   markTemplatePickerSeen(): void;
 
   /**
+   * First-run onboarding overlay (the empty-canvas welcome card). Loaded
+   * from localStorage; `markOnboardingSeen` sets it true and persists, so
+   * the card never returns after the user dismisses it or adds content.
+   */
+  hasSeenOnboarding: boolean;
+  markOnboardingSeen(): void;
+
+  /**
    * Phase 41 — open/closed state for the Inspector's node-properties
    * sections. Persisted across reloads so the user's preferred layout
    * sticks. See `InspectorSectionId` for the full list.
@@ -792,6 +819,7 @@ const initialSimChartMode = loadSimChartMode();
 const initialCurrencyDisplay = loadCurrencyDisplay();
 const initialInspectorHidden = loadInspectorHidden();
 const initialHasSeenTemplatePicker = loadHasSeenTemplatePicker();
+const initialHasSeenOnboarding = loadHasSeenOnboarding();
 const initialInspectorSections = loadInspectorSections();
 const initialResourcePaletteOpen = loadResourcePaletteOpen();
 const initialSnapToGrid = loadSnapToGrid();
@@ -826,6 +854,7 @@ export const useViewStore = create<ViewState>()((set) => ({
   inspectorHidden: initialInspectorHidden,
   lastSavedJson: null,
   hasSeenTemplatePicker: initialHasSeenTemplatePicker,
+  hasSeenOnboarding: initialHasSeenOnboarding,
   inspectorSectionsOpen: initialInspectorSections,
   resourcePaletteOpen: initialResourcePaletteOpen,
   snapToGridEnabled: initialSnapToGrid,
@@ -1118,6 +1147,11 @@ export const useViewStore = create<ViewState>()((set) => ({
   markTemplatePickerSeen() {
     saveHasSeenTemplatePicker(true);
     set({ hasSeenTemplatePicker: true });
+  },
+
+  markOnboardingSeen() {
+    saveHasSeenOnboarding(true);
+    set({ hasSeenOnboarding: true });
   },
 
   toggleInspectorSection(id) {

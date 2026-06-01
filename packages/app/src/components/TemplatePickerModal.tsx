@@ -556,7 +556,7 @@ interface TemplateThumbnailProps {
  * above the parent-canvas layout (the regression flagged on the
  * Construction thumbnail). Edges that span body nodes drop with them.
  */
-function TemplateThumbnail({ nodes, edges, subsystems }: TemplateThumbnailProps) {
+export function TemplateThumbnail({ nodes, edges, subsystems }: TemplateThumbnailProps) {
   // Filter out subsystem body nodes — only the container (nodeType ===
   // 'subsystem') is visible on the parent canvas. Use the project's
   // `subsystems` array as the source of truth rather than guessing from
