@@ -12,7 +12,7 @@
   <picture><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs welcome" /></picture>
 </p>
 
-<p align="center"><strong>An open-source, local-first business process simulator. Draw your process, see the schedule and cost, run Monte Carlo what-ifs — all in your browser.</strong></p>
+<p align="center"><strong>An open-source, local business process simulator. Draw your process, see the schedule and cost, run Monte Carlo what-ifs — all in your browser.</strong></p>
 
 <p align="center">No accounts. No backend. Everything runs in the browser and saves to your local files (<code>.cala</code>).</p>
 
@@ -101,7 +101,7 @@ file-format → calendar → scheduler → simulation ─┬─→ engine-worker
                                                  └─→ cli
 ```
 
-- **`file-format`** — Zod schema (source of truth for all types), file I/O, V1→V7 migration chain, holiday presets, `.calasub` sub-system file format
+- **`file-format`** — Zod schema (source of truth for all types), file I/O, holiday presets, `.calasub` sub-system file format
 - **`calendar`** — working-time arithmetic (calendar-aware date math)
 - **`scheduler`** — CPM engine: FS/SS/FF/SF dependencies, calendar-aware, loop constructs via two-pass scheduling, sub-system flattening pre-pass
 - **`simulation`** — Monte Carlo with seeded hierarchical per-node RNG (`pure-rand`)
@@ -118,11 +118,11 @@ Core packages are pure and framework-free — no React, no DOM, no `Date.now()` 
 
 Projects are saved as `.cala` files (JSON, MIME `application/json`). The schema is versioned, so old files keep loading via migration — see `packages/file-format/src/schema.ts` for the Zod definition (the source of truth for all types).
 
-| Extension  | Description                                                                                                                                                                                                                                                                             |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.cala`    | Project file (V7 JSON). Contains nodes, edges, loops, calendars, resources, scenarios, sub-systems, free-floating comments, plus project currency / pinned FX snapshot / optional budget for cost modelling. Sub-systems carry auto-injected structural entry/exit port nodes since V7. |
-| `.procsim` | Legacy project file (V1 / V2 JSON). Still loads cleanly; migrated forward through V1→V2→…→V7 and saved back as `.cala`.                                                                                                                                                                 |
-| `.calasub` | Stand-alone sub-system file (v4 JSON). Contains the body nodes/edges/loops plus the calendars and resources they reference, plus the structural port nodes since v4.                                                                                                                    |
+| Extension  | Description                                                                                                                                                                                                                                                                   |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.cala`    | Project file. Contains nodes, edges, loops, calendars, resources, scenarios, sub-systems, free-floating comments, plus project currency / pinned FX snapshot / optional budget for cost modelling. Sub-systems carry auto-injected structural entry/exit port nodes since V7. |
+| `.procsim` | Legacy project file. Still loads cleanly; migrated forward through V1→V2→…→V7 and saved back as `.cala`.                                                                                                                                                                      |
+| `.calasub` | Stand-alone sub-system file. Contains the body nodes/edges/loops plus the calendars and resources they reference, plus the structural port nodes since v4.                                                                                                                    |
 
 ---
 
